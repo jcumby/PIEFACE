@@ -1,0 +1,4 @@
+Polyhedra Inscribing Ellipsoids
+===============================
+
+Presumably this will contain an MIT license file...

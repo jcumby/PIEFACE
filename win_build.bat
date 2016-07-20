@@ -9,6 +9,9 @@ echo
 echo BEWARE: This script will overwrite the dist\distellipsoid_win\ directory
 pause
 
+REM Remove existing distellipsoid_win folder, to prevent old files hanging around
+RMDIR /S /Q dist\distellipsoid_win
+
 pyinstaller -y win_build.spec
 copy /Y dist\CIFellipsoid\CIFellipsoid.exe dist\distellipsoid_win\CIFellipsoid.exe
 

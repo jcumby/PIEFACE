@@ -27,9 +27,6 @@ def calcfromcif(CIF, centres, radius, allligtypes=[], alllignames=[], **kwargs):
     
     for cen in centres:
         if cen not in allatoms.keys():
-            #print "\nValid atom labels are:\n\n {0}".format(", ".join(allatoms.keys()))
-            #raise KeyError("Centre {0} is not present in atom labels.".format(cen))
-            #warnings.warn("Centre {0} is not present in atom labels: skipping".format(cen))
             logger.info("Centre %s is not present in atom labels: skipping", cen)
             continue
             
@@ -115,7 +112,7 @@ def makeDataFrame(phases):
         frame = pd.concat(d, axis=1)
         
         if len(frame.index) == 1:   # We're looking at a single cif file - unstack DataFrame with atoms as index
-            return pd.to_numeric(frame.ix[frame.index[0]].unstack(), errors='ignore')        # Need to convert back to float/int when unstacking
+            return frame.ix[frame.index[0]].unstack().apply(pd.to_numeric, errors='ignore')        # Need to convert back to float/int when unstacking
         else:
             return frame
     else:

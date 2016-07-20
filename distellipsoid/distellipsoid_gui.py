@@ -23,6 +23,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import pandas as pd
 
 log = logging.getLogger()
+#log.setLevel(logging.debug)
 
 
 class MainWindow:
@@ -183,7 +184,7 @@ class MainWindow:
         filelist = self.parent.tk.splitlist(filenames)
         
         for file in filelist:
-            if file not in self.filenames:
+            if os.path.normpath(file) not in self.filenames:
                 self.filenames.append(os.path.normpath(file))
                 self.filebox.insert(tk.END, os.path.basename(file) )
         if len(self.filenames) > 0:
@@ -193,12 +194,19 @@ class MainWindow:
         """ Remove file from input list"""
         files = self.filebox.curselection()
         pos = 0
+
         for index in files:
+            # Remove results corresponding to file (if present)
+            if self.filenames[index - pos] in self.phases:
+                self.phases.pop(self.filenames[index - pos])
+            
             self.filebox.delete(index - pos)
             self.filenames.pop(index - pos)
             pos += 1
         if len(self.filenames) == 0:
             self.clearbutton.configure(state='disabled')
+            self.resultsbutton.configure(state='disabled')
+            self.sumbutton.configure(state='disabled')
         
     def disable_check(self, chkbutn):
         """ Disable entry boxes if check button is ticked"""
@@ -269,7 +277,16 @@ class MainWindow:
             tkMessageBox.showerror('Error','No files have been selected.')
             return
         
-        for file in self.filenames:
+        if len(self.filebox.curselection()) > 0:
+            # Some files are currently selected: check whether to use them or all files
+            if tkMessageBox.askyesno("File Selection", "Only calculate for selected files?"):
+                procfiles = [self.filenames[i] for i in self.filebox.curselection()]
+            else:
+                procfiles = self.filenames
+        else:
+            procfiles = self.filenames
+        
+        for file in procfiles:
             if not os.path.isfile(file):
                 tkMessageBox.showerror('Error', 'File {0} is not a valid file'.format(file))
                 return
@@ -279,30 +296,34 @@ class MainWindow:
             extravals = dict( [ i.split('=') for i in self.extraent.get().split()] )
         else:
             extravals = {}
-        
+        # Set up variables    
+        vals = dict(outfile = None,
+            radius = float(self.radent.get()),
+            ligtypes = list(self.ligtent.get().split()),
+            lignames = list(self.lignent.get().split()),
+            tolerance = float(self.tolent.get()),
+            maxcycles = int(extravals.get('maxcycles', 0)),
+            nosave = not bool(self.svoutvar.get()),
+            writeall = True,    # Overwrite all files by default
+            printlabels = bool(extravals.get('printlabels', False)),
+            nothread = not bool(self.paravar.get()),
+            ptocs = int(self.procsent.get()),
+            noplot = True,
+            pickle = bool(extravals.get('pickle', False)),
+            writelog = bool(extravals.get('writelog', False)))
+
+        if vals['maxcycles'] <= 0:
+            vals['maxcycles'] = None
         try:
-            vals = dict(outfile = None,
-                        radius = float(self.radent.get()),
-                        ligtypes = list(self.ligtent.get().split()),
-                        lignames = list(self.lignent.get().split()),
-                        tolerance = float(self.tolent.get()),
-                        maxcycles = extravals.get('maxcycles', None),
-                        nosave = not bool(self.svoutvar.get()),
-                        writeall = True,    # Overwrite all files by default
-                        printlabels = extravals.get('printlabels', False),
-                        nothread = not bool(self.paravar.get()),
-                        ptocs = int(self.procsent.get()),
-                        noplot = True,
-                        pickle = extravals.get('pickle', False),
-                        writelog = extravals.get('writelog', False))
-                        
+
             
             
             # Run calculation in a new thread
             self.resQ = Queue.Queue()
             self.calcthread = threading.Thread(target=multiCIF_thread_wrapper,
                                           args = (self.resQ,
-                                                  self.filenames,
+                                                  self.parent,
+                                                  procfiles,
                                                   list(self.centent.get().split()),
                                                   ),
                                                   kwargs = vals)
@@ -620,19 +641,18 @@ def multiCIF_wrapper(queue, args, **kwargs):
 def multiCIF_thread_wrapper(*args, **kwargs):
     """ Wrapper to put results of multiCIF into a queue to be retrieved """
     queue = args[0]
+    root_win = args[1]
     try:
-        results = multiCIF.main(*args[1:], **kwargs)
+        results = multiCIF.main(*args[2:], **kwargs)
         queue.put(results)
     except ValueError as e:
-        root.after(5, tkMessageBox.showerror, "Error", " ".join(e.args))
-        queue.put(None)
+        root_win.after(5, tkMessageBox.showerror, "Error", " ".join(e.args))
+        queue.put_nowait(None)
 
 def main():
     if sys.platform.startswith('win'):
         # Hack for multiprocessing.freeze_support() to work from a
         # setuptools-generated entry point.
-        if __name__ != "__main__":
-            sys.modules["__main__"] = sys.modules[__name__]
         multiprocessing.freeze_support()
         
     root = tk.Tk()

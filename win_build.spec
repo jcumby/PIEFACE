@@ -57,12 +57,19 @@ def Entrypoint(dist,
 
     return Analysis([script_path] + scripts, pathex, binaries, datas, hiddenimports, hookspath, runtime_hooks, excludes, win_no_prefer_redirects, win_private_assemblies, cipher)
 
+# Additional files (e.g. data files) to copy directly into the output directory
+ADDEDFILES = [
+            ('README.rst', '.'),
+            ('ellipsoid_icon.ico', '.'),
+            ('license.txt','.')
+             ]
+    
 GUI = Entrypoint('distellipsoid',
              'gui_scripts',
              'EllipsoidGUI',
              pathex=['C:\\Users\\JCC\\Documents\\custom_python_libs\\distellipsoid'],
              binaries=None,
-             datas=None,
+             datas=ADDEDFILES,
              hiddenimports=['FileDialog'],
              hookspath=[],
              runtime_hooks=[],

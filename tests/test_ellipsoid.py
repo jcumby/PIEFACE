@@ -205,8 +205,8 @@ class PlanarEllipse(AllEllipsoidFunctions, unittest.TestCase):
              'ellipdims'    : 2,
              'numpoints'    : 3,
              'radii'        : np.array([2.309401, 1.632993, 0.]),
-             'rotation'     : np.array([[ -np.sqrt(2)/2., -np.sqrt(2)/2., 0. ],\
-                                        [ -np.sqrt(2)/2.,  np.sqrt(2)/2., 0.],\
+             'rotation'     : np.array([[  np.sqrt(2)/2., np.sqrt(2)/2., 0. ],\
+                                        [ -np.sqrt(2)/2., np.sqrt(2)/2., 0.],\
                                         [ 0.           ,  0.           , 1.]]),
              'ellipsvol'    : float(0.0),
              'meanrad'      : float(1.3141314128713184),

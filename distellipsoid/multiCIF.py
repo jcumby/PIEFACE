@@ -49,7 +49,7 @@ class QueueHandler(logging.Handler):
 
 def worker_configure(queue):
     """ Initialise logging on worker"""
-    ## Can be used to turn of passing of CTRL-C to sub-processes, but then 
+    ## Can be used to turn off passing of CTRL-C to sub-processes, but then 
     ## parent has to wait for current files to finish before killing...
     #import signal
     #signal.signal(signal.SIGINT, signal.SIG_IGN)
@@ -114,41 +114,78 @@ def _wrapper(args):
         
 def _alllabels(CIF):
     """ Return all allowed labels in CIF file. """
+    return _alltyplbls(CIF).keys()
+
+def _alltyplbls(CIF):
+    """ Return all allowed labels and corresponding types in CIF file. """
     from distellipsoid.readcoords import readcif
     cell, atomcoords, atomtypes, spacegp, symmops, symmid = readcif(CIF)
-    return atomcoords.keys()
+    # Just return atomtypes dict {label: type} direct from readcif
+    return atomtypes
     
+def _alltypes(CIF):
+    """ Return all allowed types in CIF file. """
+    return _alltyplbls(CIF).values()
+    
+def check_labels(labels, alllabs):
+    """ Check that all labels are present in all cif files, handling regular expressions if needed.
+    Returns list of labels to test,
+            list of labels to omit,
+            list of missing labels
+    """
+    
+    test = set()
+    omit = set()
+    missing = set()
+    
+    for l in labels:
+        # Iterate over labels, either adding to `test` or `omit` sets
+        if any( [i in l for i in ['*','$','^','.','?','{','}','|','[',']','\\']] ):
+            # Treat label as regex (approximately)
+            if l[0] == '#':     # omit label l
+                found = False
+                for a in alllabs:
+                    if re.search(l[1:], a):     # Regex matches
+                        omit.add(a)
+                        found = True
+                if not found:
+                    # omitted label did not occur in any file
+                    missing.add(l)
+            else:           # Find centres based on regex       
+                found = False
+                for a in alllabs:
+                    if re.search(l, a):     # Regex matches
+                        test.add(a)
+                        found = True
+                if not found:
+                    # label not present in any file
+                    missing.add(l)
+        elif l[0] == '#':      # Omit centre with # prepending name
+            if l[1:] in alllabs:
+                omit.add(l[1:])
+            else:
+                missing.add(l)
+            continue
+        else:
+            if l in alllabs:
+                test.add(l)
+            else:
+                missing.add(l)
+                
+    return list(test), list(omit), list(missing)            
+
  
 def check_centres(cifs, centres):
     """ Determine which centres to use based on CIF contents and user-supplied arguments."""
     # Work out what centres to include
     log.debug('Checking centre labels')
+    
     allcentres = set([ i for c in cifs for i in _alllabels(c) ])
-    testcen = set()
-    omitcen = set()
-    for c in centres:
-        if any( [i in c for i in ['*','$','^','.','+','?','{','}','|','[',']','\\']] ):  # Treat as regex (approximately)
-            if c[0] == '#':     # omit centres
-                found = False
-                for a in allcentres:
-                    if re.search(c[1:], a):     # Regex matches
-                        omitcen.add(a)
-                        found = True
-                if not found:
-                    log.warning("Regular expression %s did not match any centre labels; skipping", c[1:])
-            else:           # Find centres based on regex       
-                found = False
-                for a in allcentres:
-                    if re.search(c, a):     # Regex matches
-                        testcen.add(a)
-                        found = True
-                if not found:
-                    log.warning("Regular expression %s did not match any centre labels; skipping", c)
-        elif c[0] == '#':      # Omit centre with # prepending name
-            omitcen.add(c[1:])
-            continue
-        else:
-            testcen.add(c)
+    testcen, omitcen, missingcen = check_labels(centres, allcentres)
+    
+    if len(missingcen) > 0:
+        log.warning("Centres %s are not valid labels for any CIF files; they will be skipped", str(", ".join(missingcen)))
+    
     if len(testcen) == 0:       # Empty list was passed apart from exclusions: add all atoms apart from those
         testcen = allcentres.copy()
         testcen.difference_update(omitcen)
@@ -157,12 +194,88 @@ def check_centres(cifs, centres):
         log.critical("Label(s) %s are not present in any of the CIF files - stopping", str(" ".join([str(i) for i in set(testcen).difference(allcentres)])))
         log.critical("Valid atom labels are:\n")
         for CIF in cifs:
-            #log.warning("{0:<40}:  {1}".format(CIF, ", ".join(_alllabels(CIF))))
             log.critical("%-40s:  %s", CIF, ", ".join(_alllabels(CIF)))
-        #raise ValueError
-        return
+        return None
  
     return testcen
+    
+def check_ligands(cifs, ligtypes, liglbls):
+    """ Find lists of ligand labels and types that should be used to define ellipsoids based on supplied lists.
+
+    NOTE: This function will find the appropriate combination of label/type commands to find all required ligands,
+          EXCEPT where a site is found in multiple CIFs with the same label, but different type. In this case, the
+          returned lists of labels and types *should* work correctly when run through calcellipsoid.calcfromcif
+    """
+    
+    log.debug('Checking ligand types and labels')
+    
+    # Iterate through all cifs, adding label:[type1, <type2>...] pairs to overall dict
+    ligtyplbls = {}
+    for c in cifs:
+        typlbls = _alltyplbls(c)      # Get labels and types from current cif
+        for l in typlbls:
+            if l in ligtyplbls.keys():      # Label already exists in overall dict - if the type is the same, we can ignore it
+                if typlbls[l] in ligtyplbls[l]:
+                    continue
+                else:                       # Types are different: append type to label list
+                    ligtyplbls[l].append(typlbls[l])
+            else:                       # Label doesn't already exist; add
+                ligtyplbls[l] = [typlbls[l]]
+    
+    # Get sets of all types and labels
+    alltypes = set([ i for l in ligtyplbls for i in ligtyplbls[l]])
+    alllbls = set( ligtyplbls.keys() )
+    
+    testtyp, omittyp, missingtyp = check_labels(ligtypes, alltypes)
+    testlbl, omitlbl, missinglbl = check_labels(liglbls, alllbls)   
+
+    # Get final lists of labels and types to test
+    if len(testtyp) == 0 and len(testlbl) == 0:    # No ligands have been specified; use everything apart from exclusions
+        log.warning("No valid ligand types/labels were given; using all types")
+        finallbl = alllbls.copy()
+        finaltyp = alltypes.copy()
+    elif len(testtyp) == 0:         # Presume only labels are supplied
+        finallbl = alllbls.copy()
+        finaltyp = set()
+    elif len(testlbl) == 0:         # Presume only types are supplied
+        finallbl = set()
+        finaltyp = set(testtyp)
+    else:
+        finallbl = set(testlbl)
+        finaltyp = set(testtyp)
+        
+    # Remove values corresponding to omit expressions
+    if len(omittyp) > 0:                        # Omit types first, as more general
+        toomit = []
+        for o in omittyp:                       # Iterate over omit types, appending corresponding labels to list
+            for l in finallbl:                  # Iterate over labels selected
+                if ligtyplbls[l] == [o]:        # Omit label ONLY if it has the single type (keep otherwise) ; further basic filtering is performed by calcfromcif
+                    toomit.append(l)
+        finallbl.difference_update(toomit)       # finallbl should now contain a list of site labels to test
+        finaltyp.difference_update(omittyp)
+    
+    # Need to remove labels supplied by omit, as well as types no longer required (i.e. if label omit removes all atoms of type XX)
+    if len(omitlbl) > 0:                        # Omit sites by label
+        finallbl.difference_update(omitlbl)
+        
+        # Work out if any types need to be removed
+        typfromlbl = set([ i for l in finallbl for i in ligtyplbls[l]])
+        toomit = []
+        for o in omitlbl:
+            for t in ligtyplbls[o]:
+                if t not in typfromlbl and t not in testtyp:        # Type does not occur from supplied labels, nor from supplied types - remove type
+                    toomit.append(t)
+                    
+        finaltyp.difference_update(toomit)
+        
+    
+    if len(missingtyp) > 0:
+        log.warning("Ligand(s) %s are not valid types for any CIF files; they will be skipped", str(", ".join(missingtyp)))
+    if len(missinglbl) > 0:
+        log.warning("Ligand(s) %s are not valid labels for any CIF files; they will be skipped", str(", ".join(missinglbl)))
+    
+    return list(finallbl), list(finaltyp)
+    
     
 def run_parallel(cifs, testcen, radius=3.0, ligtypes=[], lignames=[], maxcycles=None, tolerance=1e-6, procs=None):
     """ Run ellipsoid computation in parallel, by CIF file """
@@ -240,9 +353,9 @@ def run_parallel(cifs, testcen, radius=3.0, ligtypes=[], lignames=[], maxcycles=
             
 def run_serial(cifs, testcen, radius=3.0, ligtypes=[], lignames=[], maxcycles=None, tolerance=1e-6):
     log.warning('Processing all cif files...')
-    log.debug('Using options:')
+    log.info('Using options:')
     for a in ['cifs', 'testcen', 'radius', 'ligtypes', 'lignames', 'maxcycles', 'tolerance']:
-        log.debug('{0:20s} : {1}'.format(a, vars()[a]))
+        log.info('{0:20s} : {1}'.format(a, vars()[a]))
         
     phases = {}
     for i, CIF in enumerate(cifs):
@@ -285,6 +398,7 @@ def main(cifs, centres, **kwargs):
             of plots (keyed by ellipsoid centre)
     """
 
+    multiprocessing.freeze_support()
     
     defaults = {}
     defaults['outfile'] = None
@@ -341,6 +455,12 @@ def main(cifs, centres, **kwargs):
         if testcen is None:
             return (None, None)
      
+        testliglbl, testligtyp = check_ligands(cifs, args['ligtypes'], args['lignames'])
+        if len(testliglbl) == 0 and len(testligtyp) == 0:
+            log.critical('No suitable ligands have been defined - stopping')
+            return (None, None)
+        
+     
         phases = {}
     
         if len(cifs) > 1 and not args['nothread'] and args['procs'] != 1:
@@ -348,8 +468,10 @@ def main(cifs, centres, **kwargs):
             phases = run_parallel(cifs,
                                 testcen,
                                 radius=args['radius'],
-                                ligtypes=args['ligtypes'],
-                                lignames=args['lignames'],
+                                #ligtypes=args['ligtypes'],
+                                #lignames=args['lignames'],
+                                ligtypes=testligtyp,
+                                lignames=testliglbl,
                                 maxcycles=args['maxcycles'],
                                 tolerance=args['tolerance'],
                                 procs=args['procs'])
@@ -360,8 +482,10 @@ def main(cifs, centres, **kwargs):
             phases = run_serial(cifs,
                                 testcen,
                                 radius=args['radius'],
-                                ligtypes=args['ligtypes'],
-                                lignames=args['lignames'],
+                                #ligtypes=args['ligtypes'],
+                                #lignames=args['lignames'],
+                                ligtypes=testligtyp,
+                                lignames=testliglbl,
                                 maxcycles=args['maxcycles'],
                                 tolerance=args['tolerance'])
             log.debug('Finished serial calculation')

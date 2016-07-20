@@ -312,7 +312,7 @@ class Ellipsoid(object):
         summary4 = "{:<12}:{:12.4f}\n".format("R3", self.radii[2]) + "\n" #+ \
         summary5 = "{:<10}{:<2}:{:12.4f}\n".format("Centre", "x", self.centre[0]) + \
                   "{:<10}{:<2}:{:12.4f}\n".format("","y", self.centre[1]) + \
-                  "{:<10}{:<2}:{:12.4f}\n".format("","z", self.centre[1]) + \
+                  "{:<10}{:<2}:{:12.4f}\n".format("","z", self.centre[2]) + \
                   "{:>10}{:<2}:{:12.4f}\n".format("Total","",self.centredisp()) + "\n" + \
                   "{:<12}:{:12.4f}\n".format("<R>", self.meanrad()) +\
                   "{:<12}:{:12.9f}\n".format("sigma(R)", self.raderr()) +\

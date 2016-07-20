@@ -16,7 +16,7 @@ def _alllabels(CIF):
     cell, atomcoords, atomtypes, spacegp, symmops, symmid = readcif(CIF)
     return atomcoords.keys()
 
-def _query(question, default="yes"):
+def _query(question, default="yes", output=None):
     """Ask a yes/no question via raw_input() and return their answer. """
     valid = {"yes": True, "y": True, "ye": True,
              "no": False, "n": False}
@@ -30,22 +30,22 @@ def _query(question, default="yes"):
         raise ValueError("invalid default answer: '%s'".format(default))
 
     while True:
-        log.critical(question + prompt)
+        output.critical(question + prompt)
         choice = raw_input().lower()
         if default is not None and choice == '':
             return valid[default]
         elif choice in valid:
             return valid[choice]
         else:
-            log.critical("Please respond with 'yes' or 'no' (or 'y' or 'n').\n")
+            output.critical("Please respond with 'yes' or 'no' (or 'y' or 'n').\n")
 
 def main():
     import sys
     if sys.platform.startswith('win'):
-        # Hack for multiprocessing.freeze_support() to work from a
-        # setuptools-generated entry point.
-        if __name__ != "__main__":
-            sys.modules["__main__"] = sys.modules[__name__]
+        # # Hack for multiprocessing.freeze_support() to work from a
+        # # setuptools-generated entry point.
+        # if __name__ != "__main__":
+            # sys.modules["__main__"] = sys.modules[__name__]
         multiprocessing.freeze_support()
 
     from distellipsoid import multiCIF
@@ -172,7 +172,7 @@ def main():
             raise
 
         if args.nosave:
-            if not _query("Option `-N` will not save any data; do you want to continue?", default="no"):
+            if not _query("Option `-N` will not save any data; do you want to continue?", default="no", output=log):
                 raise
                 
         argdict = vars(args)
@@ -191,6 +191,13 @@ def main():
         sys.exit()            
             
 if __name__ == "__main__":
+    import sys
+    if sys.platform.startswith('win'):
+        # Hack for multiprocessing.freeze_support() to work from a
+        # setuptools-generated entry point.
+        # if __name__ != "__main__":
+            # sys.modules["__main__"] = sys.modules[__name__]
+        multiprocessing.freeze_support()
     main()
 
 

@@ -192,7 +192,10 @@ def readcif(FILE):
     
     symmops=None
     try:
-        allcif = CifFile.ReadCif(urllib.pathname2url(FILE))
+        if os.path.isfile(FILE):
+            allcif = CifFile.ReadCif(urllib.pathname2url(FILE))
+        else:
+            allcif = CifFile.ReadCif(FILE)
     except:
         if os.path.isfile(FILE):
             raise RuntimeError("There seems to be a problem with either {0} or PyCifRW!".format(FILE))
