@@ -46,7 +46,11 @@ class MainWindow:
         #self.log.__init__(self.logtab)
         self.log.pack(expand=1, fill=tk.BOTH)
         
+        self.init_menu()
+        
         self.init_gui(self.intab)
+        
+        
         
         self.nbookmain.pack(expand=1, fill=tk.BOTH)
         self.intab.columnconfigure(0, weight=1)
@@ -167,10 +171,47 @@ class MainWindow:
         self.sumbutton = ttk.Button(self.frame, text="Results Summary", command = self.make_sum_win, state='disabled')
         self.sumbutton.grid(row=3, column = 3, sticky=(tk.NE,tk.NW), padx=3)
 
+    def init_menu(self):
+        """ Set up drop-down menus for the main window. """
+        
+        # Add menubar to parent window
+        self.menubar = tk.Menu(self.parent)
+        
+        # Add menubar items and sub-options
+        self.filemenu = tk.Menu(self.menubar, tearoff=0)
+        self.filemenu.add_separator()
+        self.filemenu.add_command(label="Exit", command=self._quit)
+        
+        self.helpmenu = tk.Menu(self.menubar, tearoff=0)
+        self.helpmenu.add_command(label='View README', command=self.viewhelp)
+        
+        self.menubar.add_cascade(label="File", menu=self.filemenu)
+        self.menubar.add_cascade(label="Help", menu=self.helpmenu)
+        
+        # Simpler single option syntax
+        #self.menubar.add_command(label='Quit', command=self._quit)
+        #self.menubar.add_command(label='Help', command=self.viewhelp)
+        
+        self.parent.config(menu=self.menubar)
+        
     def _quit(self):
         # Necessary to avoid problems with matplotlib on exit with Windows
         self.parent.quit()
         self.parent.destroy()
+        
+    def viewhelp(self):
+        """ Open help file in default viewer """
+        #README = "C:\Users\JCC\Documents\custom_python_libs\distellipsoid\README.rst"
+        
+        # Try to get README location based on multiCIF location
+        multiCIFloc = os.path.dirname( multiCIF.__file__ )
+        README = os.path.abspath(os.path.join( multiCIFloc, '..', 'README.rst'))
+
+        if os.path.isfile(README):
+            os.startfile(README)
+        else:
+            tkMessageBox.showerror("Error", "Cannot find README location")
+            
         
     def openfiles(self):
         """ Open dialog for selecting CIF files"""
@@ -456,8 +497,11 @@ class SummaryWindow(tk.Frame):
     """ Class to hold summary table for ellipsoids """
     def __init__(self, parent, phases):
         if phases is not None and len(phases) > 0:
+        
             self.parent = parent
-            dframe = makeDataFrame(phases)
+            self.dframe = makeDataFrame(phases)
+            
+            self.init_menu()
             
             tk.Frame.__init__(self, self.parent)
             self.nb = ttk.Notebook(self)
@@ -488,11 +532,11 @@ class SummaryWindow(tk.Frame):
                 self.tables['all'].grid(column=0,row=0, sticky=(tk.W, tk.N, tk.S, tk.E))
                 vscrolls['all'].grid(column=1, row=0, sticky=(tk.E,tk.N,tk.S))
                 hscrolls['all'].grid(column=0,row=1, sticky=(tk.E,tk.W,tk.S))
-                sframe = dframe[['r1','r2','r3','meanrad','rad_sig','shapeparam','centredisp','coordination']]
-                sframe = sframe.rename(columns = {'r1':'R1','r2':'R2','r3':'R3','meanrad':'<R>','rad_sig':'sigma(R)','shapeparam':'S','centredisp':'Centre Displacement','coordination':'Coordination'})
+                self.sframe = self.dframe[['r1','r2','r3','meanrad','rad_sig','shapeparam','centredisp','coordination']]
+                self.sframe = self.sframe.rename(columns = {'r1':'R1','r2':'R2','r3':'R3','meanrad':'<R>','rad_sig':'sigma(R)','shapeparam':'S','centredisp':'Centre Displacement','coordination':'Coordination'})
                 selection = ['R1','R2','R3','<R>','sigma(R)','S','Centre Displacement','Coordination']
             
-                self.tables['all'].insert(tk.END, sframe[selection].to_string())
+                self.tables['all'].insert(tk.END, self.sframe[selection].to_string())
             else:
                 self.tabs['all'] = ttk.Frame(self.nb)
                 self.nb.add(self.tabs['all'], text='All data', sticky='nesw')
@@ -510,14 +554,14 @@ class SummaryWindow(tk.Frame):
                 self.tables['all'].grid(column=0,row=0, sticky=(tk.W, tk.N, tk.S, tk.E))
                 vscrolls['all'].grid(column=1, row=0, sticky=(tk.E,tk.N,tk.S))
                 hscrolls['all'].grid(column=0,row=1, sticky=(tk.E,tk.W,tk.S))
-                sframe = dframe.loc[:, (slice(None),['r1','r2','r3','meanrad','rad_sig','shapeparam','centredisp','coordination']) ]
-                sframe = sframe.rename(columns = {'r1':'R1','r2':'R2','r3':'R3','meanrad':'<R>','rad_sig':'sigma(R)','shapeparam':'S', 'centredisp':'Centre Displacement','coordination':'Coordination'})
-                sframe.index = sframe.index.map(os.path.basename)
+                self.sframe = self.dframe.loc[:, (slice(None),['r1','r2','r3','meanrad','rad_sig','shapeparam','centredisp','coordination']) ]
+                self.sframe = self.sframe.rename(columns = {'r1':'R1','r2':'R2','r3':'R3','meanrad':'<R>','rad_sig':'sigma(R)','shapeparam':'S', 'centredisp':'Centre Displacement','coordination':'Coordination'})
+                self.sframe.index = self.sframe.index.map(os.path.basename)
                 # Simple way to ensure order is correct on output
-                selection = pd.MultiIndex.from_product([sframe.columns.get_level_values(level=0).unique(), ['R1','R2','R3','<R>','sigma(R)','S', 'Centre Displacement','Coordination']])
-                self.tables['all'].insert(tk.END, sframe[selection].to_string())
+                selection = pd.MultiIndex.from_product([self.sframe.columns.get_level_values(level=0).unique(), ['R1','R2','R3','<R>','sigma(R)','S', 'Centre Displacement','Coordination']])
+                self.tables['all'].insert(tk.END, self.sframe[selection].to_string())
                 
-                for site in sorted(list(set(dframe.columns.get_level_values(level=0)))):
+                for site in sorted(list(set(self.dframe.columns.get_level_values(level=0)))):
                     self.tabs[site] = ttk.Frame(self.nb)
                     self.nb.add(self.tabs[site], text=site, sticky='nesw')
                     self.tabs[site].columnconfigure(0, weight=1)
@@ -534,7 +578,7 @@ class SummaryWindow(tk.Frame):
                     self.tables[site].grid(column=0,row=0, sticky=(tk.W, tk.N, tk.S, tk.E))
                     vscrolls[site].grid(column=1, row=0, sticky=(tk.E,tk.N,tk.S))
                     hscrolls[site].grid(column=0,row=1, sticky=(tk.E,tk.W,tk.S))
-                    sframe = dframe.loc[:, (slice(site),['r1','r2','r3','meanrad','rad_sig','shapeparam','centredisp','coordination']) ][site]
+                    sframe = self.dframe.loc[:, (slice(site),['r1','r2','r3','meanrad','rad_sig','shapeparam','centredisp','coordination']) ][site]
                     sframe.index = sframe.index.map(os.path.basename)
                     sframe.rename(columns = {'r1':'R1','r2':'R2','r3':'R3','meanrad':'<R>','rad_sig':'sigma(R)','shapeparam':'S','centredisp':'Centre Displacement','coordination':'Coordination'}, inplace=True)
                     selection = ['R1','R2','R3','<R>','sigma(R)','S','Centre Displacement','Coordination']
@@ -545,6 +589,52 @@ class SummaryWindow(tk.Frame):
             self.nb.columnconfigure(0, weight=1)
             self.nb.rowconfigure(0, weight=1)
 
+    def init_menu(self):
+        """ Set up drop-down menus for the main window. """
+        
+        # Add menubar to parent window
+        self.menubar = tk.Menu(self.parent)
+        
+        # Add menubar items and sub-options
+        self.filemenu = tk.Menu(self.menubar, tearoff=0)
+        self.filemenu.add_command(label='Save As...', command=self.savedata)
+        self.filemenu.add_separator()
+        self.filemenu.add_command(label="Close", command=self.parent.destroy)
+        
+        self.menubar.add_cascade(label="File", menu=self.filemenu)
+        
+        self.parent.config(menu=self.menubar)
+        
+    def savedata(self):
+        """ Save DataFrame to file. """
+        options = {}
+        options['initialdir'] = '{0}'.format(os.path.expanduser('~'))
+        options['filetypes'] = [('Excel Spreadsheet', '.xlsx'),
+                                ('HTML Table','.html'),
+                                ('LaTeX Tabular environment', '.tex'),
+                                ('Comma-Separated variable (CSV)', '.csv')
+                                ]
+        options['title'] = 'Save Data As'
+        options['defaultextension'] = '.csv'
+        options['parent'] = self.parent
+        
+        f = tkFileDialog.asksaveasfilename(**options)
+        if f is None or len(f) == 0:
+            return
+        
+        # Output 'all' sframe to file depending on file extension
+        ext = os.path.splitext(f)[1]
+        if ext == '.csv':
+            self.sframe.to_csv(f)
+        elif ext == '.xlsx':
+            self.sframe.to_excel(f)
+        elif ext == '.tex':
+            self.sframe.to_latex(f)
+        elif ext == '.html':
+            self.sframe.to_html(f)
+        else:
+            tkMessageBox.showerror("Unknown file type", "Unknown file type *{0}".format(ext))
+        
         
         
 class LogDisplay(tk.Frame):

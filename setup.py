@@ -31,6 +31,9 @@ setup(
                         
     ],
     test_suite = 'tests',
+    package_data = {
+        'distellipsoid' : ['README.rst']
+        },
     entry_points = {
         'console_scripts' : [
             'CIFellipsoid=distellipsoid.CIFellipsoid:main'],
