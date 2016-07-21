@@ -4,10 +4,11 @@
  ; Define name of main output program (GUI)
  #define GUIEXE "distellipsoid_gui.exe"
  ; define the path to your work folder
- #define BaseFolder "C:\Users\JCC\Documents\custom_python_libs\distellipsoid\dist\distellipsoid_win"
+ #define BaseFolder64 "C:\Users\JCC\Documents\custom_python_libs\distellipsoid\dist\distellipsoid_win64"
+ #define BaseFolder32 "C:\Users\JCC\Documents\custom_python_libs\distellipsoid\dist\distellipsoid_win32"
  ; get version information from the exe
- #define GUIName BaseFolder+"\"+GUIEXE
- #define CMDName BaseFolder+"\CIFellipsoid.exe"
+ #define GUIName BaseFolder64+"\"+GUIEXE
+ #define CMDName BaseFolder64+"\CIFellipsoid.exe"
  #define AppVersionNo GetFileVersion(GUIName)
  #define AppMajorVersionIdx Pos(".", AppVersionNo)
  #define AppMinorVersionTemp Copy(AppVersionNo, AppMajorVersionIdx +1)
@@ -34,9 +35,13 @@
  AppPublisherURL={#MyAppURL}
  AppSupportURL={#MyAppSupportURL}
  AppUpdatesURL={#MyAppUpdatesURL}
+ 
+ ; Allow different installation for 64/32-bit
+ ArchitecturesInstallIn64BitMode = x64
+ 
  ; Following should probably be something like "{pf}\yourappname" for a real application
-; set DefaultDirName to store files after setup done
- DefaultDirName="C:\Program Files\PIE"
+ ; set DefaultDirName to store files after setup done
+ DefaultDirName={pf}\PIE
  DefaultGroupName=PIE
  AllowNoIcons=yes
  PrivilegesRequired=admin
@@ -53,17 +58,17 @@
  ; SolidCompression=yes
 
  ; Location of files to use
- SourceDir=C:\Users\JCC\Documents\custom_python_libs\distellipsoid\dist\distellipsoid_win
+ SourceDir=C:\Users\JCC\Documents\custom_python_libs\distellipsoid\dist\distellipsoid_win64
 
  Uninstallable=yes
-
  ; Add ability to add program to PATH
  ChangesEnvironment=true
 
  ; Show README during setup
- InfoBeforeFile=README.rst
-
+ InfoAfterFile=README.rst
  LicenseFile=license.txt
+
+
   
  [Languages]
  Name: english; MessagesFile: compiler:Default.isl
@@ -77,22 +82,18 @@
 ; Name: quicklaunchicon; Description: {cm:CreateQuickLaunchIcon}; GroupDescription: {cm:AdditionalIcons}; Flags: unchecked
   
  [Files]
- Source: "{#BaseFolder}\*" ; DestDir: {app}; Excludes: "*.exe" ;Flags: ignoreversion
- Source: "{#BaseFolder}\CIFellipsoid.exe"; DestDir: {app}; Flags: ignoreversion
- Source: "{#BaseFolder}\{#GUIEXE}"; DestDir: {app}; Flags: ignoreversion
- Source: "{#BaseFolder}\certifi\*"; DestDir: {app}\certifi; Flags: recursesubdirs createallsubdirs
- Source: "{#BaseFolder}\docutils\*"; DestDir: {app}\docutils; Flags: recursesubdirs createallsubdirs
- Source: "{#BaseFolder}\idlelib\*"; DestDir: {app}\idlelib; Flags: recursesubdirs createallsubdirs
- Source: "{#BaseFolder}\Include\*"; DestDir: {app}\Include; Flags: recursesubdirs createallsubdirs
- Source: "{#BaseFolder}\IPython\*"; DestDir: {app}\IPython; Flags: recursesubdirs createallsubdirs
- Source: "{#BaseFolder}\jsonschema\*"; DestDir: {app}\jsonschema; Flags: recursesubdirs createallsubdirs
- Source: "{#BaseFolder}\mpl-data\*"; DestDir: {app}\mpl-data; Flags: recursesubdirs createallsubdirs
- Source: "{#BaseFolder}\pytz\*"; DestDir: {app}\pytz; Flags: recursesubdirs createallsubdirs
- Source: "{#BaseFolder}\qt4_plugins\*"; DestDir: {app}\qt4_plugins; Flags: recursesubdirs createallsubdirs
- Source: "{#BaseFolder}\requests\*"; DestDir: {app}\requests; Flags: recursesubdirs createallsubdirs
- Source: "{#BaseFolder}\tcl\*"; DestDir: {app}\tcl; Flags: recursesubdirs createallsubdirs
- Source: "{#BaseFolder}\tk\*"; DestDir: {app}\tk; Flags: recursesubdirs createallsubdirs
- Source: "{#BaseFolder}\zmq\*"; DestDir: {app}\zmq; Flags: recursesubdirs createallsubdirs
+ ; 64-bit source
+ Source: "{#BaseFolder64}\*" ; DestDir: {app}; Excludes: "*.exe, *.rst" ;Flags: ignoreversion; Check: Is64BitInstallMode;
+ Source: "{#BaseFolder64}\CIFellipsoid.exe"; DestDir: {app}; Flags: ignoreversion; Check: Is64BitInstallMode;
+ Source: "{#BaseFolder64}\{#GUIEXE}"; DestDir: {app}; Flags: ignoreversion; Check: Is64BitInstallMode;
+ Source: "{#BaseFolder64}\README.rst"; DestDir: {app}; Flags: isreadme; Check: Is64BitInstallMode;
+ Source: "{#BaseFolder64}\*"; DestDir: {app}; Flags: recursesubdirs createallsubdirs; Check: Is64BitInstallMode;
+ ; 32-bit source
+  Source: "{#BaseFolder32}\*" ; DestDir: {app}; Excludes: "*.exe, *.rst" ;Flags: ignoreversion; Check: not Is64BitInstallMode;
+ Source: "{#BaseFolder32}\CIFellipsoid.exe"; DestDir: {app}; Flags: ignoreversion; Check: not Is64BitInstallMode;
+ Source: "{#BaseFolder32}\{#GUIEXE}"; DestDir: {app}; Flags: ignoreversion; Check: not Is64BitInstallMode;
+ Source: "{#BaseFolder32}\README.rst"; DestDir: {app}; Flags: isreadme; Check: not Is64BitInstallMode;
+ Source: "{#BaseFolder32}\*"; DestDir: {app}\certifi; Flags: recursesubdirs createallsubdirs; Check: not Is64BitInstallMode;
  ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
   
  [Icons]
@@ -106,6 +107,8 @@
  ;Root: HKLM; Subkey: "Software\My Company\My Program"; Flags: uninsdeletekey
   
  [Run]
+; Open README file when complete
+Filename: "{app}\README.TXT"; Description: "View the README file"; Flags: postinstall shellexec skipifsilent
 ; Here runhidden flag is used to hide pop up window after setup done
  Filename: {app}\{#GUIEXE}; Description: {cm:LaunchProgram,{#GUIEXE}}; Flags: nowait postinstall skipifsilent runhidden
 ; Filename: {sys}\net.exe; Parameters: start {#MyAppName}; Flags: runhidden;
