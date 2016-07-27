@@ -65,7 +65,7 @@
  ChangesEnvironment=true
 
  ; Show README during setup
- InfoAfterFile=README.rst
+ ;InfoAfterFile=README.rst
  LicenseFile=license.txt
 
 
@@ -75,9 +75,9 @@
   
  [Tasks]
 ; To create Desktop Icon
- Name: desktopicon; Description: {cm:CreateDesktopIcon}; GroupDescription: {cm:AdditionalIcons}; Flags: unchecked
+ Name: desktopicon; Description: {cm:CreateDesktopIcon}; GroupDescription: {cm:AdditionalIcons}
 ; Add reference to modpath.iss, to enable add/remove of program to PATH
- Name: modifypath; Description: Add application directory to your environmental path; Flags: unchecked
+ Name: modifypath; Description: Add application directory to your environmental path
 ; To create Quicklaunchicon
 ; Name: quicklaunchicon; Description: {cm:CreateQuickLaunchIcon}; GroupDescription: {cm:AdditionalIcons}; Flags: unchecked
   
@@ -86,14 +86,16 @@
  Source: "{#BaseFolder64}\*" ; DestDir: {app}; Excludes: "*.exe, *.rst" ;Flags: ignoreversion; Check: Is64BitInstallMode;
  Source: "{#BaseFolder64}\CIFellipsoid.exe"; DestDir: {app}; Flags: ignoreversion; Check: Is64BitInstallMode;
  Source: "{#BaseFolder64}\{#GUIEXE}"; DestDir: {app}; Flags: ignoreversion; Check: Is64BitInstallMode;
- Source: "{#BaseFolder64}\README.rst"; DestDir: {app}; Flags: isreadme; Check: Is64BitInstallMode;
+ Source: "{#BaseFolder64}\README.rst"; DestDir: {app}; Check: Is64BitInstallMode;
+ ;Flags: isreadme; 
  Source: "{#BaseFolder64}\*"; DestDir: {app}; Flags: recursesubdirs createallsubdirs; Check: Is64BitInstallMode;
  ; 32-bit source
-  Source: "{#BaseFolder32}\*" ; DestDir: {app}; Excludes: "*.exe, *.rst" ;Flags: ignoreversion; Check: not Is64BitInstallMode;
+ Source: "{#BaseFolder32}\*" ; DestDir: {app}; Excludes: "*.exe, *.rst" ;Flags: ignoreversion; Check: not Is64BitInstallMode;
  Source: "{#BaseFolder32}\CIFellipsoid.exe"; DestDir: {app}; Flags: ignoreversion; Check: not Is64BitInstallMode;
  Source: "{#BaseFolder32}\{#GUIEXE}"; DestDir: {app}; Flags: ignoreversion; Check: not Is64BitInstallMode;
- Source: "{#BaseFolder32}\README.rst"; DestDir: {app}; Flags: isreadme; Check: not Is64BitInstallMode;
- Source: "{#BaseFolder32}\*"; DestDir: {app}\certifi; Flags: recursesubdirs createallsubdirs; Check: not Is64BitInstallMode;
+ Source: "{#BaseFolder32}\README.rst"; DestDir: {app}; Check: not Is64BitInstallMode;
+ ;Flags: isreadme; 
+ Source: "{#BaseFolder32}\*"; DestDir: {app}; Flags: recursesubdirs createallsubdirs; Check: not Is64BitInstallMode;
  ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
   
  [Icons]
@@ -108,7 +110,7 @@
   
  [Run]
 ; Open README file when complete
-Filename: "{app}\README.TXT"; Description: "View the README file"; Flags: postinstall shellexec skipifsilent
+Filename: "{app}\README.rst"; Description: "View the README file"; Flags: postinstall shellexec skipifsilent
 ; Here runhidden flag is used to hide pop up window after setup done
  Filename: {app}\{#GUIEXE}; Description: {cm:LaunchProgram,{#GUIEXE}}; Flags: nowait postinstall skipifsilent runhidden
 ; Filename: {sys}\net.exe; Parameters: start {#MyAppName}; Flags: runhidden;

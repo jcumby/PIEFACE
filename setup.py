@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "distellipsoid",
-    version = "0.3.1a",
+    version = "0.4.0a",
     revision = "$Revision$",
     author = "James Cumby",
     author_email = "james.cumby@ed.ac.uk",

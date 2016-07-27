@@ -16,28 +16,28 @@ echo **********************
 echo Freezing 64-bit python
 echo **********************
 
-RMDIR /S /Q dist\distellipsoid_win
+RMDIR /S /Q dist\distellipsoid_win64
 REM Run 64-bit PyInstaller, copy CIFellipsoid files across and then move entire directory to 64-bit folder
-C:\Users\JCC\AppData\Local\enthought\Canopy\User\Scripts\pyinstaller.exe -y win_build.spec
-copy /Y dist\CIFellipsoid\CIFellipsoid.exe dist\distellipsoid_win\CIFellipsoid.exe
-copy /Y dist\CIFellipsoid\CIFellipsoid.exe.manifest dist\distellipsoid_win\CIFellipsoid.exe.manifest
-move /Y dist\distellipsoid_win dist\distellipsoid_win64
+C:\Users\JCC\AppData\Local\enthought\Canopy\User\Scripts\pyinstaller.exe -y win_build64.spec
+copy /Y dist\CIFellipsoid64\CIFellipsoid.exe dist\distellipsoid_win64\CIFellipsoid.exe
+copy /Y dist\CIFellipsoid64\CIFellipsoid.exe.manifest dist\distellipsoid_win64\CIFellipsoid.exe.manifest
+REM move /Y dist\distellipsoid_win dist\distellipsoid_win64
 
-pause
+REM pause
 
 REM ******* 32-bit Version *********
 REM Remove existing distellipsoid_win folder, to prevent old files hanging around
 echo **********************
 echo Freezing 32-bit python
 echo **********************
-RMDIR /S /Q dist\distellipsoid_win
+RMDIR /S /Q dist\distellipsoid_win32
 REM Run 64-bit PyInstaller, copy CIFellipsoid files across and then move entire directory to 64-bit folder
-C:\Users\JCC\AppData\Local\enthought\Canopy32\User\Scripts\pyinstaller.exe -y win_build.spec
-copy /Y dist\CIFellipsoid\CIFellipsoid.exe dist\distellipsoid_win\CIFellipsoid.exe
-copy /Y dist\CIFellipsoid\CIFellipsoid.exe.manifest dist\distellipsoid_win\CIFellipsoid.exe.manifest
-move /Y dist\distellipsoid_win dist\distellipsoid_win32
+C:\Users\JCC\AppData\Local\enthought\Canopy32\User\Scripts\pyinstaller.exe -y win_build32.spec
+copy /Y dist\CIFellipsoid32\CIFellipsoid.exe dist\distellipsoid_win32\CIFellipsoid.exe
+copy /Y dist\CIFellipsoid32\CIFellipsoid.exe.manifest dist\distellipsoid_win32\CIFellipsoid.exe.manifest
+REM move /Y dist\distellipsoid_win dist\distellipsoid_win32
 
-pause
+REM pause
 
 echo
 echo **************************************************************

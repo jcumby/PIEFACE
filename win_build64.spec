@@ -63,14 +63,23 @@ ADDEDFILES = [
             ('ellipsoid_icon.ico', '.'),
             ('license.txt','.')
              ]
+
+# By default, some required MKL DLLs are missing (seems to be related to Enthought, matplotlib and numpy...)
+
+
+MISSINGDLLS = [
+                ('lib64\\mk2_avx.dll', '.' ),
+                ('lib64\\mk2_def.dll', '.' )
+              ]
+
     
 GUI = Entrypoint('distellipsoid',
              'gui_scripts',
              'EllipsoidGUI',
              pathex=['C:\\Users\\JCC\\Documents\\custom_python_libs\\distellipsoid'],
-             binaries=None,
+             binaries=MISSINGDLLS,
              datas=ADDEDFILES,
-             hiddenimports=['FileDialog'],
+             hiddenimports=['FileDialog','Queue'],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],
@@ -82,7 +91,7 @@ CMD = Entrypoint('distellipsoid',
                'console_scripts',
                'CIFellipsoid',
                pathex=['C:\\Users\\JCC\\Documents\\custom_python_libs\\distellipsoid'],
-               binaries=None,
+               binaries=MISSINGDLLS,
                datas=None,
                hiddenimports=[],
                hookspath=[],
@@ -107,8 +116,8 @@ GUIexe = EXE(GUIpyz,
           name='distellipsoid_gui',
           debug=False,
           strip=False,
-          upx=True,
-          console=False,
+          upx=False,
+          console=True,
           icon='ellipsoid_icon.ico',
           version='win_GUI_info.txt')
 CMDexe = EXE(CMDpyz,
@@ -117,22 +126,22 @@ CMDexe = EXE(CMDpyz,
           name='CIFellipsoid',
           debug=False,
           strip=False,
-          upx=True,
+          upx=False,
           console=True,
           icon='ellipsoid_icon.ico',
-          version='win_CMD_info.txt')          
-
+          version='win_CMD_info.txt')                
+          
 GUIcoll = COLLECT(GUIexe,
                GUI.binaries,
                GUI.zipfiles,
                GUI.datas,
                strip=False,
-               upx=True,
-               name='distellipsoid_win')
+               upx=False,
+               name='distellipsoid_win64')
 CMDcoll = COLLECT(CMDexe,
                CMD.binaries,
                CMD.zipfiles,
                CMD.datas,
                strip=False,
-               upx=True,
-               name='CIFellipsoid')
+               upx=False,
+               name='CIFellipsoid64')
