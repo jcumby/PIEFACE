@@ -3,13 +3,19 @@ import unittest
 from distellipsoid import multiCIF
 import numpy as np
 
+# Minimal 
+simpleCIF="""
+"""
+
+
 
 class LabelChecking(unittest.TestCase):
-    """ Test processing of site labels for centre/ligands. """
+    """ Test processing of site labels for centre/ligands using check_labels(). """
     
     def setUp(self):
         """ Set up simple labels/types for testing check_labels. """
         self.alllabels = ['Pr1','O1','O2','O3','Al1','Pr2']
+        #self.cifs
         
     def tearDown(self):
         del(self.alllabels)

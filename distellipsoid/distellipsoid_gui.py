@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+""" Graphical interface to multiCIF, offering a GUI equivalent of CIFellipsoid.py. """
+
 import Tkinter as tk
 import tkMessageBox
 import tkFileDialog
@@ -28,7 +30,7 @@ log = logging.getLogger()
 
 class MainWindow:
     def __init__(self, parent):
-    
+        """ Initialise main window. """
         self.parent = parent
         self.parent.title("Distellipsoid Input GUI")
         
@@ -49,8 +51,6 @@ class MainWindow:
         self.init_menu()
         
         self.init_gui(self.intab)
-        
-        
         
         self.nbookmain.pack(expand=1, fill=tk.BOTH)
         self.intab.columnconfigure(0, weight=1)
@@ -269,6 +269,7 @@ class MainWindow:
         self.parent.deiconify()
 
     def check_completed(self):
+        """ Check if calculation has finished, and update GUI as necessary. """
         if hasattr(self.calcthread, 'isAlive'):
             # Calculation running using threading (also has is_alive() method...)
             if self.calcthread.isAlive():
@@ -313,7 +314,7 @@ class MainWindow:
           
     
     def run(self):
-        """ Run distellipsoid calculation"""
+        """ Run distellipsoid calculation using multiCIF (through a parallel thread)."""
         if len(self.filenames) == 0:
             tkMessageBox.showerror('Error','No files have been selected.')
             return
@@ -445,6 +446,7 @@ class MainWindow:
         self.sumnb.pack(expand=1, fill=tk.BOTH)
 
 class ProgressWindow(tk.Toplevel):
+    """ Create window with progress bar. """
     def __init__(self, parent=None):
         self.parent = parent
         tk.Toplevel.__init__(self)

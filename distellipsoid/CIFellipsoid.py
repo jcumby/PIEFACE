@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 
 """
-Calculate minimum-bounding-ellipsoid for polyhedra, based on an imported Cif file.
-
-Run as a script with appropriate arguments: in this case, the output routine
-is also called to write data to a file.
+Calculate minimum-bounding-ellipsoid for polyhedra, based on a list of Cif files.
 """
 
 import multiprocessing
@@ -53,7 +50,7 @@ def main():
     import sys
     import logging
     
-    parser = argparse.ArgumentParser(description="Compute ellipsoid properties from a CIF file.")
+    parser = argparse.ArgumentParser(description="Compute ellipsoid properties from CIF file(s).")
     parser.add_argument("cifs",
                         type=str,
                         action="store",

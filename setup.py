@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "distellipsoid",
-    version = "0.4.0a",
+    version = "0.4.1a",
     revision = "$Revision$",
     author = "James Cumby",
     author_email = "james.cumby@ed.ac.uk",
@@ -23,6 +23,7 @@ setup(
     ],
     
     packages = find_packages(),
+    include_package_data = True,
     install_requires = ['numpy>=1.9.2',
                         'matplotlib>=1.4.3',
                         'PyCifRW>=3.3',
@@ -32,7 +33,8 @@ setup(
     ],
     test_suite = 'tests',
     package_data = {
-        'distellipsoid' : ['README.rst']
+        'distellipsoid' : ['README.rst'],
+        'test_files': ['test_data/*.cif'],
         },
     entry_points = {
         'console_scripts' : [

@@ -226,7 +226,10 @@ def readcif(FILE):
         atomcoords[site] = np.array([ allcif[phase]['_atom_site_fract_x'][i].split('(')[0], allcif[phase]['_atom_site_fract_y'][i].split('(')[0], allcif[phase]['_atom_site_fract_z'][i].split('(')[0] ]).astype(np.float)
         atomtypes[site] = allcif[phase]['_atom_site_type_symbol'][i]
     
-    spacegp = allcif[phase]['_symmetry_Int_Tables_number']
+    try:
+        spacegp = allcif[phase]['_symmetry_Int_Tables_number']
+    except KeyError:
+        spacegp = allcif[phase]['_space_group_IT_number']
     
     # Possible references to symmetry operations to check for
     symmop_strings = ['_space_group_symop_operation_xyz', '_symmetry_equiv_pos_as_xyz']
