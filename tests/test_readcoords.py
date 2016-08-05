@@ -62,6 +62,17 @@ class CifRead(unittest.TestCase):
     """ Check reading of CIF files works as expected. """
     # Mainly checks correct interface to pyCIFRW
     
+    def check_internet():
+        """ Check there is an internet connection. """
+        import urllib2
+        
+        try:
+            response=urllib2.urlopen('http://www.google.com', timeout=1)
+            return True
+        except urllib2.URLERROR as err:
+            return False
+
+    
     def setUp(self):
         """ Generate simple CIF objects. """
         # Find all 'test_data' files ending .cif, and create a dict with {filename:absolute path}
@@ -121,13 +132,134 @@ class CifRead(unittest.TestCase):
             self.assertListEqual(returnvals[4], self.results[cif]['symmops'])
             self.assertListEqual(returnvals[5], self.results[cif]['symmid'])
             
+    @unittest.skipUnless(check_internet(), "Requires an internet connection")        
+    def test_read_internet_CIF(self):
+        """ Check that we can read a CIF online from COD (requires an internet connection). """
         
+        ciffile = 'http://www.crystallography.net/cod/1004021.cif'
+        cif = '1004021'
         
+        returnvals = readcoords.readcif(ciffile)
+        self.assertDictEqual(returnvals[0], self.results[cif]['cell'])
+        # Test atomcoords are equal
+        self.assertItemsEqual(returnvals[1].keys(), self.results[cif]['atomcoords'].keys())
+        for k in returnvals[1].keys():
+            np.testing.assert_array_almost_equal(returnvals[1][k], self.results[cif]['atomcoords'][k])
+        self.assertDictEqual(returnvals[2], self.results[cif]['atomtypes'])
+        self.assertEqual(returnvals[3], self.results[cif]['spacegrp'])
+        self.assertListEqual(returnvals[4], self.results[cif]['symmops'])
+        self.assertListEqual(returnvals[5], self.results[cif]['symmid'])    
+        
+            
+            
+class PrimitiveCell(unittest.TestCase):
+    """ Test generation of all atom positions. """
+    def TearDown(slef):
+        del(self.atomcoords)
+        del(self.symmops)
+        del(self.symmid)
+        del(self.newcoords)
+    
+    def test_simple_cubic(self):
+        """ Generate all atoms in very simple cell. """
+        self.atomcoords={'Mn1':np.array([0.0,0.0,0.0]),
+                         'O1': np.array([0.25, 0.25, 0.25])}
+        self.symmops = ['x,y,z', '-x,-y,-z']
+        self.symmid = [0,1]
+        
+        correctcoords = {'Mn1': np.array([0.0,0.0,0.0]),
+                         'O1' : np.array([0.25,0.25,0.25]),
+                         'O1_1': np.array([0.75,0.75,0.75])}
+        
+        self.newcoords = readcoords.makeP1cell(self.atomcoords, self.symmops, self.symmid)
+        
+        self.assertItemsEqual(self.newcoords.keys(), correctcoords.keys())
+        for k in self.newcoords.keys():
+            np.testing.assert_array_almost_equal(self.newcoords[k], correctcoords[k])
+            
+    def test_rounding_errors(self):
+        """ Check that positions rounded when reading CIF are correctly handled as duplicates"""
+        self.atomcoords={'O1': np.array([0.3333, 0.3333, 0.3333])}
+        self.symmops = ['x,y,z', '-x,-y,-z','x+1/3, y+1/3, z+1/3']
+        self.symmid = [0,1,2]
+        
+        correctcoords = {'O1' : np.array([0.3333, 0.3333, 0.3333]),
+                         'O1_1': np.array([0.6667, 0.6667, 0.6667])}
+        
+        self.newcoords = readcoords.makeP1cell(self.atomcoords, self.symmops, self.symmid)
+        
+        self.assertItemsEqual(self.newcoords.keys(), correctcoords.keys())
+        for k in self.newcoords.keys():
+            np.testing.assert_array_almost_equal(self.newcoords[k], correctcoords[k])
+
+class LigandSearching(unittest.TestCase):
+    """ Test searching of ligands from all atoms. """
+    def TearDown(slef):
+        del(self.atomcoords)
+        del(self.orthom)
+        del(self.ligands)
+        del(self.atomtypes)
+        del(self.ligtypes)
+    
+    def test_simple_cubic(self):
+        """ Find one ligand in simple cubic cell. """
+        self.atomcoords={'Mn1':np.array([0.0,0.0,0.0]),
+                         'O1': np.array([0.25, 0.25, 0.25])}
+        self.orthom = np.array([[4.5, 0.0, 0.0],[0.0, 4.5, 0.0],[0.0, 0.0, 4.5]])
+        self.atomtypes = {'Mn1':'Mn', 'O1':'O'}
+ 
+        correctligands = {'O1': np.array([0.25, 0.25, 0.25])}
+        
+        self.ligands, self.ligtypes = readcoords.findligands('Mn1', self.atomcoords, self.orthom, radius=2.0, types=['O'], names = [], atomtypes=self.atomtypes)
+
+        self.assertItemsEqual(self.ligands.keys(), correctligands.keys())
+        for k in self.ligands.keys():
+            np.testing.assert_array_almost_equal(self.ligands[k], correctligands[k])
+        self.assertDictEqual(self.ligtypes, self.atomtypes)
+        
+    def test_duplicated_ligands(self):
+        """ Check that an atom can be found as a ligand in more than one adjacent cell """
+        self.atomcoords={'Mn1':np.array([0.0,0.0,0.0]),
+                         'O1': np.array([0.5, 0.5, 0.5])}
+        self.orthom = np.array([[4.0, 0.0, 0.0],[0.0, 4.0, 0.0],[0.0, 0.0, 4.0]])
+        self.atomtypes = {'Mn1':'Mn', 'O1':'O'}
+ 
+        correctligands = {'O1': np.array([0.5, 0.5, 0.5]),
+                          'O1a': np.array([-0.5, 0.5, 0.5]),
+                          'O1b': np.array([0.5, -0.5, 0.5]),
+                          'O1c': np.array([0.5, 0.5, -0.5]),
+                          'O1d': np.array([-0.5, -0.5, 0.5]),
+                          'O1e': np.array([-0.5, 0.5, -0.5]),
+                          'O1f': np.array([0.5, -0.5, -0.5]),
+                          'O1g': np.array([-0.5, -0.5, -0.5]),
+                          }
+        
+        correcttypes = {'Mn1':'Mn',
+                        'O1' : 'O',
+                        'O1a' : 'O',
+                        'O1b' : 'O',
+                        'O1c' : 'O',
+                        'O1d' : 'O',
+                        'O1e' : 'O',
+                        'O1f' : 'O',
+                        'O1g' : 'O'
+                        }
+                        
+        
+        self.ligands, self.ligtypes = readcoords.findligands('Mn1', self.atomcoords, self.orthom, radius=3.5, types=['O'], names = [], atomtypes=self.atomtypes)
+        
+        self.assertItemsEqual(self.ligands.keys(), correctligands.keys())
+        for k in self.ligands.keys():
+            np.testing.assert_array_almost_equal(self.ligands[k], correctligands[k])
+        self.assertDictEqual(self.ligtypes, correcttypes)
+
 
 if __name__ == "__main__":
 
     test_classes_to_run = [ CrystalInit,
                             CifRead,
+                            PrimitiveCell,
+                            LigandSearching,
                            ]
     
     

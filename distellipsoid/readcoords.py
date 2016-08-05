@@ -212,6 +212,7 @@ def readcif(FILE):
     
     # Read cell
     cell = {}
+    
     cell['a'] = float(allcif[phase]['_cell_length_a'].split('(')[0])
     cell['b'] = float(allcif[phase]['_cell_length_b'].split('(')[0])
     cell['c'] = float(allcif[phase]['_cell_length_c'].split('(')[0])
