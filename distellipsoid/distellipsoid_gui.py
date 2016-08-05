@@ -379,7 +379,7 @@ class MainWindow:
             
             
             self.runButton.config(state='disabled')
-            self.parent.config(cursor="wait")
+            self.parent.config(cursor="watch")
             self.prog = ProgressWindow(self)
             self.prog.grab_set()
             self.prog.start()
