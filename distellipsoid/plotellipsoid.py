@@ -2,8 +2,8 @@
 Module for plotting ellipsoids.
 
 Basic Usage:
-    Generate EllipsoidImage object (using existing matplotlib figure axes if required)
-    plotellipsoid(ellipsoidobject) will hten plot 3D ellipsoid with basic settings
+    * Generate EllipsoidImage object (using existing matplotlib figure axes if required)
+    * plotellipsoid(ellipsoidobject) will then plot 3D ellipsoid with basic settings
     
 """
 

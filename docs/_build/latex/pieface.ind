@@ -1,0 +1,167 @@
+\begin{theindex}
+\def\bigletter#1{{\Large\sffamily#1}\nopagebreak\vspace{1mm}}
+
+  \bigletter {Symbols}
+  \item --maxcycles
+    \subitem CIFellipsoid command line option, \hyperpage{8}
+  \item --noplot
+    \subitem CIFellipsoid command line option, \hyperpage{9}
+  \item --procs
+    \subitem CIFellipsoid command line option, \hyperpage{9}
+  \item --writelog
+    \subitem CIFellipsoid command line option, \hyperpage{9}
+  \item -N
+    \subitem CIFellipsoid command line option, \hyperpage{8}
+  \item -P, --PrintLabels
+    \subitem CIFellipsoid command line option, \hyperpage{8}
+  \item -U, --Unthreaded
+    \subitem CIFellipsoid command line option, \hyperpage{9}
+  \item -W, --overwriteall
+    \subitem CIFellipsoid command line option, \hyperpage{8}
+  \item -l, --ligandtypes
+    \subitem CIFellipsoid command line option, \hyperpage{8}
+  \item -m, --metal
+    \subitem CIFellipsoid command line option, \hyperpage{8}
+  \item -n, --ligandnames
+    \subitem CIFellipsoid command line option, \hyperpage{8}
+  \item -o, --output
+    \subitem CIFellipsoid command line option, \hyperpage{8}
+  \item -r, --radius
+    \subitem CIFellipsoid command line option, \hyperpage{8}
+  \item -t, --tolerance
+    \subitem CIFellipsoid command line option, \hyperpage{8}
+
+  \indexspace
+  \bigletter A
+  \item allbondlens() (distellipsoid.polyhedron.Polyhedron method), \hyperpage{11}
+  \item alldelabc() (distellipsoid.polyhedron.Polyhedron method), \hyperpage{11}
+  \item alldelxyz() (distellipsoid.polyhedron.Polyhedron method), \hyperpage{11}
+  \item allxyz() (distellipsoid.polyhedron.Polyhedron method), \hyperpage{11}
+  \item averagebondlen() (distellipsoid.polyhedron.Polyhedron method), \hyperpage{11}
+
+  \indexspace
+  \bigletter B
+  \item bondlensig() (distellipsoid.polyhedron.Polyhedron method), \hyperpage{11}
+  \item bondlenvar() (distellipsoid.polyhedron.Polyhedron method), \hyperpage{11}
+
+  \indexspace
+  \bigletter C
+  \item calcfromcif() (in module distellipsoid.calcellipsoid), \hyperpage{12}
+  \item centreaxes() (distellipsoid.ellipsoid.Ellipsoid method), \hyperpage{10}
+  \item centredisp() (distellipsoid.ellipsoid.Ellipsoid method), \hyperpage{10}
+  \item cenxyz() (distellipsoid.polyhedron.Polyhedron method), \hyperpage{11}
+  \item check\_centres() (in module distellipsoid.multiCIF), \hyperpage{12}
+  \item check\_labels() (in module distellipsoid.multiCIF), \hyperpage{12}
+  \item check\_ligands() (in module distellipsoid.multiCIF), \hyperpage{13}
+  \item CIF, \hyperindexformat{\textbf}{15}
+  \item CIFellipsoid command line option
+    \subitem --maxcycles, \hyperpage{8}
+    \subitem --noplot, \hyperpage{9}
+    \subitem --procs, \hyperpage{9}
+    \subitem --writelog, \hyperpage{9}
+    \subitem -N, \hyperpage{8}
+    \subitem -P, --PrintLabels, \hyperpage{8}
+    \subitem -U, --Unthreaded, \hyperpage{9}
+    \subitem -W, --overwriteall, \hyperpage{8}
+    \subitem -l, --ligandtypes, \hyperpage{8}
+    \subitem -m, --metal, \hyperpage{8}
+    \subitem -n, --ligandnames, \hyperpage{8}
+    \subitem -o, --output, \hyperpage{8}
+    \subitem -r, --radius, \hyperpage{8}
+    \subitem -t, --tolerance, \hyperpage{8}
+    \subitem cifs, \hyperpage{8}
+  \item cifs
+    \subitem CIFellipsoid command line option, \hyperpage{8}
+  \item citation, \hyperindexformat{\textbf}{15}
+  \item clearlast() (distellipsoid.plotellipsoid.EllipsoidImage method), \hyperpage{12}
+  \item Crystal (class in distellipsoid.readcoords), \hyperpage{12}
+
+  \indexspace
+  \bigletter D
+  \item distellipsoid.ellipsoid (module), \hyperpage{10}
+  \item distellipsoid.multiCIF (module), \hyperpage{12}
+  \item distellipsoid.polyhedron (module), \hyperpage{11}
+  \item distellipsoid.writeproperties (module), \hyperpage{13}
+
+  \indexspace
+  \bigletter E
+  \item ellipsoid, \hyperindexformat{\textbf}{15}
+  \item Ellipsoid (class in distellipsoid.ellipsoid), \hyperpage{10}
+  \item EllipsoidImage (class in distellipsoid.plotellipsoid), \hyperpage{12}
+  \item ellipsvol() (distellipsoid.ellipsoid.Ellipsoid method), \hyperpage{10}
+  \item emit() (distellipsoid.multiCIF.QueueHandler method), \hyperpage{12}
+
+  \indexspace
+  \bigletter F
+  \item findellipsoid() (distellipsoid.ellipsoid.Ellipsoid method), \hyperpage{10}
+  \item findligands() (in module distellipsoid.readcoords), \hyperpage{13}
+
+  \indexspace
+  \bigletter G
+  \item getminvol() (distellipsoid.ellipsoid.Ellipsoid method), \hyperpage{10}
+  \item GUI, \hyperindexformat{\textbf}{15}
+
+  \indexspace
+  \bigletter L
+  \item ligdelabc() (distellipsoid.polyhedron.Polyhedron method), \hyperpage{11}
+  \item ligdelxyz() (distellipsoid.polyhedron.Polyhedron method), \hyperpage{11}
+  \item ligxyz() (distellipsoid.polyhedron.Polyhedron method), \hyperpage{11}
+  \item listener\_configurer() (in module distellipsoid.multiCIF), \hyperpage{13}
+  \item listener\_empty\_config() (in module distellipsoid.multiCIF), \hyperpage{13}
+  \item listener\_process() (in module distellipsoid.multiCIF), \hyperpage{13}
+
+  \indexspace
+  \bigletter M
+  \item main() (in module distellipsoid.multiCIF), \hyperpage{13}
+  \item makeellipsoid() (distellipsoid.polyhedron.Polyhedron method), \hyperpage{11}
+  \item makeP1cell() (in module distellipsoid.readcoords), \hyperpage{13}
+  \item makepolyhedron() (distellipsoid.readcoords.Crystal method), \hyperpage{12}
+  \item MBE, \hyperindexformat{\textbf}{15}
+  \item meanrad() (distellipsoid.ellipsoid.Ellipsoid method), \hyperpage{10}
+  \item mtensor() (distellipsoid.readcoords.Crystal method), \hyperpage{12}
+
+  \indexspace
+  \bigletter N
+  \item numpoints() (distellipsoid.ellipsoid.Ellipsoid method), \hyperpage{10}
+
+  \indexspace
+  \bigletter O
+  \item orthomatrix() (distellipsoid.readcoords.Crystal method), \hyperpage{12}
+
+  \indexspace
+  \bigletter P
+  \item plot() (distellipsoid.ellipsoid.Ellipsoid method), \hyperpage{10}
+  \item plotell() (distellipsoid.plotellipsoid.EllipsoidImage method), \hyperpage{12}
+  \item plotsummary() (distellipsoid.ellipsoid.Ellipsoid method), \hyperpage{10}
+  \item pointcolours() (distellipsoid.polyhedron.Polyhedron method), \hyperpage{11}
+  \item points (distellipsoid.ellipsoid.Ellipsoid attribute), \hyperpage{10}
+  \item Polyhedron (class in distellipsoid.polyhedron), \hyperpage{11}
+
+  \indexspace
+  \bigletter Q
+  \item QueueHandler (class in distellipsoid.multiCIF), \hyperpage{12}
+
+  \indexspace
+  \bigletter R
+  \item raderr() (distellipsoid.ellipsoid.Ellipsoid method), \hyperpage{10}
+  \item radvar() (distellipsoid.ellipsoid.Ellipsoid method), \hyperpage{11}
+  \item readcif() (in module distellipsoid.readcoords), \hyperpage{13}
+  \item run\_parallel() (in module distellipsoid.multiCIF), \hyperpage{13}
+
+  \indexspace
+  \bigletter S
+  \item shapeparam() (distellipsoid.ellipsoid.Ellipsoid method), \hyperpage{11}
+  \item shapeparam\_old() (distellipsoid.ellipsoid.Ellipsoid method), \hyperpage{11}
+  \item sphererad() (distellipsoid.ellipsoid.Ellipsoid method), \hyperpage{11}
+  \item strainenergy() (distellipsoid.ellipsoid.Ellipsoid method), \hyperpage{11}
+
+  \indexspace
+  \bigletter U
+  \item uniquerad() (distellipsoid.ellipsoid.Ellipsoid method), \hyperpage{11}
+
+  \indexspace
+  \bigletter W
+  \item worker\_configure() (in module distellipsoid.multiCIF), \hyperpage{13}
+  \item writeall() (in module distellipsoid.writeproperties), \hyperpage{13}
+
+\end{theindex}

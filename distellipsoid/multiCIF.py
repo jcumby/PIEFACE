@@ -1,8 +1,6 @@
 """
 Module for processing one or more CIF files using supplied options
-
 To run from the command line, call the CIFellipsoid.py script.
-    
 """
 
 
@@ -129,9 +127,11 @@ def _alltypes(CIF):
     
 def check_labels(labels, alllabs):
     """ Check that all labels are present in all cif files, handling regular expressions if needed.
-    Returns list of labels to test,
-            list of labels to omit,
-            list of missing labels
+    Returns
+    -------
+    list of labels to test,
+    list of labels to omit,
+    list of missing labels
     """
     
     test = set()
@@ -390,10 +390,9 @@ def main(cifs, centres, **kwargs):
     """ Process all supplied cif files using options supplied as kwargs (or defaults).
     
     Returns
-    -------
-    phases : Dict
+        phases : Dict
             Dictionary of Crystal objects (containing ellipsoid results), keyed by CIF name.
-    plots : dict or dicts, optional
+        plots : dict or dicts, optional
             Dictionary of summary plots (keyed by CIF name) containing Dictionary
             of plots (keyed by ellipsoid centre)
     """

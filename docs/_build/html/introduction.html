@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introduction to PIEFACE &#8212; pieface 1.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="pieface 1.0.0 documentation" href="index.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="pieface - Fitting Distorted Coordination Polyhedra" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="pieface - Fitting Distorted Coordination Polyhedra"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pieface 1.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/high_res_icon.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction to PIEFACE</a><ul>
+<li><a class="reference internal" href="#polyhedra-inscribing-ellipsoids-for-analysis-of-coordination-environments">Polyhedra Inscribing Ellipsoids For Analysis of Coordination Environments</a></li>
+<li><a class="reference internal" href="#citing-pieface">Citing pieface</a></li>
+<li><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li><a class="reference internal" href="#license">License</a></li>
+<li><a class="reference internal" href="#disclaimer">Disclaimer</a></li>
+<li><a class="reference internal" href="#authors">Authors</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">pieface - Fitting Distorted Coordination Polyhedra</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="next chapter">Installation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/introduction.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="introduction-to-pieface">
+<span id="introduction"></span><h1>Introduction to PIEFACE<a class="headerlink" href="#introduction-to-pieface" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="polyhedra-inscribing-ellipsoids-for-analysis-of-coordination-environments">
+<h2>Polyhedra Inscribing Ellipsoids For Analysis of Coordination Environments<a class="headerlink" href="#polyhedra-inscribing-ellipsoids-for-analysis-of-coordination-environments" title="Permalink to this headline">¶</a></h2>
+<p><strong>P</strong>olyhedra <strong>I</strong>nscribing <strong>E</strong>llipsoids <strong>F</strong>or <strong>A</strong>nalysis of <strong>C</strong>oordination <strong>E</strong>nvironments (or <a class="reference external" href="http://www.csec.ed.ac.uk">pieface</a>) is an open source <a class="reference external" href="https://www.python.org/&gt;">Python</a> project intended for the
+analysis of distortions of a chemical coordination polyhedron. The analysis is very general way, irrespective of polyhedron size or nature of the distortion, and could be applied
+to any problem where a coordination sphere with known coordinates exists, from extended inorganic solids to organic molecules.
+Full details of the method can be found in the original research article, <a class="reference external" href="http://www.csec.ed.ac.uk">Ellipsoidal Analysis of Coordination Polyhedra</a>, including some interesting examples.</p>
+<p>For many crystallographic polyhedra, distortion is difficult to rationalise simply in terms of deviations of bond lengths or bond angles from <em>ideal</em> values. By fitting the smallest volume <a class="reference internal" href="glossary.html#term-ellipsoid"><span class="xref std std-term">ellipsoid</span></a>
+around the polyhedron, distortions are defined in terms of the three principal axes of the ellipsoid and it&#8217;s orientation in space. The distortion of this <a class="reference internal" href="glossary.html#term-ellipsoid"><span class="xref std std-term">ellipsoid</span></a> can then give a simple description
+of the distortions involved.</p>
+</div>
+<div class="section" id="citing-pieface">
+<h2>Citing pieface<a class="headerlink" href="#citing-pieface" title="Permalink to this headline">¶</a></h2>
+<p>If you use pieface, please <strong>cite</strong> it:</p>
+<blockquote>
+<div><a class="reference external" href="http://www.csec.ed.ac.uk">James Cumby &amp; J. Paul Attfield, <em>Ellipsoidal Analysis of Coordination Polyhedra</em>.</a></div></blockquote>
+</div>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>Once installed (see <a class="reference internal" href="installation.html#installation"><span class="std std-ref">Installation</span></a>) pieface can be accessed either through a command-line interface (<code class="docutils literal"><span class="pre">CIFellipsoid</span></code>) or a user-friendly graphical interface (<code class="docutils literal"><span class="pre">distellipsoidGUI</span></code>).
+Both should be available on the system command line/terminal, and also from the start menu (on Windows).</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">distellipsoidGUI</span></code></dt>
+<dd>Should be adequate for most users. This <a class="reference internal" href="glossary.html#term-gui"><span class="xref std std-term">GUI</span></a> provides a clickable interface to commonly used <a class="reference external" href="http://www.csec.ed.ac.uk">pieface</a> functions, and allows users to
+import <a class="reference internal" href="glossary.html#term-cif"><span class="xref std std-term">CIF</span></a> files for analysis, and examine/save the resulting output.</dd>
+<dt><code class="docutils literal"><span class="pre">CIFellipsoid</span></code></dt>
+<dd>Gives terminal-based access to a wider range of capabilities, details of which can be found by typing <code class="docutils literal"><span class="pre">CIFellipsoid</span></code> <code class="docutils literal"><span class="pre">--help</span></code>.</dd>
+</dl>
+<p>In both cases, the input required is one or more <a class="reference internal" href="glossary.html#term-cif"><span class="xref std std-term">CIF</span></a> files, and a list of atom types or labels to be used as polyhedron centres and ligands.
+Once calculated (which can take some time for a large number of files) the resulting ellipsoid parameters are saved as a text file (one per <a class="reference internal" href="glossary.html#term-cif"><span class="xref std std-term">CIF</span></a> file).
+Using <code class="docutils literal"><span class="pre">distellipsoidGUI</span></code> the resulting ellipsoids and parameters can also be visualised interactively.</p>
+<p>More detailed examples of usage can be found in <a class="reference internal" href="tutorial.html#tutorials"><span class="std std-ref">Tutorials</span></a>.</p>
+</div>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p>pieface is distributed under the <a class="reference external" href="https://opensource.org/licenses/MIT">MIT license</a> (see <span class="xref doc">&lt;../license.txt&gt;</span>). Any use of the software should be <a class="reference external" href="/citation">cited</a></p>
+</div>
+<div class="section" id="disclaimer">
+<h2>Disclaimer<a class="headerlink" href="#disclaimer" title="Permalink to this headline">¶</a></h2>
+<p>This software is provided as-is, on a best-effort basis. The authors accept no liabilities associated with the use of this software.
+It has been tested for accuracy of results for a number of cases, but only for uses that the authors can think of. We would be interested
+to hear of any suggestions for new uses, or potential additions to the software.</p>
+<p>We will attempt to correct any bugs as they are found on a best-effort basis!</p>
+</div>
+<div class="section" id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
+<p>James Cumby - james.cumby &#8220;at&#8221; ed.ac.uk</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="pieface - Fitting Distorted Coordination Polyhedra"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pieface 1.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, James Cumby.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

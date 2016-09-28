@@ -1,7 +1,7 @@
-distellipsoid
-=============
+Polyhedra Inscribing Ellipsoids For Analysis of Coordination Environments (PIEFACE)
+===================================================================================
 
-distellipsoid provides functons for fitting ellipsoids to crystallographic polyhedra, for the purpose of analysing distortion and volume changes,
+PIEFACE provides functons for fitting ellipsoids to crystallographic polyhedra, for the purpose of analysing distortion and volume changes,
 irrespective of whether the changes occur from bond lengths or bond angles (or both). Typical usage is to read atom coordinates from a CIF 
 (crystallographic information file) using EllipsoidGUI; start by calling EllipsoidGUI from the command line (once installed).
 

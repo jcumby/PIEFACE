@@ -1,0 +1,94 @@
+\indexentry{CIFellipsoid command line option!cifs|hyperpage}{8}
+\indexentry{cifs!CIFellipsoid command line option|hyperpage}{8}
+\indexentry{CIFellipsoid command line option!-m, --metal|hyperpage}{8}
+\indexentry{-m, --metal!CIFellipsoid command line option|hyperpage}{8}
+\indexentry{CIFellipsoid command line option!-o, --output|hyperpage}{8}
+\indexentry{-o, --output!CIFellipsoid command line option|hyperpage}{8}
+\indexentry{CIFellipsoid command line option!-r, --radius|hyperpage}{8}
+\indexentry{-r, --radius!CIFellipsoid command line option|hyperpage}{8}
+\indexentry{CIFellipsoid command line option!-l, --ligandtypes|hyperpage}{8}
+\indexentry{-l, --ligandtypes!CIFellipsoid command line option|hyperpage}{8}
+\indexentry{CIFellipsoid command line option!-n, --ligandnames|hyperpage}{8}
+\indexentry{-n, --ligandnames!CIFellipsoid command line option|hyperpage}{8}
+\indexentry{CIFellipsoid command line option!-t, --tolerance|hyperpage}{8}
+\indexentry{-t, --tolerance!CIFellipsoid command line option|hyperpage}{8}
+\indexentry{CIFellipsoid command line option!--maxcycles|hyperpage}{8}
+\indexentry{--maxcycles!CIFellipsoid command line option|hyperpage}{8}
+\indexentry{CIFellipsoid command line option!-N|hyperpage}{8}
+\indexentry{-N!CIFellipsoid command line option|hyperpage}{8}
+\indexentry{CIFellipsoid command line option!-W, --overwriteall|hyperpage}{8}
+\indexentry{-W, --overwriteall!CIFellipsoid command line option|hyperpage}{8}
+\indexentry{CIFellipsoid command line option!-P, --PrintLabels|hyperpage}{8}
+\indexentry{-P, --PrintLabels!CIFellipsoid command line option|hyperpage}{8}
+\indexentry{CIFellipsoid command line option!-U, --Unthreaded|hyperpage}{9}
+\indexentry{-U, --Unthreaded!CIFellipsoid command line option|hyperpage}{9}
+\indexentry{CIFellipsoid command line option!--procs|hyperpage}{9}
+\indexentry{--procs!CIFellipsoid command line option|hyperpage}{9}
+\indexentry{CIFellipsoid command line option!--noplot|hyperpage}{9}
+\indexentry{--noplot!CIFellipsoid command line option|hyperpage}{9}
+\indexentry{CIFellipsoid command line option!--writelog|hyperpage}{9}
+\indexentry{--writelog!CIFellipsoid command line option|hyperpage}{9}
+\indexentry{distellipsoid.ellipsoid (module)|hyperpage}{10}
+\indexentry{Ellipsoid (class in distellipsoid.ellipsoid)|hyperpage}{10}
+\indexentry{centreaxes() (distellipsoid.ellipsoid.Ellipsoid method)|hyperpage}{10}
+\indexentry{centredisp() (distellipsoid.ellipsoid.Ellipsoid method)|hyperpage}{10}
+\indexentry{ellipsvol() (distellipsoid.ellipsoid.Ellipsoid method)|hyperpage}{10}
+\indexentry{findellipsoid() (distellipsoid.ellipsoid.Ellipsoid method)|hyperpage}{10}
+\indexentry{getminvol() (distellipsoid.ellipsoid.Ellipsoid method)|hyperpage}{10}
+\indexentry{meanrad() (distellipsoid.ellipsoid.Ellipsoid method)|hyperpage}{10}
+\indexentry{numpoints() (distellipsoid.ellipsoid.Ellipsoid method)|hyperpage}{10}
+\indexentry{plot() (distellipsoid.ellipsoid.Ellipsoid method)|hyperpage}{10}
+\indexentry{plotsummary() (distellipsoid.ellipsoid.Ellipsoid method)|hyperpage}{10}
+\indexentry{points (distellipsoid.ellipsoid.Ellipsoid attribute)|hyperpage}{10}
+\indexentry{raderr() (distellipsoid.ellipsoid.Ellipsoid method)|hyperpage}{10}
+\indexentry{radvar() (distellipsoid.ellipsoid.Ellipsoid method)|hyperpage}{11}
+\indexentry{shapeparam() (distellipsoid.ellipsoid.Ellipsoid method)|hyperpage}{11}
+\indexentry{shapeparam\_old() (distellipsoid.ellipsoid.Ellipsoid method)|hyperpage}{11}
+\indexentry{sphererad() (distellipsoid.ellipsoid.Ellipsoid method)|hyperpage}{11}
+\indexentry{strainenergy() (distellipsoid.ellipsoid.Ellipsoid method)|hyperpage}{11}
+\indexentry{uniquerad() (distellipsoid.ellipsoid.Ellipsoid method)|hyperpage}{11}
+\indexentry{distellipsoid.polyhedron (module)|hyperpage}{11}
+\indexentry{Polyhedron (class in distellipsoid.polyhedron)|hyperpage}{11}
+\indexentry{allbondlens() (distellipsoid.polyhedron.Polyhedron method)|hyperpage}{11}
+\indexentry{alldelabc() (distellipsoid.polyhedron.Polyhedron method)|hyperpage}{11}
+\indexentry{alldelxyz() (distellipsoid.polyhedron.Polyhedron method)|hyperpage}{11}
+\indexentry{allxyz() (distellipsoid.polyhedron.Polyhedron method)|hyperpage}{11}
+\indexentry{averagebondlen() (distellipsoid.polyhedron.Polyhedron method)|hyperpage}{11}
+\indexentry{bondlensig() (distellipsoid.polyhedron.Polyhedron method)|hyperpage}{11}
+\indexentry{bondlenvar() (distellipsoid.polyhedron.Polyhedron method)|hyperpage}{11}
+\indexentry{cenxyz() (distellipsoid.polyhedron.Polyhedron method)|hyperpage}{11}
+\indexentry{ligdelabc() (distellipsoid.polyhedron.Polyhedron method)|hyperpage}{11}
+\indexentry{ligdelxyz() (distellipsoid.polyhedron.Polyhedron method)|hyperpage}{11}
+\indexentry{ligxyz() (distellipsoid.polyhedron.Polyhedron method)|hyperpage}{11}
+\indexentry{makeellipsoid() (distellipsoid.polyhedron.Polyhedron method)|hyperpage}{11}
+\indexentry{pointcolours() (distellipsoid.polyhedron.Polyhedron method)|hyperpage}{11}
+\indexentry{Crystal (class in distellipsoid.readcoords)|hyperpage}{12}
+\indexentry{makepolyhedron() (distellipsoid.readcoords.Crystal method)|hyperpage}{12}
+\indexentry{mtensor() (distellipsoid.readcoords.Crystal method)|hyperpage}{12}
+\indexentry{orthomatrix() (distellipsoid.readcoords.Crystal method)|hyperpage}{12}
+\indexentry{EllipsoidImage (class in distellipsoid.plotellipsoid)|hyperpage}{12}
+\indexentry{clearlast() (distellipsoid.plotellipsoid.EllipsoidImage method)|hyperpage}{12}
+\indexentry{plotell() (distellipsoid.plotellipsoid.EllipsoidImage method)|hyperpage}{12}
+\indexentry{calcfromcif() (in module distellipsoid.calcellipsoid)|hyperpage}{12}
+\indexentry{distellipsoid.multiCIF (module)|hyperpage}{12}
+\indexentry{QueueHandler (class in distellipsoid.multiCIF)|hyperpage}{12}
+\indexentry{emit() (distellipsoid.multiCIF.QueueHandler method)|hyperpage}{12}
+\indexentry{check\_centres() (in module distellipsoid.multiCIF)|hyperpage}{12}
+\indexentry{check\_labels() (in module distellipsoid.multiCIF)|hyperpage}{12}
+\indexentry{check\_ligands() (in module distellipsoid.multiCIF)|hyperpage}{13}
+\indexentry{listener\_configurer() (in module distellipsoid.multiCIF)|hyperpage}{13}
+\indexentry{listener\_empty\_config() (in module distellipsoid.multiCIF)|hyperpage}{13}
+\indexentry{listener\_process() (in module distellipsoid.multiCIF)|hyperpage}{13}
+\indexentry{main() (in module distellipsoid.multiCIF)|hyperpage}{13}
+\indexentry{run\_parallel() (in module distellipsoid.multiCIF)|hyperpage}{13}
+\indexentry{worker\_configure() (in module distellipsoid.multiCIF)|hyperpage}{13}
+\indexentry{makeP1cell() (in module distellipsoid.readcoords)|hyperpage}{13}
+\indexentry{findligands() (in module distellipsoid.readcoords)|hyperpage}{13}
+\indexentry{readcif() (in module distellipsoid.readcoords)|hyperpage}{13}
+\indexentry{distellipsoid.writeproperties (module)|hyperpage}{13}
+\indexentry{writeall() (in module distellipsoid.writeproperties)|hyperpage}{13}
+\indexentry{CIF|hyperindexformat{\textbf}}{15}
+\indexentry{ellipsoid|hyperindexformat{\textbf}}{15}
+\indexentry{citation|hyperindexformat{\textbf}}{15}
+\indexentry{MBE|hyperindexformat{\textbf}}{15}
+\indexentry{GUI|hyperindexformat{\textbf}}{15}

@@ -9,7 +9,7 @@ __copyright__ = "The University of Edinburgh, Edinburgh, UK"
 __status__ = "Development"
 
 
-__all__ = ["ellipsoid", "plotellipsoid", "readcoords", "polyhedron", "calcellipsoid", "writeproperties", "multiCIF", "distellipsoid_GUI"]
+__all__ = ["ellipsoid", "plotellipsoid", "readcoords", "polyhedron", "calcellipsoid", "writeproperties", "multiCIF", "distellipsoid_gui", "CIFellipsoid"]
 
 # Set up simple logging when importing as a module (should be separate to CIFellipsoid.py logging...)
 import logging

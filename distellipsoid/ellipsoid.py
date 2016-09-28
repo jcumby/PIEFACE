@@ -5,10 +5,10 @@ Contains a class to hold Ellipsoid object/properties, and functions to compute
 the ellipsoid from a set of points
 
 Basic usage:
-    Set up an Ellipsoid object
-    Assign a set of (cartesian) points to be used for fitting
-    Use method findellipsoid() to compute minimum bounding ellipsoid
-    After that, all other properties should be available.
+    * Set up an Ellipsoid object
+    * Assign a set of (cartesian) points to be used for fitting
+    * Use method findellipsoid() to compute minimum bounding ellipsoid
+    * After that, all other properties should be available.
 """
 
 from __future__ import division
