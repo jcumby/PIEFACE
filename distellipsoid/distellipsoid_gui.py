@@ -27,12 +27,16 @@ import pandas as pd
 log = logging.getLogger()
 #log.setLevel(logging.debug)
 
+# Try to get ICON location based on multiCIF location
+multiCIFloc = os.path.dirname( multiCIF.__file__ )
+iconloc = os.path.abspath(os.path.join( multiCIFloc, '..', 'docs', 'images', 'pieface.ico'))
+
 
 class MainWindow:
     def __init__(self, parent):
         """ Initialise main window. """
         self.parent = parent
-        self.parent.title("Distellipsoid Input GUI")
+        self.parent.title("PIEFACE Input GUI")
         
         #parent.report_callback_exception = self.report_callback_exception
         
@@ -183,7 +187,8 @@ class MainWindow:
         self.filemenu.add_command(label="Exit", command=self._quit)
         
         self.helpmenu = tk.Menu(self.menubar, tearoff=0)
-        self.helpmenu.add_command(label='View README', command=self.viewhelp)
+        self.helpmenu.add_command(label='View README', command=self.viewreadme)
+        self.helpmenu.add_command(label='View PDF Help', command=self.viewhelp)
         
         self.menubar.add_cascade(label="File", menu=self.filemenu)
         self.menubar.add_cascade(label="Help", menu=self.helpmenu)
@@ -199,12 +204,11 @@ class MainWindow:
         self.parent.quit()
         self.parent.destroy()
         
-    def viewhelp(self):
+    def viewreadme(self):
         """ Open help file in default viewer """
         #README = "C:\Users\JCC\Documents\custom_python_libs\distellipsoid\README.rst"
         
         # Try to get README location based on multiCIF location
-        multiCIFloc = os.path.dirname( multiCIF.__file__ )
         README = os.path.abspath(os.path.join( multiCIFloc, '..', 'README.rst'))
 
         if os.path.isfile(README):
@@ -212,7 +216,17 @@ class MainWindow:
         else:
             tkMessageBox.showerror("Error", "Cannot find README location")
             
+    def viewhelp(self):
+        """ Open help file in default viewer """
         
+        # Try to get help file location based on multiCIF location
+        PDFhelp = os.path.abspath(os.path.join( multiCIFloc, '..', 'docs', '_build', 'latex', 'pieface.pdf'))
+
+        if os.path.isfile(PDFhelp):
+            os.startfile(PDFhelp)
+        else:
+            tkMessageBox.showerror("Error", "Cannot find help file location")
+    
     def openfiles(self):
         """ Open dialog for selecting CIF files"""
         options = {}
@@ -314,7 +328,7 @@ class MainWindow:
           
     
     def run(self):
-        """ Run distellipsoid calculation using multiCIF (through a parallel thread)."""
+        """ Run pieface calculation using multiCIF (through a parallel thread)."""
         if len(self.filenames) == 0:
             tkMessageBox.showerror('Error','No files have been selected.')
             return
@@ -425,6 +439,8 @@ class MainWindow:
             crystob = self.phases[self.filenames[selection]]
             
             self.plotwin = tk.Toplevel()
+            self.plotwin.iconbitmap(iconloc)
+            self.plotwin.title("PIEFACE Ellipsoid Plots")
             self.plotnb = ttk.Notebook(self.plotwin)
             
             tabs = {}
@@ -442,6 +458,8 @@ class MainWindow:
     def make_sum_win(self):
         """ Create top level window with Pandas summary DataFrame """
         self.sumwin = tk.Toplevel()
+        self.sumwin.iconbitmap(iconloc)
+        self.sumwin.title("PIEFACE Results Summary")
         self.sumnb = SummaryWindow(self.sumwin, self.phases)
         self.sumnb.pack(expand=1, fill=tk.BOTH)
 
@@ -451,6 +469,7 @@ class ProgressWindow(tk.Toplevel):
         self.parent = parent
         tk.Toplevel.__init__(self)
         #self.win = tk.Toplevel(parent)
+        self.iconbitmap(iconloc)
         self.title('Busy')
         self.resizable(False, False)
         self.message = ttk.Label(self, text='Please wait. This may take a long time.')
@@ -660,7 +679,7 @@ class LogDisplay(tk.Frame):
         
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
-        self.console.insert(tk.END, 'Started Distellipsoid GUI\n*************************\n')
+        self.console.insert(tk.END, 'Started PIEFACE GUI\n*************************\n')
         self.console.config(state=tk.DISABLED)
         
 class LoggingtoGUI(logging.Handler):
@@ -751,7 +770,11 @@ def main():
     root.minsize(450,380)    #width,height
     root.columnconfigure(0, weight=1)
     root.rowconfigure(0, weight=1)
+    
+    root.iconbitmap(iconloc)
+    
     app = MainWindow(root)
+    
 
     h = LoggingtoGUI(app.log.console)
     h.setLevel(logging.INFO)
