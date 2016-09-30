@@ -4,8 +4,8 @@
  ; Define name of main output program (GUI)
  #define GUIEXE "distellipsoid_gui.exe"
  ; define the path to your work folder
- #define BaseFolder64 "C:\Users\JCC\Documents\custom_python_libs\distellipsoid\dist\distellipsoid_win64"
- #define BaseFolder32 "C:\Users\JCC\Documents\custom_python_libs\distellipsoid\dist\distellipsoid_win32"
+ #define BaseFolder64 "C:\Users\JCC\Documents\custom_python_libs\pieface\dist\distellipsoid_win64"
+ #define BaseFolder32 "C:\Users\JCC\Documents\custom_python_libs\pieface\dist\distellipsoid_win32"
  ; get version information from the exe
  #define GUIName BaseFolder64+"\"+GUIEXE
  #define CMDName BaseFolder64+"\CIFellipsoid.exe"
@@ -50,7 +50,7 @@
  ; AlwaysRestart=yes
   
  OutputBaseFilename={#OutputFileName}_{#AppVersionNo}
- OutputDir="..\"
+ OutputDir="..\..\"
   
  ; bzip/9 is better by about 400KB over zip/9 and lzma is even better
  Compression=lzma/ultra
@@ -58,7 +58,7 @@
  ; SolidCompression=yes
 
  ; Location of files to use
- SourceDir=C:\Users\JCC\Documents\custom_python_libs\distellipsoid\dist\distellipsoid_win64
+ SourceDir=C:\Users\JCC\Documents\custom_python_libs\pieface\dist\distellipsoid_win64
 
  Uninstallable=yes
  ; Add ability to add program to PATH

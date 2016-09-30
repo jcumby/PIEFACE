@@ -16,6 +16,7 @@ echo **********************
 echo Freezing 64-bit python
 echo **********************
 
+MKDIR dist\distellipsoid_win64
 RMDIR /S /Q dist\distellipsoid_win64
 REM Run 64-bit PyInstaller, copy CIFellipsoid files across and then move entire directory to 64-bit folder
 C:\Users\JCC\AppData\Local\enthought\Canopy\User\Scripts\pyinstaller.exe -y win_build64.spec
@@ -30,6 +31,8 @@ REM Remove existing distellipsoid_win folder, to prevent old files hanging aroun
 echo **********************
 echo Freezing 32-bit python
 echo **********************
+
+MKDIR dist\distellipsoid_win32
 RMDIR /S /Q dist\distellipsoid_win32
 REM Run 64-bit PyInstaller, copy CIFellipsoid files across and then move entire directory to 64-bit folder
 C:\Users\JCC\AppData\Local\enthought\Canopy32\User\Scripts\pyinstaller.exe -y win_build32.spec
