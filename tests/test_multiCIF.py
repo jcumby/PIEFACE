@@ -1,6 +1,6 @@
 """ Tests for multiCIF.py """
 import unittest
-from distellipsoid import multiCIF
+from pieface import multiCIF
 import numpy as np
 
 # Minimal 

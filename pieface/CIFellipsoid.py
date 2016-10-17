@@ -9,7 +9,7 @@ import multiprocessing
         
 def _alllabels(CIF):
     """ Return all allowed labels in CIF file. """
-    from distellipsoid.readcoords import readcif
+    from pieface.readcoords import readcif
     cell, atomcoords, atomtypes, spacegp, symmops, symmid = readcif(CIF)
     return atomcoords.keys()
 
@@ -45,7 +45,7 @@ def main():
             # sys.modules["__main__"] = sys.modules[__name__]
         multiprocessing.freeze_support()
 
-    from distellipsoid import multiCIF
+    from pieface import multiCIF
     import argparse
     import sys
     import logging

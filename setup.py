@@ -1,11 +1,11 @@
 """
-Setup distellipsoid on your system with setuptools
+Setup pieface on your system with setuptools
 """
 
 from setuptools import setup, find_packages
 
 setup(
-    name = "distellipsoid",
+    name = "pieface",
     version = "0.4.2a",
     revision = "$Revision$",
     author = "James Cumby",
@@ -33,14 +33,14 @@ setup(
     ],
     test_suite = 'tests',
     package_data = {
-        'distellipsoid' : ['README.rst'],
+        'pieface' : ['README.rst'],
         'test_files': ['test_data/*.cif'],
         },
     entry_points = {
         'console_scripts' : [
-            'CIFellipsoid=distellipsoid.CIFellipsoid:main'],
+            'CIFellipsoid=pieface.CIFellipsoid:main'],
         'gui_scripts':[
-            'EllipsoidGUI=distellipsoid.distellipsoid_gui:main'],
+            'EllipsoidGUI=pieface.pieface_gui:main'],
             }
                         
     

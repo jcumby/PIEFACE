@@ -8,8 +8,8 @@ import tkFileDialog
 import ttk
 
 import os, sys
-from distellipsoid import multiCIF
-from distellipsoid.calcellipsoid import makeDataFrame
+from pieface import multiCIF
+from pieface.calcellipsoid import makeDataFrame
 import traceback
 import threading
 import logging
@@ -206,7 +206,7 @@ class MainWindow:
         
     def viewreadme(self):
         """ Open help file in default viewer """
-        #README = "C:\Users\JCC\Documents\custom_python_libs\distellipsoid\README.rst"
+        #README = "C:\Users\JCC\Documents\custom_python_libs\pieface\README.rst"
         
         # Try to get README location based on multiCIF location
         README = os.path.abspath(os.path.join( multiCIFloc, '..', 'README.rst'))

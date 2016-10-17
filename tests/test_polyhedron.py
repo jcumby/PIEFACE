@@ -1,6 +1,6 @@
 """ Tests for polyhedron.py """
 import unittest
-from distellipsoid import polyhedron
+from pieface import polyhedron
 import numpy as np
 
 class RepeatedPolyFunctions(object):

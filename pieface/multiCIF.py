@@ -6,7 +6,7 @@ To run from the command line, call the CIFellipsoid.py script.
 
 import logging, sys, os
 import multiprocessing
-from distellipsoid import writeproperties, calcellipsoid
+from pieface import writeproperties, calcellipsoid
 import argparse
 import os, sys
 import re
@@ -102,7 +102,7 @@ def listener_process(queue, configurer):
     
 def _wrapper(args):
     """ Wrapper function for passing arguments to calcfromcif when multiprocessing """
-    from distellipsoid import calcellipsoid
+    from pieface import calcellipsoid
     try:
         return calcellipsoid.calcfromcif(args[0], args[1], args[2], allligtypes=args[3], alllignames=args[4], maxcycles=args[5], tolerance=args[6])
     except IOError as e:    # Except IOErrors so that missing files are handled sensibly...
@@ -116,7 +116,7 @@ def _alllabels(CIF):
 
 def _alltyplbls(CIF):
     """ Return all allowed labels and corresponding types in CIF file. """
-    from distellipsoid.readcoords import readcif
+    from pieface.readcoords import readcif
     cell, atomcoords, atomtypes, spacegp, symmops, symmid = readcif(CIF)
     # Just return atomtypes dict {label: type} direct from readcif
     return atomtypes

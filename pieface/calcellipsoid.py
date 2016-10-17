@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 def calcfromcif(CIF, centres, radius, allligtypes=[], alllignames=[], **kwargs):
     """ Main routine for computing ellipsoids from CIF file. """
     # kwargs should be valid arguments for polyhedron.makeellipsoid(), primarily designed for tolerance and maxcycles
-    from distellipsoid import readcoords
+    from pieface import readcoords
     
     logger.debug('Starting file %s', CIF)
     
@@ -99,7 +99,7 @@ def makeDataFrame(phases):
     """ Return Pandas DataFrame object, with CIF files as index and ellipsoid parameters as columns (hierarchical by centre atom)"""
     
     import pandas as pd
-    from distellipsoid.readcoords import Crystal
+    from pieface.readcoords import Crystal
     
     if isinstance(phases, dict):
         if isinstance( phases[phases.keys()[0]], Crystal):      # We are reading a dict of Crystals: convert to nested dict first

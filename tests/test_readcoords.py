@@ -1,6 +1,6 @@
 """ Tests for polyhedron.py """
 import unittest
-from distellipsoid import readcoords
+from pieface import readcoords
 import numpy as np
 import os
 import StringIO         # Necessary to read text string like a file

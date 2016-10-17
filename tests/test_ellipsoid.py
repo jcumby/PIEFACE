@@ -1,6 +1,6 @@
 """ Tests for ellipsoid.py """
 import unittest
-from distellipsoid import ellipsoid
+from pieface import ellipsoid
 import numpy as np
 
 class AllEllipsoidFunctions(object):

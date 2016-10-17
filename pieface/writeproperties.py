@@ -1,4 +1,4 @@
-""" Module to write distellipsoid ellipsoid parameters to text file. """
+""" Module to write pieface ellipsoid parameters to text file. """
 
 from __future__ import division
 import os, sys
