@@ -45,7 +45,7 @@ rst_epilog="""
 .. |Python| replace:: Python
 .. _Python:  https://www.python.org/>
 .. |cmdprog| replace:: ``CIFellipsoid``
-.. |GUI| replace:: ``distellipsoidGUI``
+.. |GUI| replace:: ``EllipsoidGUI``
 .. |article| replace:: Ellipsoidal Analysis of Coordination Polyhedra
 .. _article: http://www.csec.ed.ac.uk
 .. |citation| replace:: James Cumby & J. Paul Attfield, *Ellipsoidal Analysis of Coordination Polyhedra*.
