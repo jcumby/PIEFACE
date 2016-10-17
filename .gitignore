@@ -63,4 +63,4 @@ win_GUI_info.txt
 
 # InnoSetup files
 *.iss
-WinSetup_PIE_*.exe
+WinSetup_PIEFACE*.exe
