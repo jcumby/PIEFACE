@@ -16,7 +16,7 @@ situations.
 Installation
 ============
 
-See [Installation](src/master/docs/installation.rst)
+See `installation`_.
 
 ====================
 License and Citation
@@ -100,3 +100,4 @@ Authors
 James Cumby - james.cumby@ed.ac.uk
 
 .. _tutorial: docs/tutorial.rst
+.. _installation: docs/installation.rst
