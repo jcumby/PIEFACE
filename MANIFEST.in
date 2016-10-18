@@ -1,1 +1,4 @@
 include test_data/*
+include docs/*.rst
+include docs/images/*
+include LICENSE.txt

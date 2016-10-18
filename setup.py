@@ -4,21 +4,27 @@ Setup pieface on your system with setuptools
 
 from setuptools import setup, find_packages
 
+def readme():
+    with open('README.rst') as f:
+        return f.read()
+
 setup(
     name = "pieface",
     version = "0.4.2a",
-    revision = "$Revision$",
     author = "James Cumby",
     author_email = "james.cumby@ed.ac.uk",
     description = ("A program for calculating minimum bounding ellipsoids for"
                 "crystallographic polyhedra and various related properties"),
     license = "Unknown",
-    keywords = "Polyhedra Crystallography Materials Analysis Distortion",
-    long_description=('README'),
+    keywords = ["Polyhedra", "Crystallography", "Materials", "Analysis", "Distortion"],
+    long_description=readme(),
     classifiers=[
         "Development Status :: 3 - Alpha",
+        "Natural Language :: English",
         "Topic :: Utilities",
-        "License :: None :: None",
+        "License :: OSI Approved :: MIT license",
+        "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 2.6",
         "Programming Language :: Python :: 2.7",
     ],
     
