@@ -16,17 +16,15 @@ situations.
 Installation
 ============
 
-See `installation`_. On Windows, the easiest way is to download and run the most recent pieface `installer`_ in Downloads.
+See `installation`_. On Windows, the easiest way is to download and run the most recent pieface `Windows Installer`_ in `Downloads`_.
 
 ====================
 License and Citation
 ====================
 
-pieface is open-source, distributed under an [MIT license](license.txt).
+pieface is open-source, distributed under an `MIT license <./license.txt>`_.
 
-Use of the software should cite the following article:
-
-`REFERENCE <http://www.csec.ed.ac.uk>`
+Use of the software should cite the article; `REFERENCE <http://www.csec.ed.ac.uk>`_.
 
 =====
 Usage
@@ -40,7 +38,7 @@ pieface is supplied with two utilities for easy use; a command-line program (`CI
 These allow one or more CIF files to be read, coordination polyhedra to be determined, and ellipsoids to be fitted. The resulting ellipsoid
 parameters can be saved to text file(s), or viewed within `EllipsoidGUI`.
 
-Once installed, the graphical interface can be started by typing `EllipsoidGUI` on the command line, or clicking the start menu icon (if using the Windows executable).
+Once installed, the graphical interface can be started by typing `EllipsoidGUI` on the command line, or clicking the start menu icon (if installed using the Windows `installer`_).
 
 The command line application can be run by typing `CIFellipsoid` with appropriate arguments:
 
@@ -72,7 +70,7 @@ source code for more details.
 Example
 -------
 
-See `tutorials`_.
+See `Tutorials`_.
 
 =======
 Testing
@@ -100,6 +98,7 @@ Authors
 
 James Cumby - james.cumby@ed.ac.uk
 
-.. _tutorials: docs/tutorial.rst
+.. _Tutorials: docs/tutorial.rst
 .. _installation: docs/installation.rst
-.. _installer: ../../downloads/WinSetup_PIEFACE_0.3.0.0.exe
+.. _Windows Installer: ../../downloads/WinSetup_PIEFACE_0.3.0.0.exe
+.. _Downloads: ../../downloads
