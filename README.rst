@@ -16,7 +16,7 @@ situations.
 Installation
 ============
 
-See `installation`_. On Windows, the easiest way is to download and run the most recent pieface `installer`_.
+See `installation`_. On Windows, the easiest way is to download and run the most recent pieface `installer`_ in Downloads.
 
 ====================
 License and Citation
