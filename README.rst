@@ -16,7 +16,7 @@ situations.
 Installation
 ============
 
-See `installation`_.
+See `installation`_. On Windows, the easiest way is to download and run the self-contained `pieface installer`_
 
 ====================
 License and Citation
@@ -101,3 +101,4 @@ James Cumby - james.cumby@ed.ac.uk
 
 .. _tutorial: docs/tutorial.rst
 .. _installation: docs/installation.rst
+.. _installer: ../downloads/WinSetup_PIEFACE_0.3.0.0.exe
