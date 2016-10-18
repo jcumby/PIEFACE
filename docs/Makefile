@@ -6,6 +6,7 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 PAPER         =
 BUILDDIR      = _build
+PDFOUT        = ./PIEFACE_manual.pdf
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
@@ -139,6 +140,7 @@ latexpdf:
 	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
 	@echo "Running LaTeX files through pdflatex..."
 	$(MAKE) -C $(BUILDDIR)/latex all-pdf
+	cp $(BUILDDIR)/latex/pieface.pdf $(PDFOUT)
 	@echo "pdflatex finished; the PDF files are in $(BUILDDIR)/latex."
 
 .PHONY: latexpdfja

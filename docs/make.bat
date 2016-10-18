@@ -2,10 +2,13 @@
 
 REM Command file for Sphinx documentation
 
+set winmake="C:\Program Files (x86)\GnuWin32\bin\make.exe"
+
 if "%SPHINXBUILD%" == "" (
 	set SPHINXBUILD=sphinx-build
 )
 set BUILDDIR=_build
+set PDFOUT=PIEFACE_manual.pdf
 set ALLSPHINXOPTS=-d %BUILDDIR%/doctrees %SPHINXOPTS% .
 set I18NSPHINXOPTS=%SPHINXOPTS% .
 if NOT "%PAPER%" == "" (
@@ -170,9 +173,11 @@ if "%1" == "latex" (
 if "%1" == "latexpdf" (
 	%SPHINXBUILD% -b latex %ALLSPHINXOPTS% %BUILDDIR%/latex
 	cd %BUILDDIR%/latex
-	make all-pdf
+	%winmake% all-pdf
 	cd %~dp0
+	copy %BUILDDIR%\latex\pieface.pdf %PDFOUT%
 	echo.
+	echo.%PDFOUT%
 	echo.Build finished; the PDF files are in %BUILDDIR%/latex.
 	goto end
 )
