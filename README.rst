@@ -16,7 +16,7 @@ situations.
 Installation
 ============
 
-See `installation`_. On Windows, the easiest way is to download and run the most recent pieface `installer`_
+See `installation`_. On Windows, the easiest way is to download and run the most recent pieface `installer`_.
 
 ====================
 License and Citation
@@ -26,7 +26,7 @@ pieface is open-source, distributed under an [MIT license](license.txt).
 
 Use of the software should cite the following article:
 
-[REFERENCE](http://www.csec.ed.ac.uk)
+`REFERENCE <http://www.csec.ed.ac.uk>`
 
 =====
 Usage
@@ -72,14 +72,15 @@ source code for more details.
 Example
 -------
 
-See `tutorial`_
+See `tutorials`_.
 
 =======
 Testing
 =======
 
-The package contains some basic unit tests, which can be run with::
- python setup.py test
+The package contains some basic unit tests, which can be run with:
+    
+    python setup.py test
 
 All tests should pass without exceptions - if not please send me a bug report.
 
@@ -99,6 +100,6 @@ Authors
 
 James Cumby - james.cumby@ed.ac.uk
 
-.. _tutorial: docs/tutorial.rst
+.. _tutorials: docs/tutorial.rst
 .. _installation: docs/installation.rst
 .. _installer: ../../downloads/WinSetup_PIEFACE_0.3.0.0.exe
