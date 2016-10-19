@@ -23,6 +23,7 @@ can be found below.
    installation
    tutorial
    script_input
+   license
    api_reference
    glossary
    
