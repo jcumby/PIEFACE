@@ -60,6 +60,7 @@ docs/_build/
 *.bat
 win_CMD_info.txt
 win_GUI_info.txt
+release_instructions.txt
 
 # InnoSetup files
 *.iss
