@@ -10,7 +10,7 @@ Introduction
 analysis of distortions in chemical coordination polyhedra.
 The analysis is achieved using a minimum bounding ellipsoid (MBE) method; the smallest volume ellipsoid that can enclose all of the polyhedral vertices.
 The result is very general, and is irrespective of polyhedron size or nature of the distortion. As such, the method has been applied to a range of crystallographic
-situations.
+situations. See `introduction`_ for more details.
 
 ============
 Installation
@@ -46,7 +46,7 @@ The command line application can be run by typing `CIFellipsoid` with appropriat
     
 This will produce an output file of ellipsoid parameters (CIF.TXT) and a 3D plot of the ellipsoid with a summary of useful ellipsoid parameters.
 
-Many other options are also available; type `CIFellipsoid --help` for details, or open help from within `EllipsoidGUI`.
+Many other options are also available; type `CIFellipsoid --help` for details, open help from within `EllipsoidGUI` or see `Script Help`_.
 
 ------------
 Advanced Use
@@ -64,7 +64,7 @@ which will (by default) process all CIF files in parallel (as for the scripts). 
     * tolerance (for fit tolerance)
 
 Individual modules from the package can also be imported (ie. ellipsoid.py) for perform specific functions: read the documentation in the
-source code for more details.
+source code for more details or see the `API reference`_.
 
 -------
 Example
@@ -98,7 +98,11 @@ Authors
 
 James Cumby - james.cumby@ed.ac.uk
 
+
+.. _introduction: docs/introduction.rst
 .. _Tutorials: docs/tutorial.rst
 .. _installation: docs/installation.rst
 .. _Windows Installer: ../../downloads/WinSetup_PIEFACE_0.3.0.0.exe
 .. _Downloads: ../../downloads
+.. _Script Help: docs/script_input.rst
+.. _API reference: docs/api_reference.rst
