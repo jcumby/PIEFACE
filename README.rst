@@ -16,7 +16,7 @@ situations. See `introduction`_ for more details.
 Installation
 ============
 
-See `installation`_. On Windows, the easiest way is to download and run the most recent pieface `Windows Installer`_ in `Downloads`_.
+See `installation`_. On Windows, the easiest way is to download and run the most recent pieface Windows Installer in `Downloads`_.
 
 ====================
 License and Citation
@@ -34,19 +34,19 @@ Usage
 Basic Use
 ---------
 
-pieface is supplied with two utilities for easy use; a command-line program (`CIFellipsoid`) and a graphical interface (`EllipsoidGUI`).
+pieface is supplied with two utilities for easy use; a command-line program (``CIFellipsoid``) and a graphical interface (``EllipsoidGUI``).
 These allow one or more CIF files to be read, coordination polyhedra to be determined, and ellipsoids to be fitted. The resulting ellipsoid
-parameters can be saved to text file(s), or viewed within `EllipsoidGUI`.
+parameters can be saved to text file(s) and viewed interactively.
 
-Once installed, the graphical interface can be started by typing `EllipsoidGUI` on the command line, or clicking the start menu icon (if installed using the Windows `installer`_).
+Once installed, the graphical interface can be started by typing ``EllipsoidGUI`` on the command line, or clicking the start menu icon (if installed using the `Windows Installer`_).
 
-The command line application can be run by typing `CIFellipsoid` with appropriate arguments:
+The command line application can be run by typing ``CIFellipsoid`` with appropriate arguments:
 
     CIFellipsoid CIF1 [CIF2 CIF3...] -m <polyhedron centre> -r <max bond length> -l <ligand types>
     
 This will produce an output file of ellipsoid parameters (CIF.TXT) and a 3D plot of the ellipsoid with a summary of useful ellipsoid parameters.
 
-Many other options are also available; type `CIFellipsoid --help` for details, open help from within `EllipsoidGUI` or see `Script Help`_.
+Many other options are also available; type ``CIFellipsoid --help`` for details, open help from within ``EllipsoidGUI`` or see `Script Help`_.
 
 ------------
 Advanced Use
@@ -58,12 +58,12 @@ For more complex use cases, the package can be imported and used as a python pac
     
     phases, plots = distellipsoid.calcellipsoid.calcfromcif([list of CIFs], [list of centres], **kwargs)
     
-which will (by default) process all CIF files in parallel (as for the scripts). `kwargs` are many of the options available to CIFellipsoid; most important are 
+which will (by default) process all CIF files in parallel (as for the scripts). ``kwargs`` are many of the options available to ``CIFellipsoid``; most important are 
     * ligtypes or lignames (to specify correct ligands for centres)
     * radius (for bond searching)
     * tolerance (for fit tolerance)
 
-Individual modules from the package can also be imported (ie. ellipsoid.py) for perform specific functions: read the documentation in the
+Individual modules from the package can also be imported (ie. ``ellipsoid.py``) for perform specific functions: read the documentation in the
 source code for more details or see the `API reference`_.
 
 -------
@@ -71,6 +71,15 @@ Example
 -------
 
 See `Tutorials`_.
+
+----
+Help
+----
+
+Help can be accessed through:
+    * ``EllipsoidGUI`` from the help menu
+    * ``CIFellipsoid --help``
+    * `Online documentation <docshome>`_
 
 =======
 Testing
@@ -102,7 +111,7 @@ James Cumby - james.cumby@ed.ac.uk
 .. _introduction: docs/introduction.rst
 .. _Tutorials: docs/tutorial.rst
 .. _installation: docs/installation.rst
-.. _Windows Installer: ../../downloads/WinSetup_PIEFACE_0.3.0.0.exe
 .. _Downloads: ../../downloads
 .. _Script Help: docs/script_input.rst
 .. _API reference: docs/api_reference.rst
+.. _docshome: docs/index.rst
