@@ -13,9 +13,10 @@ setup(
     version = "0.4.2a",
     author = "James Cumby",
     author_email = "james.cumby@ed.ac.uk",
+    url = "https://bitbucket.org/JCumby/pieface",
     description = ("A program for calculating minimum bounding ellipsoids for"
                 "crystallographic polyhedra and various related properties"),
-    license = "Unknown",
+    license = "MIT",
     keywords = ["Polyhedra", "Crystallography", "Materials", "Analysis", "Distortion"],
     long_description=readme(),
     classifiers=[
