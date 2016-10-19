@@ -24,11 +24,10 @@ can be found below.
    tutorial
    script_input
    license
+   recentchange
    api_reference
    glossary
    
-
-
 
 Indices and tables
 ==================
