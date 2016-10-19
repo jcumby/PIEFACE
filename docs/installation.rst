@@ -44,7 +44,7 @@ In reality, installation can sometimes be operating-system specific.
 Windows
 ^^^^^^^
 
-Due to problems with ensuring correct dependencies, the recommended method for obtaining |pieface| for Windows is to download the self-contained installer
+Due to problems with ensuring correct dependencies, the recommended method for obtaining |pieface| for Windows is to download the most recent self-contained installer
 |wininstall|_ and run it, following the on-screen prompts. This will also (optionally) add |pieface| shortcuts to the Start Menu and Windows Desktop,
 as well as making the two main scripts accessible from the Windows Command Line.
 
@@ -87,13 +87,13 @@ Once downloaded, this file should be unpacked into the desired directory (``tar 
 Development Version
 ^^^^^^^^^^^^^^^^^^^
 
-The latest development version of |pieface| can be obtained from the `pieface repository <http://www.github.org>`_ using GIT::
+The latest development version of |pieface| can be obtained from the `pieface repository <http://www.github.org>`_ using `git <https://git-scm.com/>`::
 
-    GIT clone git://github.com/JCumby/pieface .
+    git clone git://github.com/JCumby/pieface .
 
 To update the repository at a later date, use::
 
-    GIT pull
+    git pull
     
 In both cases, you should then change into the resulting directory, and follow the instruction for :ref:`manual install <setup>`.
 
