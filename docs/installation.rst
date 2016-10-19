@@ -95,7 +95,7 @@ To update the repository at a later date, use::
 
     GIT pull
     
-In both cases, you should then change into the resulting directory, and follow the :ref:`setup instructions <setup>`.
+In both cases, you should then change into the resulting directory, and follow the instruction for :ref:`manual install <setup>`.
 
 .. _setup:
 

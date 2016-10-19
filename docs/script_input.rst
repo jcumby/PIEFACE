@@ -1,3 +1,5 @@
+.. _script_input:
+
 User-interface Documentation
 ****************************
 
