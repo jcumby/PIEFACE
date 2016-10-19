@@ -220,7 +220,7 @@ class MainWindow:
         """ Open help file in default viewer """
         
         # Try to get help file location based on multiCIF location
-        PDFhelp = os.path.abspath(os.path.join( multiCIFloc, '..', 'docs', '_build', 'latex', 'pieface.pdf'))
+        PDFhelp = os.path.abspath(os.path.join( multiCIFloc, '..', 'docs', 'PIEFACE_manual.pdf'))
 
         if os.path.isfile(PDFhelp):
             os.startfile(PDFhelp)
