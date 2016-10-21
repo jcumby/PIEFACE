@@ -187,8 +187,9 @@ class MainWindow:
         self.filemenu.add_command(label="Exit", command=self._quit)
         
         self.helpmenu = tk.Menu(self.menubar, tearoff=0)
-        self.helpmenu.add_command(label='View README', command=self.viewreadme)
-        self.helpmenu.add_command(label='View PDF Help', command=self.viewhelp)
+        self.helpmenu.add_command(label='View README', command=self.viewreadme)        
+        self.helpmenu.add_command(label='View online manual', command=self.viewinternethelp)
+        self.helpmenu.add_command(label='View PDF manual', command=self.viewhelp)
         
         self.menubar.add_cascade(label="File", menu=self.filemenu)
         self.menubar.add_cascade(label="Help", menu=self.helpmenu)
@@ -205,7 +206,7 @@ class MainWindow:
         self.parent.destroy()
         
     def viewreadme(self):
-        """ Open help file in default viewer """
+        """ Open README file in default viewer """
         #README = "C:\Users\JCC\Documents\custom_python_libs\pieface\README.rst"
         
         # Try to get README location based on multiCIF location
@@ -226,6 +227,11 @@ class MainWindow:
             os.startfile(PDFhelp)
         else:
             tkMessageBox.showerror("Error", "Cannot find help file location")
+            
+    def viewinternethelp(self):
+        """ Open online documentation in default webbrowser"""
+        import webbrowser       # Should be part of Python
+        webbrowser.open('http://pieface.readthedocs.io/')
     
     def openfiles(self):
         """ Open dialog for selecting CIF files"""
