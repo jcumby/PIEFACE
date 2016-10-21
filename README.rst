@@ -10,7 +10,9 @@ Introduction
 analysis of distortions in chemical coordination polyhedra.
 The analysis is achieved using a minimum bounding ellipsoid (MBE) method; the smallest volume ellipsoid that can enclose all of the polyhedral vertices.
 The result is very general, and is irrespective of polyhedron size or nature of the distortion. As such, the method has been applied to a range of crystallographic
-situations. See `introduction`_ for more details.
+situations.
+
+For more details, see the `online documentation <http://pieface.readthedocs.io/>`_.
 
 ============
 Installation
@@ -22,7 +24,7 @@ See `installation`_. On Windows, the easiest way is to download and run the most
 License and Citation
 ====================
 
-pieface is open-source, distributed under an `MIT license <./license.txt>`_.
+pieface is open-source, distributed under an `MIT license <http://pieface.readthedocs.io/en/latest/license.html>`_.
 
 Use of the software should cite the article; `REFERENCE <http://www.csec.ed.ac.uk>`_.
 
@@ -79,7 +81,7 @@ Help
 Help can be accessed through:
     * ``EllipsoidGUI`` from the help menu
     * ``CIFellipsoid --help``
-    * :ref:`Online documentation <docshome>`
+    * `Online documentation <http://pieface.readthedocs.io/>`_
 
 =======
 Testing
