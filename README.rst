@@ -107,11 +107,10 @@ Authors
 
 James Cumby - james.cumby@ed.ac.uk
 
-
-.. _introduction: docs/introduction.rst
-.. _Tutorials: docs/tutorial.rst
-.. _installation: docs/installation.rst
+.. _docshome: http://pieface.readthedocs.io/
+.. _introduction: http://pieface.readthedocs.io/en/latest/introduction.html
+.. _Tutorials: http://pieface.readthedocs.io/en/latest/tutorial.html
+.. _installation: http://pieface.readthedocs.io/en/latest/installation.html
 .. _Downloads: ../../downloads
-.. _Script Help: docs/script_input.rst
-.. _API reference: docs/api_reference.rst
-.. _docshome: docs/index.rst
+.. _Script Help: http://pieface.readthedocs.io/en/latest/script_input.html
+.. _API reference: http://pieface.readthedocs.io/en/latest/api_reference.html
