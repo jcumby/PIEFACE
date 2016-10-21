@@ -79,9 +79,9 @@ Help
 ----
 
 Help can be accessed through:
+    * `Online documentation <http://pieface.readthedocs.io/>`_
     * ``EllipsoidGUI`` from the help menu
     * ``CIFellipsoid --help``
-    * `Online documentation <http://pieface.readthedocs.io/>`_
 
 =======
 Testing
