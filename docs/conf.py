@@ -57,7 +57,7 @@ release = u'1.0.0'
 rst_epilog="""
 .. |pieface| replace:: pieface
 .. _pieface: http://www.csec.ed.ac.uk
-.. |wininstall| replace:: WinSetup_PIEFACE_{0}.exe
+.. |wininstall| replace:: WinSetup_PIEFACE_{0}.0.exe
 .. _wininstall: https://bitbucket.org/JCumby/pieface/downloads
 .. |Python| replace:: Python
 .. _Python:  https://www.python.org/
