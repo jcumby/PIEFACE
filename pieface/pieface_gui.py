@@ -210,7 +210,7 @@ class MainWindow:
         #README = "C:\Users\JCC\Documents\custom_python_libs\pieface\README.rst"
         
         # Try to get README location based on multiCIF location
-        README = os.path.abspath(os.path.join( multiCIFloc, '..', 'README.rst'))
+        README = os.path.abspath(os.path.join( multiCIFloc, '..', 'README.pdf'))
 
         if os.path.isfile(README):
             os.startfile(README)
