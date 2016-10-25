@@ -6,17 +6,6 @@ Installation
 |pieface|_ is written in pure |Python|_. While this makes it highly transferrable between operating systems,
 it does require a number of other |Python| packages to operate.
 
-------------
-Requirements
-------------
-
-* `Python 2.7 <https://www.python.org/>`_ (currently NOT Python 3)
-* `NumPy <http://www.numpy.org>`_ (at least version 1.9)
-* `matplotlib <http://matplotlib.org/>`_ (1.4.3 or higher)
-* `PyCifRW <https://bitbucket.org/jamesrhester/pycifrw/overview>`_ (3.3 or higher)
-* `multiprocessing <https://docs.python.org/2/library/multiprocessing.html>`_ (2.6.2 or higher)
-* `pandas <http://pandas.pydata.org/>`_ (0.17 or higher)
-
 ----------
 Installing
 ----------
@@ -70,6 +59,17 @@ Unix-like operating systems generally come with python included. In this case,::
     pip install pieface
     
 should work as expected.
+
+------------
+Requirements
+------------
+
+* `Python 2.7 <https://www.python.org/>`_ (currently NOT Python 3)
+* `NumPy <http://www.numpy.org>`_ (at least version 1.9)
+* `matplotlib <http://matplotlib.org/>`_ (1.4.3 or higher)
+* `PyCifRW <https://bitbucket.org/jamesrhester/pycifrw/overview>`_ (3.3 or higher)
+* `multiprocessing <https://docs.python.org/2/library/multiprocessing.html>`_ (2.6.2 or higher)
+* `pandas <http://pandas.pydata.org/>`_ (0.17 or higher)
 
 
 -------------------------

@@ -58,9 +58,9 @@ rst_epilog="""
 .. |pieface| replace:: pieface
 .. _pieface: http://www.csec.ed.ac.uk
 .. |wininstall| replace:: WinSetup_PIEFACE_{0}.exe
-.. _wininstall: http://www.csec.ed.ac.uk
+.. _wininstall: https://bitbucket.org/JCumby/pieface/downloads
 .. |Python| replace:: Python
-.. _Python:  https://www.python.org/>
+.. _Python:  https://www.python.org/
 .. |cmdprog| replace:: ``CIFellipsoid``
 .. |GUI| replace:: ``EllipsoidGUI``
 .. |article| replace:: Ellipsoidal Analysis of Coordination Polyhedra
