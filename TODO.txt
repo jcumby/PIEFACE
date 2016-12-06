@@ -1,0 +1,4 @@
+Changes to be implemented
+=========================
+
+- Check documentation for correct regex use: wildcards should be eg `O.*`, **not** `O*` (* will match 0 or more of the previous character. + is one or more)
