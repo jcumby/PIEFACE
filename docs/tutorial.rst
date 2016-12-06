@@ -55,7 +55,7 @@ as follows:
 
     Polyhedron Centres
         These are the site labels (as specified in the CIF file) to be considered as the centre of a polyhedron. Exact labels can be given (e.g. ``Pr1 Pr2 Pr3 Pr4``)
-        or regular expressions can also be used (``Pr*`` or ``Pr[1-4]``). To omit a label from the list, prepend the label with a ``#``, i.e. ``Pr* #Pr3`` will search 
+        or regular expressions can also be used (``Pr.*`` or ``Pr[1-4]``). To omit a label from the list, prepend the label with a ``#``, i.e. ``Pr.* #Pr3`` will search 
         for all sites beginning ``Pr`` excluding ``Pr3``.
     
     Ligand Types

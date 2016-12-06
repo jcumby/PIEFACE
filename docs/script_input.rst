@@ -32,7 +32,7 @@ Details of the input parameters are given below, or by typing |cmdprog| ``--help
 
     Site label(s) (as found in the CIF file) of polyhedron centres to analyse (e.g. Fe1).
 	*Most* `regular expressions <https://docs.python.org/2/library/re.html>`_ can be used to make searching easier:
-		:``Al*``:	matches any site label starting ``Al`` (``Al1``, ``Al2`` ... ``Al9999`` etc.)
+		:``Al.*``:	matches any site label starting ``Al`` (``Al1``, ``Al2`` ... ``Al9999`` etc.)
 		:``Al?``:	matches any label beginning `Al`, but only 3 characters in length (e.g. ``Al1`` - ``Al9``)
 		:``Al[1-9]``:	matches any site ``Al1`` - ``Al9``
 		

@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-pieface - Fitting Distorted Coordination Polyhedra
+PIEFACE - Fitting Distorted Coordination Polyhedra
 ==================================================
 
 |pieface|_ is a Python program to fit distortions in atomic coordination polyhedra.

@@ -40,7 +40,7 @@ extensions = [
 ##############################################################################
 
 # General information about the project.
-project = u'pieface'
+project = u'PIEFACE'
 copyright = u'2016, James Cumby'
 author = u'James Cumby'
 
@@ -58,14 +58,14 @@ rst_epilog="""
 .. |pieface| replace:: PIEFACE
 .. _pieface: https://github.com/jcumby/PIEFACE
 .. |wininstall| replace:: WinSetup_PIEFACE_{0}.0.exe
-.. _wininstall: https://bitbucket.org/JCumby/pieface/downloads
+.. _wininstall: https://github.com/jcumby/PIEFACE
 .. |Python| replace:: Python
 .. _Python:  https://www.python.org/
 .. |cmdprog| replace:: ``CIFellipsoid``
 .. |GUI| replace:: ``EllipsoidGUI``
 .. |article| replace:: Ellipsoidal Analysis of Coordination Polyhedra
 .. _article: https://github.com/jcumby/PIEFACE
-.. |citation| replace:: James Cumby & J. Paul Attfield, *Ellipsoidal Analysis of Coordination Polyhedra*.
+.. |citation| replace:: James Cumby & J. Paul Attfield, *Ellipsoidal Analysis of Coordination Polyhedra*, Nature Communications, in press.
 .. _citation: https://github.com/jcumby/PIEFACE
 """.format(release)
 
