@@ -6,7 +6,7 @@ Polyhedra Inscribing Ellipsoids For Analysis of Coordination Environments (PIEFA
 Introduction
 ============
 
-**P**\ olyhedra **I**\ nscribing **E**\ llipsoids **F**\ or **A**\ nalysis of **C**\ oordination **E**\ nvironments (or pieface) is an open source Python project for the
+**P**\ olyhedra **I**\ nscribing **E**\ llipsoids **F**\ or **A**\ nalysis of **C**\ oordination **E**\ nvironments (or PIEFACE) is an open source Python project for the
 analysis of distortions in chemical coordination polyhedra.
 The analysis is achieved using a minimum bounding ellipsoid (MBE) method; the smallest volume ellipsoid that can enclose all of the polyhedral vertices.
 The result is very general, and is irrespective of polyhedron size or nature of the distortion. As such, the method has been applied to a range of crystallographic
@@ -18,13 +18,13 @@ For more details, see the `online documentation <http://pieface.readthedocs.io/>
 Installation
 ============
 
-For detailed instructions, see `installation`_. On Windows, the easiest way is to download and run the most recent pieface Windows Installer from `Downloads`_.
+For detailed instructions, see `installation`_. On Windows, the easiest way is to download and run the most recent PIEFACE Windows Installer from `Downloads`_.
 
 ====================
 License and Citation
 ====================
 
-pieface is open-source, distributed under an `MIT license <http://pieface.readthedocs.io/en/latest/license.html>`_.
+PIEFACE is open-source, distributed under an `MIT license <http://pieface.readthedocs.io/en/latest/license.html>`_.
 
 Use of the software should cite the article; `REFERENCE <http://www.csec.ed.ac.uk>`_.
 
@@ -36,7 +36,7 @@ Usage
 Basic Use
 ---------
 
-pieface is supplied with two utilities for easy use; a command-line program (``CIFellipsoid``) and a graphical interface (``EllipsoidGUI``).
+PIEFACE is supplied with two utilities for easy use; a command-line program (``CIFellipsoid``) and a graphical interface (``EllipsoidGUI``).
 These allow one or more CIF files to be read, coordination polyhedra to be determined, and ellipsoids to be fitted. The resulting ellipsoid
 parameters can be saved to text file(s) and viewed interactively.
 

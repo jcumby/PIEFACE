@@ -80,16 +80,16 @@ Installation from Sources
 Stable Build
 ^^^^^^^^^^^^
 
-|pieface| can also be installed from the source distribution. The current stable build is `pieface_1.0.0.tar.gz <http://www.csec.ed.ac.uk>`_. 
+|pieface| can also be installed from the source distribution. The current release is available from the `PIEFACE repository <https://github.com/jcumby/PIEFACE>`_. 
 Once downloaded, this file should be unpacked into the desired directory (``tar -xzf pieface_1.0.0.tar.gz``) before following the :ref:`setup instructions <setup>`.
 
 
 Development Version
 ^^^^^^^^^^^^^^^^^^^
 
-The latest development version of |pieface| can be obtained from the `pieface repository <http://www.github.org>`_ using `git <https://git-scm.com/>`::
+The latest development version of |pieface| can be obtained from the `PIEFACE repository <https://github.com/jcumby/PIEFACE>`_ using `git <https://git-scm.com/>`::
 
-    git clone git://github.com/JCumby/pieface .
+    git clone https://github.com/jcumby/PIEFACE .
 
 To update the repository at a later date, use::
 
@@ -105,7 +105,7 @@ Manual Install
 Once the source code has been downloaded, it is then necessary to install it using Python from within the 
 main |pieface| directory::
 
-    Python setup.py install
+    python setup.py install
 
 This may require all dependencies to already be installed.    
 

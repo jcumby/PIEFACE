@@ -18,7 +18,7 @@ The main window
 ###############
 
 To get started, open |GUI| either from a command prompt (type |GUI|) or (on Windows with the |pieface| installer) click the |GUI| icon on the desktop/start menu.
-You should be confronted with a window similar to the following:
+You should be presented with a window similar to the following:
 
 .. figure:: images/pieface_gui_labelled.*
     :align: center
@@ -37,7 +37,7 @@ The window contains the following elements:
     2) Output Log
         Displays calculation logs, useful for determining what options were used, and debugging problems
     3) :guilabel:`Add File(s)`
-        Used to add CIF filoes for ellipsoid calculation
+        Used to add CIF files for ellipsoid calculation
     4) :guilabel:`Remove File(s)`
         Can remove CIF files from the list
     5) :guilabel:`Plot Results`
@@ -92,7 +92,7 @@ as follows:
 Running calculations
 ####################
 
-Once CIF files are loaded and options supplied, calculations can be performed by clicking :guilabel:`Calculate All``. If a subset of CIF files are selected, the option is given to perform
+Once CIF files are loaded and options supplied, calculations can be performed by clicking :guilabel:`Calculate All`. If a subset of CIF files are selected, the option is given to perform
 the calculation only for those CIFs, keeping results for any other files.
 
 .. warning:: Depending on the parameters chosen (particularly :guilabel:`Fit tolerance`) and complexity of the resulting ellipsoid, calculations can take a number of minutes per CIF file.
