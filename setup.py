@@ -9,8 +9,8 @@ def readme():
         return f.read()
 
 setup(
-    name = "pieface",
-    version = "0.4.2a",
+    name = "PIEFACE",
+    version = "1.0.0",
     author = "James Cumby",
     author_email = "james.cumby@ed.ac.uk",
     url = "https://bitbucket.org/JCumby/pieface",

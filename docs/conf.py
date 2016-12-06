@@ -55,8 +55,8 @@ release = u'1.0.0'
 
 # Add any text (e.g. global subtitutions) to be added to the end of any .rst files here
 rst_epilog="""
-.. |pieface| replace:: pieface
-.. _pieface: http://www.csec.ed.ac.uk
+.. |pieface| replace:: PIEFACE
+.. _pieface: https://github.com/jcumby/PIEFACE
 .. |wininstall| replace:: WinSetup_PIEFACE_{0}.0.exe
 .. _wininstall: https://bitbucket.org/JCumby/pieface/downloads
 .. |Python| replace:: Python
@@ -64,9 +64,9 @@ rst_epilog="""
 .. |cmdprog| replace:: ``CIFellipsoid``
 .. |GUI| replace:: ``EllipsoidGUI``
 .. |article| replace:: Ellipsoidal Analysis of Coordination Polyhedra
-.. _article: http://www.csec.ed.ac.uk
+.. _article: https://github.com/jcumby/PIEFACE
 .. |citation| replace:: James Cumby & J. Paul Attfield, *Ellipsoidal Analysis of Coordination Polyhedra*.
-.. _citation: http://www.csec.ed.ac.uk
+.. _citation: https://github.com/jcumby/PIEFACE
 """.format(release)
 
 ##############################################################################
