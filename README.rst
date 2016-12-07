@@ -26,7 +26,9 @@ License and Citation
 
 PIEFACE is open-source, distributed under an `MIT license <http://pieface.readthedocs.io/en/latest/license.html>`_.
 
-Use of the software should cite the article; `REFERENCE <http://www.csec.ed.ac.uk>`_.
+Use of the software should cite the article
+
+.. topic:: J. Cumby and J. P. Attfield, *Ellipsoidal Analysis of Coordination Polyhedra*, Nature Communications (2017).
 
 =====
 Usage
@@ -116,6 +118,6 @@ James Cumby - james.cumby@ed.ac.uk
 .. _introduction: http://pieface.readthedocs.io/en/latest/introduction.html
 .. _Tutorials: http://pieface.readthedocs.io/en/latest/tutorial.html
 .. _installation: http://pieface.readthedocs.io/en/latest/installation.html
-.. _Downloads: https://bitbucket.org/JCumby/pieface/downloads.html
+.. _Downloads: https://github.com/jcumby/PIEFACE/releases
 .. _Script Help: http://pieface.readthedocs.io/en/latest/script_input.html
 .. _API reference: http://pieface.readthedocs.io/en/latest/api_reference.html
