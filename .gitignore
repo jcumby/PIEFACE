@@ -52,7 +52,7 @@ coverage.xml
 *.pot
 
 # Sphinx documentation
-docs/_build/
+pieface_docs/_build/
 
 # pyenv
 .python-version
