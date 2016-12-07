@@ -30,6 +30,7 @@ Use of the software should cite the article
 
 .. topic:: J. Cumby and J. P. Attfield, *Ellipsoidal Analysis of Coordination Polyhedra*, Nature Communications (2017).
 
+
 =====
 Usage
 =====
