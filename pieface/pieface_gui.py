@@ -24,13 +24,18 @@ from mpl_toolkits.mplot3d import Axes3D
 
 import pandas as pd
 
+import pkg_resources
+
 log = logging.getLogger()
 #log.setLevel(logging.debug)
 
 # Try to get ICON location based on multiCIF location
-multiCIFloc = os.path.dirname( multiCIF.__file__ )
-iconloc = os.path.abspath(os.path.join( multiCIFloc, '..', 'docs', 'images', 'pieface.ico'))
-
+#multiCIFloc = os.path.dirname( multiCIF.__file__ )
+#iconloc = os.path.abspath(os.path.join( multiCIFloc, '..', 'docs', 'images', 'pieface.ico'))
+if os.name == 'nt':
+    iconloc = pkg_resources.resource_filename('pieface', 'data/pieface.ico')
+elif os.name == 'posix':
+    iconloc = '@' + pkg_resources.resource_filename('pieface', 'data/pieface.xbm')
 
 class MainWindow:
     def __init__(self, parent):
@@ -207,24 +212,27 @@ class MainWindow:
         
     def viewreadme(self):
         """ Open README file in default viewer """
-        #README = "C:\Users\JCC\Documents\custom_python_libs\pieface\README.rst"
+        import webbrowser       # Should be part of Python
         
         # Try to get README location based on multiCIF location
-        README = os.path.abspath(os.path.join( multiCIFloc, '..', 'README.pdf'))
+        README = pkg_resources.resource_filename('pieface_docs', 'README.pdf')
+        #README = os.path.abspath(os.path.join( multiCIFloc, '..', 'README.pdf'))
 
+        
         if os.path.isfile(README):
-            os.startfile(README)
+            webbrowser.open(README)
         else:
             tkMessageBox.showerror("Error", "Cannot find README location")
             
     def viewhelp(self):
         """ Open help file in default viewer """
-        
+        import webbrowser
         # Try to get help file location based on multiCIF location
-        PDFhelp = os.path.abspath(os.path.join( multiCIFloc, '..', 'docs', 'PIEFACE_manual.pdf'))
+        PDFhelp = pkg_resources.resource_filename('pieface_docs', 'PIEFACE_manual.pdf')
+        #PDFhelp = os.path.abspath(os.path.join( multiCIFloc, '..', 'docs', 'PIEFACE_manual.pdf'))
 
         if os.path.isfile(PDFhelp):
-            os.startfile(PDFhelp)
+            webbrowser.open(PDFhelp)
         else:
             tkMessageBox.showerror("Error", "Cannot find help file location")
             
