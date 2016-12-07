@@ -28,7 +28,7 @@ PIEFACE is open-source, distributed under an `MIT license <http://pieface.readth
 
 Use of the software should cite the article:
 
-    J. Cumby and J. P. Attfield, Ellipsoidal Analysis of Coordination Polyhedra, Nature Communications (2017).
+    J\. Cumby and J. P. Attfield, Ellipsoidal Analysis of Coordination Polyhedra, Nature Communications (2017).
 
 
 =====
