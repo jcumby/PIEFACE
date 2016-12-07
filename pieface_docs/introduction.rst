@@ -11,7 +11,7 @@ Polyhedra Inscribing Ellipsoids For Analysis of Coordination Environments
 **P**\ olyhedra **I**\ nscribing **E**\ llipsoids **F**\ or **A**\ nalysis of **C**\ oordination **E**\ nvironments (or |pieface|_) is an open source |Python|_ project intended for the
 analysis of distortions of a chemical coordination polyhedron. The analysis is very general, irrespective of polyhedron size or nature of the distortion, and could be applied
 to any problem where a coordination sphere with known coordinates exists, from extended inorganic solids to organic molecules. 
-Full details of the method can be found in the original research article, |article|_, including some interesting examples.
+Full details of the method can be found in the original research article, |citation|_, including some interesting examples.
 
 For many crystallographic polyhedra, distortion is difficult to rationalise simply in terms of deviations of bond lengths or bond angles from *ideal* values. By fitting the smallest volume :term:`ellipsoid`
 around the polyhedron, distortions are defined in terms of the three principal axes of the ellipsoid and it's orientation in space. The distortion of this :term:`ellipsoid` can then give a simple description

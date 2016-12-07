@@ -11,6 +11,7 @@ PIEFACE - Fitting Distorted Coordination Polyhedra
 |pieface| is designed to be easy to use, versatile and easily extendable. The :term:`MBE` ellipsoid method used
 to fit polyhedra is very general, and can be applied to a wide range of coordination problems. Full details of the 
 method, and a few interesting examples can be seen in the original research publication:
+
 |citation|_
 
 To get started with |pieface|, have a look at the :ref:`Introduction <introduction>` and :ref:`tutorials`. Further documentation

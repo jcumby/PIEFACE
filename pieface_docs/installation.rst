@@ -13,7 +13,7 @@ Installing
 Detailed installation instructions specific to different operating systems can be found under :ref:`windows`, :ref:`macosx` and :ref:`linux`.
 
 |pieface| is registered on `PyPI <https://pypi.python.org/pypi>`_, therefore if you already have a working |Python| distribution, installation may be
-as simple as::
+as simple as:
 
     pip install PIEFACE
 
@@ -56,7 +56,7 @@ or installing from :ref:`sources <setup>`. If this does not work, see :ref:`issu
 Linux derivatives
 ^^^^^^^^^^^^^^^^^
 
-Unix-like operating systems generally come with a version of Python included. In this case,::
+Unix-like operating systems generally come with a version of Python included. In this case:
     
     pip install PIEFACE
     

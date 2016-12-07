@@ -18,7 +18,7 @@ For more details, see the `online documentation <http://pieface.readthedocs.io/>
 Installation
 ============
 
-For detailed instructions, see `installation`_. On Windows, the easiest way is to download and run the most recent PIEFACE Windows Installer from `Downloads`_.
+For detailed instructions, see `installation`_. On Windows, the easiest way is to download and run the most recent PIEFACE Windows Installer from `Downloads <Downloads>`_.
 
 ====================
 License and Citation
