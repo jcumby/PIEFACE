@@ -9,7 +9,7 @@ def readme():
         return f.read()
 
 setup(
-    name = "PIEFACE",
+    name = "pieface",
     version = "1.0.0",
     author = "James Cumby",
     author_email = "james.cumby@ed.ac.uk",
@@ -30,7 +30,7 @@ setup(
     ],
     
     packages = find_packages(),
-    include_package_data = True,
+    include_package_data = False,
     setup_requires = ['numpy'],
     install_requires = ['numpy>=1.9.2',
                         'matplotlib>=1.4.3',
@@ -39,10 +39,10 @@ setup(
                         'pandas>=0.17.1',
                         
     ],
-    test_suite = 'tests',
+    test_suite = 'pieface.tests',
     package_data = {
-        'pieface' : ['README.rst'],
-        'test_files': ['test_data/*.cif'],
+        'pieface' : ['data/pieface.png', 'data/pieface.ico', 'data/pieface.xbm'],
+        'pieface.tests': ['test_data/*.cif'],
         },
     entry_points = {
         'console_scripts' : [
