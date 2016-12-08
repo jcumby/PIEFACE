@@ -1,7 +1,9 @@
+--extra-index-url https://testpypi.python.org/pypi 
 cycler==0.10.0
 matplotlib==1.5.3
 multiprocessing==2.6.2.1
 numpy==1.11.2
+pieface==1.0.0
 pandas==0.19.1
 PyCifRW==4.2.1
 pyparsing==2.1.10
