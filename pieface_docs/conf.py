@@ -58,7 +58,7 @@ rst_epilog="""
 .. |pieface| replace:: PIEFACE
 .. _pieface: https://github.com/jcumby/PIEFACE
 .. |wininstall| replace:: WinSetup_PIEFACE_{0}.0.exe
-.. _wininstall: https://github.com/jcumby/PIEFACE
+.. _wininstall: https://github.com/jcumby/PIEFACE/releases/latest
 .. |Python| replace:: Python
 .. _Python:  https://www.python.org/
 .. |cmdprog| replace:: ``CIFellipsoid``

@@ -18,7 +18,7 @@ For more details, see the `online documentation <http://pieface.readthedocs.io/>
 Installation
 ============
 
-For detailed instructions, see `installation`_. On Windows, the easiest way is to download and run the most recent PIEFACE Windows Installer from `Downloads <Downloads>`_.
+For detailed instructions, see `installation`_. On Windows, the easiest way is to download and run the most recent PIEFACE Windows Installer `release <Downloads>`_.
 
 ====================
 License and Citation
@@ -61,7 +61,7 @@ For more complex use cases, the package can be imported and used as a python pac
 
     import pieface
     
-    phases, plots = distellipsoid.calcellipsoid.calcfromcif([list of CIFs], [list of centres], ``**``kwargs)
+    phases, plots = distellipsoid.calcellipsoid.calcfromcif([list of CIFs], [list of centres], **kwargs)
 
     
 which will (by default) process all CIF files in parallel (as for the scripts). ``kwargs`` are many of the options available to ``CIFellipsoid``; most important are 
@@ -119,6 +119,6 @@ James Cumby - james.cumby@ed.ac.uk
 .. _introduction: http://pieface.readthedocs.io/en/latest/introduction.html
 .. _Tutorials: http://pieface.readthedocs.io/en/latest/tutorial.html
 .. _installation: http://pieface.readthedocs.io/en/latest/installation.html
-.. _Downloads: https://github.com/jcumby/PIEFACE/releases
+.. _Downloads: https://github.com/jcumby/PIEFACE/releases/latest
 .. _Script Help: http://pieface.readthedocs.io/en/latest/script_input.html
 .. _API reference: http://pieface.readthedocs.io/en/latest/api_reference.html

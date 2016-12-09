@@ -13,7 +13,7 @@ Installing
 Detailed installation instructions specific to different operating systems can be found under :ref:`windows`, :ref:`macosx` and :ref:`linux`.
 
 |pieface| is registered on `PyPI <https://pypi.python.org/pypi>`_, therefore if you already have a working |Python| distribution, installation may be
-as simple as:
+as simple as::
 
     pip install PIEFACE
 
@@ -56,7 +56,7 @@ or installing from :ref:`sources <setup>`. If this does not work, see :ref:`issu
 Linux derivatives
 ^^^^^^^^^^^^^^^^^
 
-Unix-like operating systems generally come with a version of Python included. In this case:
+Unix-like operating systems generally come with a version of Python included. In this case::
     
     pip install PIEFACE
     
@@ -73,7 +73,7 @@ Stable Build
 ^^^^^^^^^^^^
 
 |pieface| can also be installed from the source distribution. The current release is available from the `PIEFACE repository <https://github.com/jcumby/PIEFACE>`_. 
-Once downloaded, this file should be unpacked into the desired directory (``tar -xzf pieface_1.0.0.tar.gz``) before following the :ref:`manual setup instructions <setup>`.
+Once downloaded, this file should be unpacked into the desired directory (``tar -xzf pieface_1.0.0.tar.gz``) before following the :ref:`manual install instructions <setup>`.
 
 .. _setup:
 
@@ -93,7 +93,7 @@ before running ``python setup.py install`` again.
 Development Version
 ^^^^^^^^^^^^^^^^^^^
 
-The latest development version of |pieface| can be obtained from the `PIEFACE repository <https://github.com/jcumby/PIEFACE>`_ using `git <https://git-scm.com/>`::
+The latest development version of |pieface| can be obtained from the `PIEFACE repository <https://github.com/jcumby/PIEFACE>`_ using `git <https://git-scm.com/>`_::
 
     git clone https://github.com/jcumby/PIEFACE .
 
@@ -135,7 +135,7 @@ In this case, there are a number of possible solutions:
     
     followed by ``pip install PIEFACE``
     
-    * Manually download either the wheel (PIEFACE-X.X.X.whl) or compressed package (PIEFACE-X.X.X.zip or PIEFACE-X.X.X.tar.gz) from PyPI, and then install that::
+    * Manually download either the wheel (PIEFACE-X.X.X.whl) or compressed package (PIEFACE-X.X.X.zip or PIEFACE-X.X.X.tar.gz) from `PyPI <https://pypi.python.org/pypi>`_, and then install that::
     
         pip install PIEFACE-X.X.X.whl
         
@@ -146,7 +146,8 @@ In this case, there are a number of possible solutions:
 Testing
 -------
 
-The package contains some basic unit tests, which can be run from within the main |pieface| directory with the command::
+The package contains some basic unit tests, which can be run following installation either from source or using ``pip``. 
+Tests can be run from within the main |pieface| directory with the command::
 
     python setup.py test
 

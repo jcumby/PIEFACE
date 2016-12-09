@@ -96,7 +96,7 @@ Once CIF files are loaded and options supplied, calculations can be performed by
 the calculation only for those CIFs, keeping results for any other files.
 
 .. warning:: Depending on the parameters chosen (particularly :guilabel:`Fit tolerance`) and complexity of the resulting ellipsoid, calculations can take a number of minutes per CIF file.
-    Fit tolerance should not be reduced below 1E-9 to avoid problems with computational rounding errors
+    Fit tolerance should not be reduced below 1E-9 to avoid problems with computational rounding errors. 1E-6 should be sufficient for most needs.
 
 Viewing Results
 ###############
