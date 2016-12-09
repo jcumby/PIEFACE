@@ -13,7 +13,7 @@ setup(
     version = "1.0.0",
     author = "James Cumby",
     author_email = "james.cumby@ed.ac.uk",
-    url = "https://bitbucket.org/JCumby/pieface",
+    url = "https://github.com/jcumby/PIEFACE",
     description = ("A program for calculating minimum bounding ellipsoids for"
                 "crystallographic polyhedra and various related properties"),
     license = "MIT",
