@@ -18,7 +18,7 @@ For more details, see the `online documentation <http://pieface.readthedocs.io/>
 Installation
 ============
 
-For detailed instructions, see `installation`_. On Windows, the easiest way is to download and run the most recent PIEFACE Windows Installer `release <Downloads>`_.
+For detailed instructions, see `installation`_. On Windows, the easiest way is to download and run the most recent PIEFACE Windows Installer `release <https://github.com/jcumby/PIEFACE/releases/latest>`_.
 
 ====================
 License and Citation
@@ -43,7 +43,7 @@ PIEFACE is supplied with two utilities for easy use; a command-line program (``C
 These allow one or more CIF files to be read, coordination polyhedra to be determined, and ellipsoids to be fitted. The resulting ellipsoid
 parameters can be saved to text file(s) and viewed interactively.
 
-Once installed, the graphical interface can be started by typing ``EllipsoidGUI`` on the command line, or clicking the start menu icon (if installed using the `Windows Installer <Downloads>`_).
+Once installed, the graphical interface can be started by typing ``EllipsoidGUI`` on the command line, or clicking the start menu icon (if installed using the `Windows Installer <https://github.com/jcumby/PIEFACE/releases/latest>`_).
 
 The command line application can be run by typing ``CIFellipsoid`` with appropriate arguments:
 
