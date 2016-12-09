@@ -135,9 +135,10 @@ The :guilabel:`All data` table can be exported to a file by selecting :menuselec
 Using the Command-line interface (|cmdprog|)
 --------------------------------------------
 
-|cmdprog| provides additional functionality beyond that of |GUI|. It can be started by typing |cmdprog| from a command prompt.
+|cmdprog| provides additional functionality beyond that of |GUI|. It can be started by typing |cmdprog| from a command prompt, or (if installed using the Windows installer) clicking on the |cmdprog|
+icon on the start menu/desktop.
 
-Full input details of the acceptable arguments to |cmdprog| can be found under :ref:`script_input`, or by typing :command:`CIFellipsoid --help`
+Full input details of the acceptable arguments to |cmdprog| can be found under :ref:`script_input`.
 
 .. note:: If running |cmdprog| on Windows, processing a large number of CIF files can be simplified by using wildcard expansion: :command:`CIFellipsoid *.cif -m ...` will automatically
     process all cif files in the current folder

@@ -1,13 +1,14 @@
 .. _installation:
 
 Installation
-############
+============
 
 |pieface|_ is written in pure |Python|_. While this makes it highly transferrable between operating systems,
 it does require a number of other |Python| packages to operate.
 
-Basic Installation
-******************
+----------
+Installing
+----------
 
 Detailed installation instructions specific to different operating systems can be found under :ref:`windows`, :ref:`macosx` and :ref:`linux`.
 
@@ -26,7 +27,7 @@ In reality, installation can sometimes be operating-system specific.
 .. _windows:
 
 Windows
-=======
+^^^^^^^
 
 Due to problems with ensuring correct dependencies, the recommended method for obtaining |pieface| for Windows is to download the most recent self-contained installer
 |wininstall|_ and run it, following the on-screen prompts. This will also (optionally) add |pieface| shortcuts to the Start Menu and Windows Desktop,
@@ -38,7 +39,7 @@ installation.
 .. _macosx:
 
 MAC OS X
-========
+^^^^^^^^
 
 Unfortunately |pieface| is not currently available as a pre-built MAC distribution, as the author does not have access to that operating system!
 
@@ -53,7 +54,7 @@ or installing from :ref:`sources <setup>`. If this does not work, see :ref:`issu
 .. _linux:
 
 Linux derivatives
-=================
+^^^^^^^^^^^^^^^^^
 
 Unix-like operating systems generally come with a version of Python included. In this case:
     
@@ -65,14 +66,11 @@ should work, but may require some manual installation of dependencies (see :ref:
 .. _sources:
 
 Installation from Sources
-*************************
-
-If other installation methods fail (or to get the latest development version) it may be necessary to install |pieface| from source code. As long as
-all :ref:`dependencies <requirements>` are installed, this *should* be straightforward.
+-------------------------
 
 
 Stable Build
-============
+^^^^^^^^^^^^
 
 |pieface| can also be installed from the source distribution. The current release is available from the `PIEFACE repository <https://github.com/jcumby/PIEFACE>`_. 
 Once downloaded, this file should be unpacked into the desired directory (``tar -xzf pieface_1.0.0.tar.gz``) before following the :ref:`manual setup instructions <setup>`.
@@ -80,7 +78,7 @@ Once downloaded, this file should be unpacked into the desired directory (``tar 
 .. _setup:
 
 Manual Install
-==============
+^^^^^^^^^^^^^^
 
 Once the source code has been downloaded, it is then necessary to install it using Python from within the 
 main |pieface| directory::
@@ -93,7 +91,7 @@ before running ``python setup.py install`` again.
 .. _development:
 
 Development Version
-===================
+^^^^^^^^^^^^^^^^^^^
 
 The latest development version of |pieface| can be obtained from the `PIEFACE repository <https://github.com/jcumby/PIEFACE>`_ using `git <https://git-scm.com/>`::
 
@@ -109,7 +107,7 @@ In both cases, you should then change into the resulting directory, and follow t
 .. requirements:
 
 Requirements
-************
+------------
 
 * `Python 2.7 <https://www.python.org/>`_ (currently NOT Python 3)
 * `NumPy <http://www.numpy.org>`_ (at least version 1.9)
@@ -122,10 +120,7 @@ Requirements
 .. _issues:
 
 Known Issues
-************
-
-PIP dependency failure
-======================
+------------
 
 When installing using ``pip``, dependencies on PyCifRW and Matplotlib are not always resolved when using::
 
@@ -146,28 +141,20 @@ In this case, there are a number of possible solutions:
         
     * Install from :ref:`sources <setup>` (may require compilation of other packages)
     
-Enthought virtualenv problem
-============================
 
-If installed within a virtual environment from the Enthought python distribution on Windows, |GUI| will fail to start silently. This 
-is due to the virtualenv not correctly linking to Tkinter/Tcl libraries, which are used for creating the GUI. This may also happen on 
-other combinations of operating system/Python distribution, but has not been investigated.
-    
-
-
+-------
 Testing
-*******
+-------
 
-The package contains some basic unit tests, which can be run following installation either from source or using pip. 
-Tests can be run from within the main |pieface| directory with the command::
+The package contains some basic unit tests, which can be run from within the main |pieface| directory with the command::
 
     python setup.py test
 
-All tests should pass - if not, please let me know!
+All tests should pass without exceptions - if not, please send me a bug report.
 
-
+-------
 Run It!
-*******
+-------
 
 Once correctly installed, the easiest way to access |pieface| is using either |GUI| or |cmdprog| (see :ref:`tutorials`).
 
