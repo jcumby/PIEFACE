@@ -185,7 +185,7 @@ class Crystal(object):
         setattr(self, str(cenname)+'_poly', polyhedron.Polyhedron(centre, ligands, atomdict=atomdict, ligtypes=ligtypes))
         self.polyhedra.append(cenname)
         
-def readcif(FILE, phaseblock=0):
+def readcif(FILE, phaseblock=None):
     """ Read useful data from cif using PyCifRW. """
     import CifFile     # Should be PyCifRW module, but also occurs in GSASII - I haven't yet found a conflict...
     import urllib
@@ -202,12 +202,32 @@ def readcif(FILE, phaseblock=0):
         else:
             raise IOError("Problem reading file {0} - does it exist?".format(FILE))
     
-    if len(allcif.keys()) != 1:    # Cif file contains more than one entry
+    if len(allcif.keys()) > 1:    # Cif file contains more than one entry
         logger.warning("CIF file contains multiple phases: {0}".format(", ".join(allcif.keys())))
-        logger.warning("Using phase {0}".format(allcif.keys()[phaseblock]))
-        phase = allcif.keys()[phaseblock]
+        
+        if phaseblock is None:
+            # If no cif block is given, us the first (alphabetically)
+            phase = sorted(allcif.keys())[0]
+            logger.warning("Using phase {0}".format(sorted(allcif.keys())[0]))
+        else:
+            # Use provided phaseblock
+            if phaseblock in allcif.keys():
+                phase = phaseblock
+                logger.warning("Using phase {0}".format(sorted(allcif.keys())[0]))
+            else:
+                matchblock = [s for s in allcif.keys() if phaseblock in s]
+                if len(matchblock) == 1:
+                    phase = matchblock[0]
+                    logger.warning("Using phase {0}".format(matchblock[0]))
+                elif len(matchblock) > 1:
+                    logger.error("Phaseblock string matches multiple CIF entries")
+                    raise ValueError("CIF phase definition matches multiple CIF entries")
+                else:
+                    logger.error("Phaseblock does not match any CIF entries")
+                    raise ValueError("Phase definition string does not match any CIF entries")
+        
     else:
-        phase = allcif.keys()[phaseblock]
+        phase = allcif.keys()[0]
     
     # Read cell
     cell = {}

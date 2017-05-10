@@ -104,26 +104,26 @@ def _wrapper(args):
     """ Wrapper function for passing arguments to calcfromcif when multiprocessing """
     from pieface import calcellipsoid
     try:
-        return calcellipsoid.calcfromcif(args[0], args[1], args[2], allligtypes=args[3], alllignames=args[4], maxcycles=args[5], tolerance=args[6])
+        return calcellipsoid.calcfromcif(args[0], args[1], args[2], allligtypes=args[3], alllignames=args[4], maxcycles=args[5], tolerance=args[6], phase=args[7])
     except IOError as e:    # Except IOErrors so that missing files are handled sensibly...
         return e
     except KeyboardInterrupt:
         raise KeyboardInterruptError()
         
-def _alllabels(CIF):
+def _alllabels(CIF, phase=None):
     """ Return all allowed labels in CIF file. """
-    return _alltyplbls(CIF).keys()
+    return _alltyplbls(CIF, phase).keys()
 
-def _alltyplbls(CIF, phase=0):
+def _alltyplbls(CIF, phase=None):
     """ Return all allowed labels and corresponding types in CIF file. """
     from pieface.readcoords import readcif
     cell, atomcoords, atomtypes, spacegp, symmops, symmid = readcif(CIF, phase)
     # Just return atomtypes dict {label: type} direct from readcif
     return atomtypes
     
-def _alltypes(CIF):
+def _alltypes(CIF, phase=None):
     """ Return all allowed types in CIF file. """
-    return _alltyplbls(CIF).values()
+    return _alltyplbls(CIF, phase).values()
     
 def check_labels(labels, alllabs):
     """ Check that all labels are present in all cif files, handling regular expressions if needed.
@@ -175,12 +175,12 @@ def check_labels(labels, alllabs):
     return list(test), list(omit), list(missing)            
 
  
-def check_centres(cifs, centres):
+def check_centres(cifs, centres, phase=None):
     """ Determine which centres to use based on CIF contents and user-supplied arguments."""
     # Work out what centres to include
     log.debug('Checking centre labels')
     
-    allcentres = set([ i for c in cifs for i in _alllabels(c) ])
+    allcentres = set([ i for c in cifs for i in _alllabels(c, phase) ])
     testcen, omitcen, missingcen = check_labels(centres, allcentres)
     
     if len(missingcen) > 0:
@@ -194,12 +194,12 @@ def check_centres(cifs, centres):
         log.critical("Label(s) %s are not present in any of the CIF files - stopping", str(" ".join([str(i) for i in set(testcen).difference(allcentres)])))
         log.critical("Valid atom labels are:\n")
         for CIF in cifs:
-            log.critical("%-40s:  %s", CIF, ", ".join(_alllabels(CIF)))
+            log.critical("%-40s:  %s", CIF, ", ".join(_alllabels(CIF, phase)))
         return None
  
     return testcen
     
-def check_ligands(cifs, ligtypes, liglbls):
+def check_ligands(cifs, ligtypes, liglbls, phase=None):
     """ Find lists of ligand labels and types that should be used to define ellipsoids based on supplied lists.
 
     NOTE: This function will find the appropriate combination of label/type commands to find all required ligands,
@@ -212,7 +212,7 @@ def check_ligands(cifs, ligtypes, liglbls):
     # Iterate through all cifs, adding label:[type1, <type2>...] pairs to overall dict
     ligtyplbls = {}
     for c in cifs:
-        typlbls = _alltyplbls(c)      # Get labels and types from current cif
+        typlbls = _alltyplbls(c, phase)      # Get labels and types from current cif
         for l in typlbls:
             if l in ligtyplbls.keys():      # Label already exists in overall dict - if the type is the same, we can ignore it
                 if typlbls[l] in ligtyplbls[l]:
@@ -277,7 +277,7 @@ def check_ligands(cifs, ligtypes, liglbls):
     return list(finallbl), list(finaltyp)
     
     
-def run_parallel(cifs, testcen, radius=3.0, ligtypes=[], lignames=[], maxcycles=None, tolerance=1e-6, procs=None):
+def run_parallel(cifs, testcen, radius=3.0, ligtypes=[], lignames=[], maxcycles=None, tolerance=1e-6, procs=None, phase=None):
     """ Run ellipsoid computation in parallel, by CIF file """
 
     import threading
@@ -296,7 +296,7 @@ def run_parallel(cifs, testcen, radius=3.0, ligtypes=[], lignames=[], maxcycles=
     else:
         pool = multiprocessing.Pool(None, worker_configure, [queue])
     # Construct input for each cif file
-    vals = [ (i, testcen, radius, ligtypes, lignames, maxcycles, tolerance,) for i in cifs ]
+    vals = [ (i, testcen, radius, ligtypes, lignames, maxcycles, tolerance, phase,) for i in cifs ]
 
     try:
         err = False
@@ -351,7 +351,7 @@ def run_parallel(cifs, testcen, radius=3.0, ligtypes=[], lignames=[], maxcycles=
     
     return phases
             
-def run_serial(cifs, testcen, radius=3.0, ligtypes=[], lignames=[], maxcycles=None, tolerance=1e-6):
+def run_serial(cifs, testcen, radius=3.0, ligtypes=[], lignames=[], maxcycles=None, tolerance=1e-6, phase=None):
     log.warning('Processing all cif files...')
     log.info('Using options:')
     for a in ['cifs', 'testcen', 'radius', 'ligtypes', 'lignames', 'maxcycles', 'tolerance']:
@@ -361,7 +361,7 @@ def run_serial(cifs, testcen, radius=3.0, ligtypes=[], lignames=[], maxcycles=No
     for i, CIF in enumerate(cifs):
         #log.debug("Starting file %s",CIF)
         try:
-            phases[CIF] = calcellipsoid.calcfromcif(CIF, testcen, radius, allligtypes=ligtypes, alllignames=lignames, maxcycles = maxcycles, tolerance=tolerance)
+            phases[CIF] = calcellipsoid.calcfromcif(CIF, testcen, radius, allligtypes=ligtypes, alllignames=lignames, maxcycles = maxcycles, tolerance=tolerance, phase=phase)
         except KeyError:
             log.critical("\nValid atom labels are:\n\n %s", ", ".join(_alllabels(CIF)))
             raise
@@ -414,6 +414,7 @@ def main(cifs, centres, **kwargs):
     defaults['noplot'] = False
     defaults['pickle'] = False
     defaults['writelog'] = False
+    defaults['phase'] = None
     
     # Sort out all arguments using defaults where necessary
     args = {}
@@ -436,7 +437,7 @@ def main(cifs, centres, **kwargs):
     if args['printlabels']:
         log.critical("Valid atom labels are:\n\n")
         for CIF in cifs:
-            log.critical("{0:<40}:  {1}".format(CIF, ", ".join(_alllabels(CIF))))
+            log.critical("{0:<40}:  {1}".format(CIF, ", ".join(_alllabels(CIF, args['phase']))))
         return
     elif centres is None or len(centres) == 0:
         raise ValueError("At least one polyhedron centre is required.")
@@ -450,11 +451,11 @@ def main(cifs, centres, **kwargs):
      
     # Check centre labels, and then perform calculation
     try:
-        testcen = check_centres(cifs, centres)
+        testcen = check_centres(cifs, centres, args['phase'])
         if testcen is None:
             return (None, None)
      
-        testliglbl, testligtyp = check_ligands(cifs, args['ligtypes'], args['lignames'])
+        testliglbl, testligtyp = check_ligands(cifs, args['ligtypes'], args['lignames'], args['phase'])
         if len(testliglbl) == 0 and len(testligtyp) == 0:
             log.critical('No suitable ligands have been defined - stopping')
             return (None, None)
@@ -473,7 +474,8 @@ def main(cifs, centres, **kwargs):
                                 lignames=testliglbl,
                                 maxcycles=args['maxcycles'],
                                 tolerance=args['tolerance'],
-                                procs=args['procs'])
+                                procs=args['procs'],
+                                phase = args['phase'])
             log.debug('Finished parallel calculation')
         
         else:
@@ -486,7 +488,8 @@ def main(cifs, centres, **kwargs):
                                 ligtypes=testligtyp,
                                 lignames=testliglbl,
                                 maxcycles=args['maxcycles'],
-                                tolerance=args['tolerance'])
+                                tolerance=args['tolerance'],
+                                phase = args['phase'])
             log.debug('Finished serial calculation')
     except:
         log.exception("Ellipsoid calculation aborted abnormally: see traceback for details")
