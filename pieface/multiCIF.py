@@ -114,10 +114,10 @@ def _alllabels(CIF):
     """ Return all allowed labels in CIF file. """
     return _alltyplbls(CIF).keys()
 
-def _alltyplbls(CIF):
+def _alltyplbls(CIF, phase=0):
     """ Return all allowed labels and corresponding types in CIF file. """
     from pieface.readcoords import readcif
-    cell, atomcoords, atomtypes, spacegp, symmops, symmid = readcif(CIF)
+    cell, atomcoords, atomtypes, spacegp, symmops, symmid = readcif(CIF, phase)
     # Just return atomtypes dict {label: type} direct from readcif
     return atomtypes
     

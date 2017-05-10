@@ -7,10 +7,10 @@ Calculate minimum-bounding-ellipsoid for polyhedra, based on a list of Cif files
 import multiprocessing
 
         
-def _alllabels(CIF):
+def _alllabels(CIF, phase=0):
     """ Return all allowed labels in CIF file. """
     from pieface.readcoords import readcif
-    cell, atomcoords, atomtypes, spacegp, symmops, symmid = readcif(CIF)
+    cell, atomcoords, atomtypes, spacegp, symmops, symmid = readcif(CIF, phase)
     return atomcoords.keys()
 
 def _query(question, default="yes", output=None):

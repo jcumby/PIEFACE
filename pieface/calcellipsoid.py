@@ -20,7 +20,7 @@ def calcfromcif(CIF, centres, radius, allligtypes=[], alllignames=[], **kwargs):
     
     logger.debug('Starting file %s', CIF)
     
-    cell, atomcoords, atomtypes, spacegp, symmops, symmid = readcoords.readcif(CIF)
+    cell, atomcoords, atomtypes, spacegp, symmops, symmid = readcoords.readcif(CIF, getattr(kwargs, 'phase', 0))
     allatoms = readcoords.makeP1cell(atomcoords, symmops, symmid)
     
     phase = readcoords.Crystal(cell=cell, atoms=allatoms, atomtypes=atomtypes)

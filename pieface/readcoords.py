@@ -185,7 +185,7 @@ class Crystal(object):
         setattr(self, str(cenname)+'_poly', polyhedron.Polyhedron(centre, ligands, atomdict=atomdict, ligtypes=ligtypes))
         self.polyhedra.append(cenname)
         
-def readcif(FILE):
+def readcif(FILE, phaseblock=0):
     """ Read useful data from cif using PyCifRW. """
     import CifFile     # Should be PyCifRW module, but also occurs in GSASII - I haven't yet found a conflict...
     import urllib
@@ -203,12 +203,11 @@ def readcif(FILE):
             raise IOError("Problem reading file {0} - does it exist?".format(FILE))
     
     if len(allcif.keys()) != 1:    # Cif file contains more than one entry
-        print "Cif file contains more than one phase:"
-        for i in allcif.keys():
-            print "\t{0}".format(i)
-        phase = raw_input("Please enter required phase:\t")
+        logger.warning("CIF file contains multiple phases: {0}".format(", ".join(allcif.keys())))
+        logger.warning("Using phase {0}".format(allcif.keys()[phaseblock]))
+        phase = allcif.keys()[phaseblock]
     else:
-        phase = allcif.keys()[0]
+        phase = allcif.keys()[phaseblock]
     
     # Read cell
     cell = {}
@@ -227,10 +226,9 @@ def readcif(FILE):
         atomcoords[site] = np.array([ allcif[phase]['_atom_site_fract_x'][i].split('(')[0], allcif[phase]['_atom_site_fract_y'][i].split('(')[0], allcif[phase]['_atom_site_fract_z'][i].split('(')[0] ]).astype(np.float)
         atomtypes[site] = allcif[phase]['_atom_site_type_symbol'][i]
     
-    try:
-        spacegp = allcif[phase]['_symmetry_Int_Tables_number']
-    except KeyError:
-        spacegp = allcif[phase]['_space_group_IT_number']
+    
+    for k in ['_symmetry_Int_Tables_number', '_space_group_IT_number']:
+        spacegp = getattr(allcif[phase], k, 0)
     
     # Possible references to symmetry operations to check for
     symmop_strings = ['_space_group_symop_operation_xyz', '_symmetry_equiv_pos_as_xyz']
