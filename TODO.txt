@@ -2,3 +2,11 @@ Changes to be implemented
 =========================
 
 - Add more tutorials and examples.
+- Add polyhedron search based on coordinate rather than specific atom
+
+Bugfixes
+========
+
+- Check what happens if mutliple ligands with the same label exist (check CIF specification)
+- Centre search seems to be case-dependent; need to check
+- Permission denied error on writing pickle with GUI (AMAL)
