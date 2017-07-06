@@ -354,7 +354,7 @@ def run_parallel(cifs, testcen, radius=3.0, ligtypes=[], lignames=[], maxcycles=
 def run_serial(cifs, testcen, radius=3.0, ligtypes=[], lignames=[], maxcycles=None, tolerance=1e-6, phase=None):
     log.warning('Processing all cif files...')
     log.info('Using options:')
-    for a in ['cifs', 'testcen', 'radius', 'ligtypes', 'lignames', 'maxcycles', 'tolerance']:
+    for a in ['cifs', 'testcen', 'radius', 'ligtypes', 'lignames', 'maxcycles', 'tolerance', 'phase']:
         log.info('{0:20s} : {1}'.format(a, vars()[a]))
         
     phases = {}
@@ -363,7 +363,7 @@ def run_serial(cifs, testcen, radius=3.0, ligtypes=[], lignames=[], maxcycles=No
         try:
             phases[CIF] = calcellipsoid.calcfromcif(CIF, testcen, radius, allligtypes=ligtypes, alllignames=lignames, maxcycles = maxcycles, tolerance=tolerance, phase=phase)
         except KeyError:
-            log.critical("\nValid atom labels are:\n\n %s", ", ".join(_alllabels(CIF)))
+            log.critical("\nValid atom labels are:\n\n %s", ", ".join(_alllabels(CIF, phase)))
             raise
         except KeyboardInterrupt:
             log.warning("Terminated successfully")
@@ -421,6 +421,7 @@ def main(cifs, centres, **kwargs):
     for a in defaults:
         args[a] = kwargs.get(a, defaults[a])
         
+    #print args['phase']    
     cifs = [os.path.normpath(i) for i in cifs]   
     
     if args['writelog']:

@@ -19,8 +19,8 @@ def calcfromcif(CIF, centres, radius, allligtypes=[], alllignames=[], **kwargs):
     from pieface import readcoords
     
     logger.debug('Starting file %s', CIF)
-    
-    cell, atomcoords, atomtypes, spacegp, symmops, symmid = readcoords.readcif(CIF, getattr(kwargs, 'phase', None))
+    logger.debug('Phase: %s', kwargs.get('phase', None))
+    cell, atomcoords, atomtypes, spacegp, symmops, symmid = readcoords.readcif(CIF, phaseblock = kwargs.get('phase', None))
     allatoms = readcoords.makeP1cell(atomcoords, symmops, symmid)
     
     phase = readcoords.Crystal(cell=cell, atoms=allatoms, atomtypes=atomtypes)

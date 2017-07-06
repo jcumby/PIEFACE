@@ -211,11 +211,11 @@ def readcif(FILE, phaseblock=None):
             logger.warning("Using phase {0}".format(sorted(allcif.keys())[0]))
         else:
             # Use provided phaseblock
-            if phaseblock in allcif.keys():
+            if phaseblock.lower() in allcif.keys():
                 phase = phaseblock
-                logger.warning("Using phase {0}".format(sorted(allcif.keys())[0]))
+                logger.warning("Using phase {0}".format(phaseblock.lower()))
             else:
-                matchblock = [s for s in allcif.keys() if phaseblock in s]
+                matchblock = [s for s in allcif.keys() if phaseblock.lower() in s]
                 if len(matchblock) == 1:
                     phase = matchblock[0]
                     logger.warning("Using phase {0}".format(matchblock[0]))

@@ -102,6 +102,12 @@ def main():
                         type=int,
                         default=None,
                         help="Maxmimum number of iterations for ellipsoid fitting (default infinite)")
+    parser.add_argument("-b", "--block",
+                         action="store",
+                         type=str,
+                         dest="phase",
+                         default=None,
+                         help="Name of datablock to read from CIF (default None reads the first alphabetically)")
     parser.add_argument("-N",
                          action="store_true",
                          dest="nosave",
