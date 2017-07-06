@@ -61,7 +61,7 @@ For more complex use cases, the package can be imported and used as a python pac
 
     import pieface
     
-    phases, plots = distellipsoid.calcellipsoid.calcfromcif([list of CIFs], [list of centres], **kwargs)
+    phases, plots = pieface.calcellipsoid.calcfromcif([list of CIFs], [list of centres], **kwargs)
 
     
 which will (by default) process all CIF files in parallel (as for the scripts). ``kwargs`` are many of the options available to ``CIFellipsoid``; most important are 
@@ -70,7 +70,7 @@ which will (by default) process all CIF files in parallel (as for the scripts). 
     * radius (for bond searching)
     * tolerance (for fit tolerance)
 
-Individual modules from the package can also be imported (ie. ``ellipsoid.py``) for perform specific functions: read the documentation in the
+Individual modules from the package can also be imported (ie. ``pieface.ellipsoid``) for perform specific functions: read the documentation in the
 source code for more details or see the `API reference`_.
 
 -------
