@@ -5,6 +5,10 @@ Calculate minimum-bounding-ellipsoid for polyhedra, based on a list of Cif files
 """
 
 import multiprocessing
+from pieface import __version__
+from json import loads
+import sys
+from urllib2 import urlopen
 
         
 def _alllabels(CIF, phase=0):
@@ -35,8 +39,43 @@ def _query(question, default="yes", output=None):
             return valid[choice]
         else:
             output.critical("Please respond with 'yes' or 'no' (or 'y' or 'n').\n")
+            
+
+def check_update(log=None):
+    """ Check if a newer version of PIEFACE has been released """
+    
+    try:
+        u = urlopen('https://api.github.com/repos/jcumby/PIEFACE/releases/latest').read()
+        ujson = loads(u)
+        
+    except:
+        # Problem reading url (perhaps no internet)?
+        return
+    
+    newversion = ujson['tag_name'][1:].split('.')
+    currversion = __version__.split('.')
+    assert len(newversion) == len(currversion)
+    
+    for i, num in enumerate(currversion):
+        if int(newversion[i]) > int(num):
+            if log is None:
+                print "A newer version of PIEFACE is now available ({0})".format(".".join(newversion))
+                if hasattr(sys, 'frozen'):
+                    print 'The newer version can be downloaded from https://github.com/jcumby/PIEFACE/releases/latest'
+                else:
+                    print 'Consider upgrading from https://github.com/jcumby/PIEFACE or PyPI'
+            else:
+                log.warning("A newer version of PIEFACE is now available ({0})".format(".".join(newversion)))
+                if hasattr(sys, 'frozen'):
+                    log.warning('The newer version can be downloaded from https://github.com/jcumby/PIEFACE/releases/latest')
+                else:
+                    log.warning('Consider upgrading from https://github.com/jcumby/PIEFACE or PyPI')
+
+    return
+        
 
 def main():
+
     import sys
     if sys.platform.startswith('win'):
         # # Hack for multiprocessing.freeze_support() to work from a
@@ -49,6 +88,23 @@ def main():
     import argparse
     import sys
     import logging
+    
+    class VersionAction(argparse.Action):
+        def __init__(self,
+                     option_strings,
+                     version=None,
+                     nargs=None,
+                     **kwargs):
+            if nargs is not None:
+                raise ValueError("nargs not allowed")
+            super(VersionAction, self).__init__(option_strings, nargs=0, **kwargs)
+            self.version=version
+            
+        def __call__(self, parser, namespace, values, option_string=None):
+            version = self.version
+            print "PIEFACE {0}".format(__version__)
+            check_update()
+            sys.exit()
     
     parser = argparse.ArgumentParser(description="Compute ellipsoid properties from CIF file(s).")
     parser.add_argument("cifs",
@@ -142,7 +198,11 @@ def main():
                          action="store_true",
                          dest="pickle",
                          help=argparse.SUPPRESS)        # Secret option to save phase dict to "ellipsoid_dat.pkl"
-
+    parser.add_argument("-V", "--version", 
+                        action=VersionAction,
+                        version="PIEFACE {0}".format(__version__),
+                        help="Print PIEFACE information and check for updates before exit")
+                         
     try:
         args = parser.parse_args()
     except:
@@ -164,14 +224,14 @@ def main():
             
     try:
         if args.printlabels:
-            print "\nValid atom labels are:\n"
+            log.warning("\nValid atom labels are:\n")
             for CIF in cifs:
-                print "{0:<40}:  {1}".format(CIF, ", ".join(_alllabels(CIF)))
+                log.critical("{0:<40}:  {1}".format(CIF, ", ".join(_alllabels(CIF))))
             raise
         elif args.centres is None:
             # Behave like argparse error
             parser.print_usage()
-            print "CIFellipsoid.py: error: argument -m/--metal is required"
+            log.critical("CIFellipsoid.py: error: argument -m/--metal is required")
             raise
 
         if args.nosave:

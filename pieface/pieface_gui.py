@@ -8,6 +8,7 @@ import tkFileDialog
 import ttk
 
 import os, sys
+import pieface
 from pieface import multiCIF
 from pieface.calcellipsoid import makeDataFrame
 import traceback
@@ -23,6 +24,9 @@ from matplotlib.backend_bases import key_press_handler
 from mpl_toolkits.mplot3d import Axes3D
 
 import pandas as pd
+import urllib2
+import json
+import webbrowser
 
 import pkg_resources
 
@@ -67,6 +71,8 @@ class MainWindow:
         
         self.nbookmain.select(self.logtab)
         self.nbookmain.select(self.intab)
+        
+        self.find_updates(verbose=False)
 
     def report_callback_exception(self, *args):
         """ Modify exception behaviour to print to message box if not caught """
@@ -195,6 +201,9 @@ class MainWindow:
         self.helpmenu.add_command(label='View README', command=self.viewreadme)        
         self.helpmenu.add_command(label='View online manual', command=self.viewinternethelp)
         self.helpmenu.add_command(label='View PDF manual', command=self.viewhelp)
+        self.helpmenu.add_separator()
+        self.helpmenu.add_command(label='Check for updates', command=self.find_updates)
+        self.helpmenu.add_command(label='About', command=self.about)
         
         self.menubar.add_cascade(label="File", menu=self.filemenu)
         self.menubar.add_cascade(label="Help", menu=self.helpmenu)
@@ -212,8 +221,7 @@ class MainWindow:
         
     def viewreadme(self):
         """ Open README file in default viewer """
-        import webbrowser       # Should be part of Python
-        
+
         # Try to get README location based on multiCIF location
         README = pkg_resources.resource_filename('pieface_docs', 'README.pdf')
         #README = os.path.abspath(os.path.join( multiCIFloc, '..', 'README.pdf'))
@@ -226,7 +234,7 @@ class MainWindow:
             
     def viewhelp(self):
         """ Open help file in default viewer """
-        import webbrowser
+
         # Try to get help file location based on multiCIF location
         PDFhelp = pkg_resources.resource_filename('pieface_docs', 'PIEFACE_manual.pdf')
         #PDFhelp = os.path.abspath(os.path.join( multiCIFloc, '..', 'docs', 'PIEFACE_manual.pdf'))
@@ -238,7 +246,7 @@ class MainWindow:
             
     def viewinternethelp(self):
         """ Open online documentation in default webbrowser"""
-        import webbrowser       # Should be part of Python
+
         webbrowser.open('http://pieface.readthedocs.io/')
     
     def openfiles(self):
@@ -276,6 +284,42 @@ class MainWindow:
             self.clearbutton.configure(state='disabled')
             self.resultsbutton.configure(state='disabled')
             self.sumbutton.configure(state='disabled')
+            
+    def check_update(self):
+        """ Check if a newer version of PIEFACE has been released """
+        
+        try:
+            u = urllib2.urlopen('https://api.github.com/repos/jcumby/PIEFACE/releases/latest').read()
+            ujson = json.loads(u)
+            
+        except:
+            # Problem reading url (perhaps no internet)?
+            tkMessageBox.showerror("Update Error", "Failed to check for updates")
+            return False
+        
+        newversion = ujson['tag_name'][1:].split('.')
+        #currversion = pkg_resources.get_distribution('pieface').version.split('.')
+        currversion = pieface.__version__.split('.')
+        assert len(newversion) == len(currversion)
+        
+        
+        for i, num in enumerate(currversion):
+            if int(newversion[i]) > int(num):
+                return True
+        return False
+        
+    def find_updates(self, verbose=True):
+        
+        if self.check_update():
+            if tkMessageBox.askyesno('Download update', 'An updated version of PIEFACE exists, do you want to download it?'):
+                webbrowser.open('https://github.com/jcumby/PIEFACE/releases/latest')
+        else:
+            if verbose:
+                tkMessageBox.showinfo('Update','PIEFACE is up to date')
+            
+    def about(self):
+        """ Return information about pieface """
+        tkMessageBox.showinfo('About', 'PIEFACE version {0}\n\n(c) James Cumby 2017\n\njames.cumby@ed.ac.uk'.format(pieface.__version__))
         
     def disable_check(self, chkbutn):
         """ Disable entry boxes if check button is ticked"""
