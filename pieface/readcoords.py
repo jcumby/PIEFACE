@@ -247,8 +247,11 @@ def readcif(FILE, phaseblock=None):
         atomtypes[site] = allcif[phase]['_atom_site_type_symbol'][i]
     
     
+    spacegp = None
     for k in ['_symmetry_Int_Tables_number', '_space_group_IT_number']:
-        spacegp = getattr(allcif[phase], k, 0)
+        for j in [k, k.lower(), k.upper(), k.title()]:
+            if j in allcif[phase].keys():
+                spacegp = allcif[phase][j]
     
     # Possible references to symmetry operations to check for
     symmop_strings = ['_space_group_symop_operation_xyz', '_symmetry_equiv_pos_as_xyz']
