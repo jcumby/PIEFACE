@@ -1,10 +1,16 @@
 language: python
 python:
     - "2.7"
-    - "pypy"
     
 install:
-    - pip install tox
+    - pip install tox-travis
     
 script:
-    - travis_wait 30 tox
+    - tox
+    
+env:
+    - NUMPY="1.9"
+    - NUMPY="1.10"
+    - NUMPY="1.11"
+    - NUMPY="1.12"
+    - NUMPY="1.13"
