@@ -6,9 +6,10 @@ install:
     - pip install tox-travis
     
 script:
-    - tox
+    - travis_wait 30 tox
     
-env:
+env:   
+# List generated locally using ``tox -l``
     - TOXENV=py-numpy19-pycifrw41-pandas017
     - TOXENV=py-numpy19-pycifrw41-pandas020
     - TOXENV=py-numpy19-pycifrw42-pandas017
