@@ -76,7 +76,7 @@ class CifRead(unittest.TestCase):
     def setUp(self):
         """ Generate simple CIF objects. """
         # Find all 'test_data' files ending .cif, and create a dict with {filename:absolute path}
-        testCIFS = dict([(f, pkg_resources.resource_filename('test_data', f)) for f in pkg_resources.resource_listdir('test_data','') if f.endswith('.cif')])
+        testCIFS = dict([(f, pkg_resources.resource_filename('pieface.tests.test_data', f)) for f in pkg_resources.resource_listdir('pieface.tests.test_data','') if f.endswith('.cif')])
         self.textCIF = simpleCIF
         self.CIFS={}
         self.results = {}
