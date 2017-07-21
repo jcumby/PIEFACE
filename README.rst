@@ -2,10 +2,9 @@
 Polyhedra Inscribing Ellipsoids For Analysis of Coordination Environments (PIEFACE)
 ***********************************************************************************
 
+
 .. image:: https://readthedocs.org/projects/pieface/badge/?version=latest
     :target: http://pieface.readthedocs.io/en/latest/?badge=latest
-    :alt: Documentation Status
-
 .. image:: https://travis-ci.org/jcumby/PIEFACE.svg?branch=master
     :target: https://travis-ci.org/jcumby/PIEFACE
 
