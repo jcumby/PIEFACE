@@ -34,7 +34,7 @@ setup(
     setup_requires = ['numpy'],
     install_requires = ['numpy>=1.9.2',
                         'matplotlib>=1.4.3',
-                        'pycifrw>=3.3',
+                        'pycifrw>=4.2',
                         'multiprocessing>=2.6.2.1',
                         'pandas>=0.17.1',
                         
