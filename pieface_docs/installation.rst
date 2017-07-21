@@ -24,6 +24,12 @@ or alternatively by manually :ref:`installing from sources <sources>`.
 
 In reality, installation can sometimes be operating-system specific.
 
+Updates
+^^^^^^^
+
+From version 1.1.0, |pieface| now includes automatic update checking. From |GUI| go to :menuselection:`Help --> Check for Updates` and follow the dialogue boxes. From |cmdprog|, 
+type |cmdprog|``-V`` and follow the resulting link.
+
 .. _windows:
 
 Windows
@@ -112,7 +118,7 @@ Requirements
 * `Python 2.7 <https://www.python.org/>`_ (currently NOT Python 3)
 * `NumPy <http://www.numpy.org>`_ (at least version 1.9)
 * `matplotlib <http://matplotlib.org/>`_ (1.4.3 or higher)
-* `PyCifRW <https://bitbucket.org/jamesrhester/pycifrw/overview>`_ (3.3 or higher)
+* `PyCifRW <https://bitbucket.org/jamesrhester/pycifrw/overview>`_ (4.2 or higher)
 * `multiprocessing <https://docs.python.org/2/library/multiprocessing.html>`_ (2.6.2 or higher)
 * `pandas <http://pandas.pydata.org/>`_ (0.17 or higher)
 
@@ -127,6 +133,8 @@ When installing using ``pip``, dependencies on PyCifRW and Matplotlib are not al
     pip install PIEFACE
     
 In this case, there are a number of possible solutions:
+
+    * Update pip (this can sometimes solve the problem)
  
     * Install the dependencies manually first::
 
@@ -150,6 +158,11 @@ The package contains some basic unit tests, which can be run following installat
 Tests can be run from within the main |pieface| directory with the command::
 
     python setup.py test
+    
+or alternatively from within a python prompt::
+
+    import pieface
+    pieface.self_test()
 
 All tests should pass without exceptions - if not, please send me a bug report.
 

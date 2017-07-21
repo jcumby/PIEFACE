@@ -16,9 +16,11 @@ Details of the input parameters are given below, or by typing |cmdprog| ``--help
 ..						[-m CENTRES [CENTRES ...]] [-r RADIUS]
 ..						[-l [LIGTYPES [LIGTYPES ...]]]
 ..						[-n [LIGNAMES [LIGNAMES ...]]]
-..						[-t TOLERANCE | --maxcycles MAXCYCLES] [-N] [-W]
+..						[-t TOLERANCE | --maxcycles MAXCYCLES]
+..                      [-b PHASE]
+..                      [-N] [-W]
 ..						[-P] [-U] [--procs [PROCS]] [--noplot]
-..						[--writelog]
+..						[--writelog] [-V]
 ..						cifs [cifs ...]
  
 
@@ -64,6 +66,10 @@ Details of the input parameters are given below, or by typing |cmdprog| ``--help
 
 	Tolerance to use for fitting ellipsoid to points (default 1e-6).
 	
+.. cmdoption:: -b, --phase
+
+	Name of data block to read from CIF file (default is first alphabetically)
+	
 .. cmdoption:: --maxcycles
 	
 	Maximum number of iterations to perform for fitting (default infinite).
@@ -95,6 +101,10 @@ Details of the input parameters are given below, or by typing |cmdprog| ``--help
 .. cmdoption:: --writelog
 
 	Write a debugging log to ``debug.log``.
+	
+.. cmdoption:: -V, --version
+
+	Print version information, check for updates, and exit.
 	
 
 

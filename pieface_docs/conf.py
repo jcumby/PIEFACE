@@ -64,9 +64,9 @@ rst_epilog="""
 .. |cmdprog| replace:: ``CIFellipsoid``
 .. |GUI| replace:: ``EllipsoidGUI``
 .. |article| replace:: Ellipsoidal Analysis of Coordination Polyhedra
-.. _article: https://github.com/jcumby/PIEFACE
-.. |citation| replace:: James Cumby & J. Paul Attfield, *Ellipsoidal Analysis of Coordination Polyhedra*, Nature Communications (2017).
-.. _citation: https://github.com/jcumby/PIEFACE
+.. _article: https://www.nature.com/articles/ncomms14235
+.. |citation| replace:: James Cumby & J. Paul Attfield, *Ellipsoidal Analysis of Coordination Polyhedra*, Nature Communications 14235 (2017).
+.. _citation: https://www.nature.com/articles/ncomms14235
 """.format(release)
 
 ##############################################################################
