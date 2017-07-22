@@ -222,26 +222,23 @@ class MainWindow:
     def viewreadme(self):
         """ Open README file in default viewer """
 
-        # Try to get README location based on multiCIF location
-        README = pkg_resources.resource_filename('pieface_docs', 'README.pdf')
-        #README = os.path.abspath(os.path.join( multiCIFloc, '..', 'README.pdf'))
-
-        
-        if os.path.isfile(README):
+        try:
+            # Try to get README location based on multiCIF location
+            README = pkg_resources.resource_filename('pieface_docs', 'README.pdf')
+            #README = os.path.abspath(os.path.join( multiCIFloc, '..', 'README.pdf'))
             webbrowser.open(README)
-        else:
+        except:
             tkMessageBox.showerror("Error", "Cannot find README location")
             
     def viewhelp(self):
         """ Open help file in default viewer """
 
-        # Try to get help file location based on multiCIF location
-        PDFhelp = pkg_resources.resource_filename('pieface_docs', 'PIEFACE_manual.pdf')
-        #PDFhelp = os.path.abspath(os.path.join( multiCIFloc, '..', 'docs', 'PIEFACE_manual.pdf'))
-
-        if os.path.isfile(PDFhelp):
+        try:
+            # Try to get help file location based on multiCIF location
+            PDFhelp = pkg_resources.resource_filename('pieface_docs', 'PIEFACE_manual.pdf')
+            #PDFhelp = os.path.abspath(os.path.join( multiCIFloc, '..', 'docs', 'PIEFACE_manual.pdf'))
             webbrowser.open(PDFhelp)
-        else:
+        except:
             tkMessageBox.showerror("Error", "Cannot find help file location")
             
     def viewinternethelp(self):
