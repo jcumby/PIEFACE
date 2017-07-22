@@ -28,7 +28,7 @@ Updates
 ^^^^^^^
 
 From version 1.1.0, |pieface| now includes automatic update checking. From |GUI| go to :menuselection:`Help --> Check for Updates` and follow the dialogue boxes. From |cmdprog|, 
-type |cmdprog|``-V`` and follow the resulting link.
+type |cmdprog| ``-V`` and follow the resulting link.
 
 .. _windows:
 
