@@ -7,7 +7,7 @@ __contact__ = "james.cumby@ed.ac.uk"
 __license__ = "GPLv3+"
 __copyright__ = "The University of Edinburgh, Edinburgh, UK"
 __status__ = "Development"
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 __all__ = ["ellipsoid", "plotellipsoid", "readcoords", "polyhedron", "calcellipsoid", "writeproperties", "multiCIF", "pieface_gui", "CIFellipsoid", "tests"]
 

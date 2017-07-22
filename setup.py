@@ -10,7 +10,7 @@ def readme():
 
 setup(
     name = "pieface",
-    version = "1.0.0",
+    version = "1.1.0",
     author = "James Cumby",
     author_email = "james.cumby@ed.ac.uk",
     url = "https://github.com/jcumby/PIEFACE",

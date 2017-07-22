@@ -41,7 +41,7 @@ extensions = [
 
 # General information about the project.
 project = u'PIEFACE'
-copyright = u'2016, James Cumby'
+copyright = u'2017, James Cumby'
 author = u'James Cumby'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -49,9 +49,9 @@ author = u'James Cumby'
 # built documents.
 #
 # The short X.Y version.
-version = u'1.0'
+version = u'1.1'
 # The full version, including alpha/beta/rc tags.
-release = u'1.0.0'
+release = u'1.1.0'
 
 # Add any text (e.g. global subtitutions) to be added to the end of any .rst files here
 rst_epilog="""
