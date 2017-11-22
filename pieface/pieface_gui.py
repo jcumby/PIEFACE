@@ -421,7 +421,17 @@ class MainWindow:
             ptocs = int(self.procsent.get()),
             noplot = True,
             pickle = bool(extravals.get('pickle', False)),
-            writelog = bool(extravals.get('writelog', False)))
+            writelog = bool(extravals.get('writelog', False))
+            )
+        # Handle phaseblocks using advanced options...
+        if 'b' in extravals.keys():
+            vals['phase'] = extravals.get('b',None)
+        elif 'block' in extravals.keys():
+            vals['phase'] = extravals.get('block', None)
+        elif 'phase' in extravals.keys():
+            vals['phase'] = extravals.get('phase',None)
+        else:
+            vals['phase'] = None
 
         if vals['maxcycles'] <= 0:
             vals['maxcycles'] = None
