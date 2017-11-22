@@ -7,6 +7,9 @@ Changes to be implemented
 Bugfixes
 ========
 
+- Catch all errors within GUI!
 - Check what happens if mutliple ligands with the same label exist (check CIF specification)
 - Centre search seems to be case-dependent; need to check
 - Permission denied error on writing pickle with GUI (AMAL)
+- If ellipsoid process does not produce a 'phases' output, file cannot be removed within GUI.
+	* Specific example is if using an incorrect 'advanced' string - process halts, GUI stays active, but file cannot be removed.
