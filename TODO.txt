@@ -3,6 +3,7 @@ Changes to be implemented
 
 - Add more tutorials and examples.
 - Add polyhedron search based on coordinate rather than specific atom
+- Add ability to output "Output Log" from GUI
 
 Bugfixes
 ========
