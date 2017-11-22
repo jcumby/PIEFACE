@@ -7,7 +7,7 @@ Changes to be implemented
 Bugfixes
 ========
 
-- Catch all errors within GUI!
+- Catch more errors, and provide useful user feedback.
 - Check what happens if mutliple ligands with the same label exist (check CIF specification)
 - Centre search seems to be case-dependent; need to check
 - Permission denied error on writing pickle with GUI (AMAL)
