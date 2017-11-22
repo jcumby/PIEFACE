@@ -47,7 +47,8 @@ class MainWindow:
         self.parent = parent
         self.parent.title("PIEFACE Input GUI")
         
-        #parent.report_callback_exception = self.report_callback_exception
+        # Make all errors propagated to MainWindow.parent call custom exception routine
+        parent.report_callback_exception = self.report_callback_exception
         
         self.filenames = []
         
@@ -77,7 +78,16 @@ class MainWindow:
     def report_callback_exception(self, *args):
         """ Modify exception behaviour to print to message box if not caught """
         a = traceback.format_exception(*args)
-        tkMessageBox.showerror(a[-1], "\n".join(a[:-1]))
+        msglst=["An unexpected error has occurred:\n",
+                a[-1],
+                a[-2],
+                "More details can be found in the Output Log.\n",
+                "Please report any bugs to james.cumby@ed.ac.uk, including a copy ",
+                "of the output log and a description of how the error was produced."]
+                
+        #log.error(a)
+        tkMessageBox.showerror("Error", "\n".join(msglst))
+        #log.Error(args[0], args[1], args[2])
 
         
     def init_gui(self, parent):
@@ -306,7 +316,7 @@ class MainWindow:
         return False
         
     def find_updates(self, verbose=True):
-        
+        """ Run check_update and as user whether to update. """
         if self.check_update():
             if tkMessageBox.askyesno('Download update', 'An updated version of PIEFACE exists, do you want to download it?'):
                 webbrowser.open('https://github.com/jcumby/PIEFACE/releases/latest')
@@ -349,11 +359,23 @@ class MainWindow:
                 self.runButton.config(state='enabled')
                 self.parent.config(cursor="")
                 try:
-                    self.phases, self.sumplots = self.resQ.get()
-                except TypeError:
+                    #self.phases, self.sumplots = self.resQ.get()
+                    queueout = self.resQ.get()
+                except:
+                    raise
+
+                if queueout is None:
                     # Assume that multiCIF has returned None (aborted calculation]
                     self.phases = None
                     self.sumplots = None
+                elif len(queueout) == 2:
+                    # Normal operation
+                    self.phases, self.sumplots = queueout
+                elif len(queueout) == 3:
+                    # multiCIF raised an error
+                    #self.report_callback_exception(*queueout)
+                    raise queueout[0], queueout[1], queueout[2]
+                    
                 # Manually write to logger window (log.info does not work here...)
                 self.log.console.config(state = tk.NORMAL)
                 self.log.console.insert(tk.END, '*************************\n')
@@ -443,7 +465,7 @@ class MainWindow:
             self.resQ = Queue.Queue()
             self.calcthread = threading.Thread(target=multiCIF_thread_wrapper,
                                           args = (self.resQ,
-                                                  self.parent,
+                                                  self,
                                                   procfiles,
                                                   list(self.centent.get().split()),
                                                   ),
@@ -483,6 +505,7 @@ class MainWindow:
         #  prog = self.start_progress(self.frame)
         #    prog.start()
         except Exception, e:
+            print "Exception caught in run"
             #exc_type, exc_value, exc_traceback = sys.exc_info()
             #self.report_callback_exception(exc_type, exc_value, exc_traceback)
             raise
@@ -817,13 +840,18 @@ def multiCIF_wrapper(queue, args, **kwargs):
 def multiCIF_thread_wrapper(*args, **kwargs):
     """ Wrapper to put results of multiCIF into a queue to be retrieved """
     queue = args[0]
-    root_win = args[1]
+    calling_win = args[1]
     try:
         results = multiCIF.main(*args[2:], **kwargs)
         queue.put(results)
-    except ValueError as e:
-        root_win.after(5, tkMessageBox.showerror, "Error", " ".join(e.args))
+    except:
+        exc_type, exc_value, exc_traceback = sys.exc_info()
+        queue.put(sys.exc_info())
         queue.put_nowait(None)
+        #raise
+        #calling_win.report_callback_exception(exc_type, exc_value, exc_traceback)
+        #root_win.after(5, tkMessageBox.showerror, "Error", " ".join(e.args))
+        
 
 def main():
     if sys.platform.startswith('win'):
