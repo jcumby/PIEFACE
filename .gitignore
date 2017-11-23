@@ -32,7 +32,6 @@ var/
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
-*.spec
 
 # Installer logs
 pip-log.txt
@@ -61,10 +60,7 @@ pieface_docs/_build/
 
 # Custom scripts/other
 *.bat
-win_CMD_info.txt
-win_GUI_info.txt
 release_instructions.txt
 
 # InnoSetup files
-*.iss
 WinSetup_PIEFACE*.exe
