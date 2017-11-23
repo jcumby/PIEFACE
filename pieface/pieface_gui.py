@@ -74,6 +74,8 @@ class MainWindow:
         self.nbookmain.select(self.intab)
         
         self.find_updates(verbose=False)
+        
+        self.phases = {}
 
     def report_callback_exception(self, *args):
         """ Modify exception behaviour to print to message box if not caught """
