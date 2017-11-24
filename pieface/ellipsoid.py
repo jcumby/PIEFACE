@@ -13,6 +13,7 @@ Basic usage:
 
 from __future__ import division
 import numpy as np
+import ellipsoid_algs
 
 
 class Ellipsoid(object):
@@ -39,35 +40,41 @@ class Ellipsoid(object):
             except AttributeError:
                 raise
         
-        (N, d) = np.shape(points)
-        d = float(d)
-    
-        # Q will be our working array
-        Q = np.vstack([np.copy(points.T), np.ones(N)]) 
-        QT = Q.T
-        # initialisations
-        err = 1.0 + self.tolerance
-        u = (1.0 / N) * np.ones(N)
-
-        count=0
-
-        # Khachiyan Algorithm
-        while err > self.tolerance:
-            V = np.dot(Q, np.dot(np.diag(u), QT))
-            M = np.diag(np.dot(QT , np.dot(np.linalg.inv(V), Q)))    # M the diagonal vector of an NxN matrix
-            j = np.argmax(M)
-            maximum = M[j]
-            step_size = (maximum - d - 1.0) / ((d + 1.0) * (maximum - 1.0))
-            new_u = (1.0 - step_size) * u
-            new_u[j] += step_size
-            err = np.linalg.norm(new_u - u)
+        if maxcycles is None:
+            maxloops=0
+        else:
+            maxloops=int(maxcycles)
             
-            if maxcycles is not None:
-                if count > maxcycles-1:
-                    self.tolerance = err
-                    break
-            u = new_u
-            count += 1
+        ellipsoid_algs.khachiyan(points, self.tolerance, maxloops)
+        # (N, d) = np.shape(points)
+        # d = float(d)
+    
+        # # Q will be our working array
+        # Q = np.vstack([np.copy(points.T), np.ones(N)]) 
+        # QT = Q.T
+        # # initialisations
+        # err = 1.0 + self.tolerance
+        # u = (1.0 / N) * np.ones(N)
+
+        # count=0
+
+        # # Khachiyan Algorithm
+        # while err > self.tolerance:
+            # V = np.dot(Q, np.dot(np.diag(u), QT))
+            # M = np.diag(np.dot(QT , np.dot(np.linalg.inv(V), Q)))    # M the diagonal vector of an NxN matrix
+            # j = np.argmax(M)
+            # maximum = M[j]
+            # step_size = (maximum - d - 1.0) / ((d + 1.0) * (maximum - 1.0))
+            # new_u = (1.0 - step_size) * u
+            # new_u[j] += step_size
+            # err = np.linalg.norm(new_u - u)
+            
+            # if maxcycles is not None:
+                # if count > maxcycles-1:
+                    # self.tolerance = err
+                    # break
+            # u = new_u
+            # count += 1
         #print "Converged with tolerance {0} in {1} iterations".format(loctol, count)
 
 
