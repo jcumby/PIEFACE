@@ -5,20 +5,22 @@ DTYPE=np.float64
 
 ctypedef np.float64_t DTYPE_t
 
-def khachiyan_orig(np.ndarray X, float tolerance, int maxcycles):
+def khachiyan_orig(np.ndarray[DTYPE_t, ndim=2] X, float tolerance, int maxcycles):
     """ Original ellipsoid minimisation routine"""
     
     cdef int N = X.shape[0]
     cdef float d = X.shape[1]
     
-    cdef np.ndarray Q = np.vstack([X.T, np.ones(N, dtype=DTYPE)]) 
-    cdef np.ndarray QT = Q.T
+    cdef np.ndarray[DTYPE_t, ndim=2] Q = np.vstack([X.T, np.ones(N, dtype=DTYPE)]) 
+    cdef np.ndarray[DTYPE_t, ndim=2] QT = Q.T
     cdef float err = 1.0 + tolerance
-    cdef np.ndarray u = (1.0 / N) * np.ones(N, dtype=DTYPE)
+    cdef np.ndarray[DTYPE_t, ndim=1] u = (1.0 / N) * np.ones(N, dtype=DTYPE)
     
     cdef int count=0
     
-    cdef np.ndarray V, M, new_u
+    cdef np.ndarray[DTYPE_t, ndim=2] V
+    cdef np.ndarray[DTYPE_t, ndim=1] M
+    cdef np.ndarray[DTYPE_t, ndim=1] new_u
     cdef int j
     cdef float step_size
 
@@ -49,4 +51,5 @@ def khachiyan_orig(np.ndarray X, float tolerance, int maxcycles):
 
 # Original function (pure Python)         : 23.2 s
 # Original python function  (cythonised)  : 23.8 s
-# Function with type definitions          : 21.7 s
+# Function with type definitions          : 21.8 s
+# With typed ndarray objects              : 24.7 s
