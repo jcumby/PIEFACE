@@ -3,6 +3,8 @@ Setup pieface on your system with setuptools
 """
 
 from setuptools import setup, find_packages
+from Cython.Build import cythonize
+import numpy
 
 def readme():
     with open('README.rst') as f:
@@ -50,6 +52,10 @@ setup(
         'gui_scripts':[
             'EllipsoidGUI=pieface.pieface_gui:main'],
             }
+    ,        
+    ext_modules = cythonize("pieface/ellipsoid_algs_c.pyx"),
+    include_dirs = [numpy.get_include()],
+    
                         
     
 )    
