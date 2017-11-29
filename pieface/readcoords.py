@@ -185,7 +185,7 @@ class Crystal(object):
         setattr(self, str(cenname)+'_poly', polyhedron.Polyhedron(centre, ligands, atomdict=atomdict, ligtypes=ligtypes))
         self.polyhedra.append(cenname)
         
-def readcif(FILE, phaseblock=None):
+def readcif(FILE, phaseblock=None, getocc=False):
     """ Read useful data from cif using PyCifRW. """
     import CifFile     # Should be PyCifRW module, but also occurs in GSASII - I haven't yet found a conflict...
     import urllib
@@ -242,9 +242,11 @@ def readcif(FILE, phaseblock=None):
     #Read in atom labels/coordinates
     atomcoords = {}
     atomtypes = {}
+    atomoccs = {}
     for i,site in enumerate(allcif[phase]['_atom_site_label']):  # Iterate over all atom labels
         atomcoords[site] = np.array([ allcif[phase]['_atom_site_fract_x'][i].split('(')[0], allcif[phase]['_atom_site_fract_y'][i].split('(')[0], allcif[phase]['_atom_site_fract_z'][i].split('(')[0] ]).astype(np.float)
         atomtypes[site] = allcif[phase]['_atom_site_type_symbol'][i]
+        atomoccs[site] = float(allcif[phase]['_atom_site_occupancy'][i])
     
     
     spacegp = None
@@ -277,7 +279,10 @@ def readcif(FILE, phaseblock=None):
         symmops.insert(0, symmops.pop(idx) )
         symmid.insert(0, symmid.pop(idx) )
     
-    return cell, atomcoords, atomtypes, spacegp, symmops, symmid
+    if getocc:
+        return cell, atomcoords, atomtypes, spacegp, symmops, symmid, atomoccs
+    else:
+        return cell, atomcoords, atomtypes, spacegp, symmops, symmid
     
 def makeP1cell(atomcoords, symmops, symmid):
     """ Generate full unit cell contents from symmetry operations from Cif file
