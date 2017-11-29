@@ -6,6 +6,7 @@ Changes to be implemented
 - Add ability to output "Output Log" from GUI
 - Add more tests
 	* Launch tests within GUI
+- Allow atom occupancies to be handled from CIF files
 
 Bugfixes
 ========
