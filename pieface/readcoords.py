@@ -246,7 +246,7 @@ def readcif(FILE, phaseblock=None, getocc=False):
     for i,site in enumerate(allcif[phase]['_atom_site_label']):  # Iterate over all atom labels
         atomcoords[site] = np.array([ allcif[phase]['_atom_site_fract_x'][i].split('(')[0], allcif[phase]['_atom_site_fract_y'][i].split('(')[0], allcif[phase]['_atom_site_fract_z'][i].split('(')[0] ]).astype(np.float)
         atomtypes[site] = allcif[phase]['_atom_site_type_symbol'][i]
-        atomoccs[site] = float(allcif[phase]['_atom_site_occupancy'][i])
+        atomoccs[site] = float(allcif[phase]['_atom_site_occupancy'][i].split('(')[0])
     
     
     spacegp = None
