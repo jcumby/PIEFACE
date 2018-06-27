@@ -98,7 +98,12 @@ def _writepolyhedron(fileob, phase, cen, v=0):
     
 def _writeellipsoid(fileob, phase, cen, v=0):
     """ Write paramters of fitted ellipsoid """
-    ellipob = getattr(phase, cen+"_poly").ellipsoid
+    
+    try:
+        ellipob = getattr(phase, cen+"_poly").ellipsoid
+    except AttributeError:
+        logger.debug("No ellipsoid defined for %s, omitting from output file", cen)
+        return
     
     if v >= 0:
         fileob.write("! Ellipsoid parameters {0} -------\n".format(cen))
@@ -177,14 +182,14 @@ def writeall(FILE, phase, verbosity=3, overwrite=False):
         fileob = open(FILE, "w")
     except IOError as e:
         logger.critical("I/O error({0}): {1}".format(e.errno, e.strerror))
-      
-    logger.debug("Output written to {0}".format(FILE))
 
     _writeintro(fileob, v=verbosity)
     _writecrystal(fileob, phase, v=verbosity)
     for site in phase.polyhedra:
         _writepolyhedron(fileob, phase, site, v=verbosity)
         _writeellipsoid(fileob, phase, site, v=verbosity)
+        
+    logger.debug("Output written to {0}".format(FILE))
     
     fileob.close()
     
