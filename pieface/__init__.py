@@ -19,6 +19,7 @@ import calcellipsoid
 import readcoords
 import writeproperties
 import multiCIF
+import polyhedron
 
 def self_test():
     """ Run all tests distributed with PIEFACE. """
