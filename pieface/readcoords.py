@@ -188,12 +188,13 @@ class Crystal(object):
 def readcif(FILE, phaseblock=None, getocc=False):
     """ Read useful data from cif using PyCifRW. """
     import CifFile     # Should be PyCifRW module, but also occurs in GSASII - I haven't yet found a conflict...
-    import urllib
+    import urllib.request
     
     symmops=None
     try:
         if os.path.isfile(FILE):
-            allcif = CifFile.ReadCif(urllib.pathname2url(FILE))
+            #allcif = CifFile.ReadCif(urllib.request.pathname2url(FILE))
+            allcif = CifFile.ReadCif(FILE)
         else:
             allcif = CifFile.ReadCif(FILE)
     except:
@@ -262,14 +263,14 @@ def readcif(FILE, phaseblock=None, getocc=False):
         raise KeyError("CIF file doesn't contain any symmetry operations")
         # Need to add function to generate symmops from spacegroup number
     else:
-        symmops = allcif[phase][keyintsec.pop()]
+        symmops = list(allcif[phase][keyintsec.pop()])
         
     symmid_strings = ['_symmetry_equiv_pos_site_id']        # Valid keys for symmetry operation numbers from PyCifRW
     keyintsec = set(symmid_strings) & set(allcif[phase].keys())
     if len( keyintsec ) < 1:
-        symmid = range(len(symmops))    # Number by default if needed
+        symmid = list(range(len(symmops)))    # Number by default if needed
     else:
-        symmid = allcif[phase][keyintsec.pop()]
+        symmid = list(allcif[phase][keyintsec.pop()])
         
     # Rearrange symmops so xyz is first
     validxyz = ['x, y, z', 'x,y,z', 'x y z']
@@ -292,8 +293,12 @@ def makeP1cell(atomcoords, symmops, symmid):
     label is not changed).
     """
     
-    def _shiftcoord((x,y,z)):
+    def _shiftcoord(coords):
         """ Shift atom coordinates back into unit cell (0.0 <= r < 1.0)"""
+        
+        assert isinstance(coords, list) or isinstance(coords, np.ndarray) or isinstance(coords, tuple), "coords should be an iterable"
+        x,y,z = coords
+        
         if x >= 1.0: x -= 1.0
         if x < 0.0: x += 1.0
         if y >= 1.0: y -= 1.0

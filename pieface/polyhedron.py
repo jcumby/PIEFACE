@@ -33,8 +33,8 @@ class Polyhedron(object):
                 # Receive centre as dict
                 if len(centre.keys()) != 1:
                     raise ValueError("Only one central atom must be defined")
-                self.cenlbl = centre.keys()[0]
-                self.cenabc = np.array(centre[centre.keys()[0]]).astype(np.float)
+                self.cenlbl = list(centre.keys())[0]
+                self.cenabc = np.array(centre[self.cenlbl]).astype(np.float)
             elif isinstance(centre, tuple) or isinstance(centre, list):
                 if len(centre) != 2:
                     raise ValueError("Only one central atom must be defined")

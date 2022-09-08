@@ -8,7 +8,7 @@ import multiprocessing
 from pieface import __version__
 from json import loads
 import sys
-from urllib2 import urlopen
+from urllib.request import urlopen
 
         
 def _alllabels(CIF, phase=0):
@@ -59,11 +59,11 @@ def check_update(log=None):
     for i, num in enumerate(currversion):
         if int(newversion[i]) > int(num):
             if log is None:
-                print "A newer version of PIEFACE is now available ({0})".format(".".join(newversion))
+                print("A newer version of PIEFACE is now available ({0})".format(".".join(newversion)))
                 if hasattr(sys, 'frozen'):
-                    print 'The newer version can be downloaded from https://github.com/jcumby/PIEFACE/releases/latest'
+                    print('The newer version can be downloaded from https://github.com/jcumby/PIEFACE/releases/latest')
                 else:
-                    print 'Consider upgrading from https://github.com/jcumby/PIEFACE or PyPI'
+                    print('Consider upgrading from https://github.com/jcumby/PIEFACE or PyPI')
             else:
                 log.warning("A newer version of PIEFACE is now available ({0})".format(".".join(newversion)))
                 if hasattr(sys, 'frozen'):
@@ -102,7 +102,7 @@ def main():
             
         def __call__(self, parser, namespace, values, option_string=None):
             version = self.version
-            print "PIEFACE {0}".format(__version__)
+            print("PIEFACE {0}".format(__version__))
             check_update()
             sys.exit()
     

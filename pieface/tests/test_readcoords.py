@@ -3,7 +3,7 @@ import unittest
 from pieface import readcoords
 import numpy as np
 import os
-import StringIO         # Necessary to read text string like a file
+#import StringIO         # Necessary to read text string like a file
 import pkg_resources    # To find packaged CIF files
 
 # Very basic CIF format to avoid problems opening files
@@ -64,12 +64,13 @@ class CifRead(unittest.TestCase):
     
     def check_internet():
         """ Check there is an internet connection. """
-        import urllib2
+        import urllib.request
+        import urllib.error
         
         try:
-            response=urllib2.urlopen('http://www.google.com', timeout=1)
+            response=urllib.request.urlopen('http://www.google.com', timeout=1)
             return True
-        except urllib2.URLERROR as err:
+        except urllib.error.URLERROR as err:
             return False
 
     
@@ -124,7 +125,7 @@ class CifRead(unittest.TestCase):
             returnvals = readcoords.readcif(self.CIFS[cif])
             self.assertDictEqual(returnvals[0], self.results[cif]['cell'])
             # Test atomcoords are equal
-            self.assertItemsEqual(returnvals[1].keys(), self.results[cif]['atomcoords'].keys())
+            self.assertCountEqual(returnvals[1].keys(), self.results[cif]['atomcoords'].keys())
             for k in returnvals[1].keys():
                 np.testing.assert_array_almost_equal(returnvals[1][k], self.results[cif]['atomcoords'][k])
             self.assertDictEqual(returnvals[2], self.results[cif]['atomtypes'])
@@ -142,7 +143,7 @@ class CifRead(unittest.TestCase):
         returnvals = readcoords.readcif(ciffile)
         self.assertDictEqual(returnvals[0], self.results[cif]['cell'])
         # Test atomcoords are equal
-        self.assertItemsEqual(returnvals[1].keys(), self.results[cif]['atomcoords'].keys())
+        self.assertCountEqual(returnvals[1].keys(), self.results[cif]['atomcoords'].keys())
         for k in returnvals[1].keys():
             np.testing.assert_array_almost_equal(returnvals[1][k], self.results[cif]['atomcoords'][k])
         self.assertDictEqual(returnvals[2], self.results[cif]['atomtypes'])
@@ -173,7 +174,7 @@ class PrimitiveCell(unittest.TestCase):
         
         self.newcoords = readcoords.makeP1cell(self.atomcoords, self.symmops, self.symmid)
         
-        self.assertItemsEqual(self.newcoords.keys(), correctcoords.keys())
+        self.assertCountEqual(self.newcoords.keys(), correctcoords.keys())
         for k in self.newcoords.keys():
             np.testing.assert_array_almost_equal(self.newcoords[k], correctcoords[k])
             
@@ -188,7 +189,7 @@ class PrimitiveCell(unittest.TestCase):
         
         self.newcoords = readcoords.makeP1cell(self.atomcoords, self.symmops, self.symmid)
         
-        self.assertItemsEqual(self.newcoords.keys(), correctcoords.keys())
+        self.assertCountEqual(self.newcoords.keys(), correctcoords.keys())
         for k in self.newcoords.keys():
             np.testing.assert_array_almost_equal(self.newcoords[k], correctcoords[k])
 
@@ -212,7 +213,7 @@ class LigandSearching(unittest.TestCase):
         
         self.ligands, self.ligtypes = readcoords.findligands('Mn1', self.atomcoords, self.orthom, radius=2.0, types=['O'], names = [], atomtypes=self.atomtypes)
 
-        self.assertItemsEqual(self.ligands.keys(), correctligands.keys())
+        self.assertCountEqual(self.ligands.keys(), correctligands.keys())
         for k in self.ligands.keys():
             np.testing.assert_array_almost_equal(self.ligands[k], correctligands[k])
         self.assertDictEqual(self.ligtypes, self.atomtypes)
@@ -248,7 +249,7 @@ class LigandSearching(unittest.TestCase):
         
         self.ligands, self.ligtypes = readcoords.findligands('Mn1', self.atomcoords, self.orthom, radius=3.5, types=['O'], names = [], atomtypes=self.atomtypes)
         
-        self.assertItemsEqual(self.ligands.keys(), correctligands.keys())
+        self.assertCountEqual(self.ligands.keys(), correctligands.keys())
         for k in self.ligands.keys():
             np.testing.assert_array_almost_equal(self.ligands[k], correctligands[k])
         self.assertDictEqual(self.ligtypes, correcttypes)

@@ -2,10 +2,10 @@
 
 """ Graphical interface to multiCIF, offering a GUI equivalent of CIFellipsoid.py. """
 
-import Tkinter as tk
-import tkMessageBox
-import tkFileDialog
-import ttk
+import tkinter as tk
+import tkinter.messagebox as tkmessagebox
+import tkinter.filedialog as tkFileDialog
+import tkinter.ttk as ttk
 
 import os, sys
 import pieface
@@ -15,7 +15,7 @@ import traceback
 import threading
 import logging
 import multiprocessing
-import Queue
+import queue as Queue
 
 import matplotlib
 matplotlib.use('TkAgg')
@@ -376,7 +376,8 @@ class MainWindow:
                 elif len(queueout) == 3:
                     # multiCIF raised an error
                     #self.report_callback_exception(*queueout)
-                    raise queueout[0], queueout[1], queueout[2]
+                    #raise queueout[0], queueout[1], queueout[2]
+                    raise queueout
                     
                 # Manually write to logger window (log.info does not work here...)
                 self.log.console.config(state = tk.NORMAL)
@@ -506,8 +507,8 @@ class MainWindow:
                           
         #  prog = self.start_progress(self.frame)
         #    prog.start()
-        except Exception, e:
-            print "Exception caught in run"
+        except Exception as e:
+            print("Exception caught in run")
             #exc_type, exc_value, exc_traceback = sys.exc_info()
             #self.report_callback_exception(exc_type, exc_value, exc_traceback)
             raise
@@ -860,7 +861,7 @@ def main():
         # Hack for multiprocessing.freeze_support() to work from a
         # setuptools-generated entry point.
         multiprocessing.freeze_support()
-        
+    print('here')    
     root = tk.Tk()
     root.minsize(450,380)    #width,height
     root.columnconfigure(0, weight=1)

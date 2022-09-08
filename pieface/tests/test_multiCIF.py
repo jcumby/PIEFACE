@@ -23,30 +23,30 @@ class LabelChecking(unittest.TestCase):
     def test_preciselabel(self):
         """ Test filtering by specific label names """
         check, omit, missing = multiCIF.check_labels(['Pr1','O3'], self.alllabels)
-        self.assertItemsEqual(check, ['Pr1', 'O3'])
-        self.assertItemsEqual(omit, [])
-        self.assertItemsEqual(missing, [])
+        self.assertCountEqual(check, ['Pr1', 'O3'])
+        self.assertCountEqual(omit, [])
+        self.assertCountEqual(missing, [])
         
     def test_regexlabel(self):
         """ Test filtering by a wildcard regular expression """
         check, omit, missing = multiCIF.check_labels(['Pr1','O.*'], self.alllabels)
-        self.assertItemsEqual(check, ['Pr1', 'O1','O2','O3'])
-        self.assertItemsEqual(omit, [])
-        self.assertItemsEqual(missing, [])
+        self.assertCountEqual(check, ['Pr1', 'O1','O2','O3'])
+        self.assertCountEqual(omit, [])
+        self.assertCountEqual(missing, [])
     
     def test_labelexclude(self):
         """ Test exclusion of labels using regex with check_labels """
         check, omit, missing = multiCIF.check_labels(['Pr1','#O.*'], self.alllabels)
-        self.assertItemsEqual(check, ['Pr1'])
-        self.assertItemsEqual(omit, ['O1','O2','O3'])
-        self.assertItemsEqual(missing, [])
+        self.assertCountEqual(check, ['Pr1'])
+        self.assertCountEqual(omit, ['O1','O2','O3'])
+        self.assertCountEqual(missing, [])
         
     def test_missing(self):
         """ Test return of unknown label"""
         check, omit, missing = multiCIF.check_labels(['Px1'], self.alllabels)
-        self.assertItemsEqual(check, [])
-        self.assertItemsEqual(omit, [])
-        self.assertItemsEqual(missing, ['Px1'])
+        self.assertCountEqual(check, [])
+        self.assertCountEqual(omit, [])
+        self.assertCountEqual(missing, ['Px1'])
 
 
 class DefineLigands(unittest.TestCase):

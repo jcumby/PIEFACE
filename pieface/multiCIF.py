@@ -313,7 +313,7 @@ def run_parallel(cifs, testcen, radius=3.0, ligtypes=[], lignames=[], maxcycles=
         pool.terminate()
         log.critical('Terminated successfully')
         raise
-    except Exception, e:
+    except Exception as e:
         err = True
         log.critical('got exception: %r, terminating all processes' % (e,))
         pool.terminate()

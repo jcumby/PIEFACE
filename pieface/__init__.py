@@ -7,7 +7,7 @@ __contact__ = "james.cumby@ed.ac.uk"
 __license__ = "GPLv3+"
 __copyright__ = "The University of Edinburgh, Edinburgh, UK"
 __status__ = "Development"
-__version__ = "1.1.0"
+__version__ = "2.0.0"
 
 __all__ = ["ellipsoid", "plotellipsoid", "readcoords", "polyhedron", "calcellipsoid", "writeproperties", "multiCIF", "pieface_gui", "CIFellipsoid", "tests"]
 
@@ -15,11 +15,11 @@ __all__ = ["ellipsoid", "plotellipsoid", "readcoords", "polyhedron", "calcellips
 import logging
 logging.getLogger('pieface').addHandler(logging.NullHandler())
 
-import calcellipsoid
-import readcoords
-import writeproperties
-import multiCIF
-import polyhedron
+from . import calcellipsoid
+from . import readcoords
+from . import writeproperties
+from . import multiCIF
+from . import polyhedron
 
 def self_test():
     """ Run all tests distributed with PIEFACE. """
